@@ -3,542 +3,755 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniKatoAPI - Anime Data API</title>
+  <title>AniKatoAPI — Free Anime Data API</title>
+  <meta name="description" content="Free REST API for anime data. Browse, search, stream episodes. No API key required. Built with Node.js, Express, Cheerio." />
+  <meta name="keywords" content="anime api, free api, rest api, anime data, streaming, episode servers, nodejs, express" />
+  <meta property="og:title" content="AniKatoAPI — Free Anime Data API" />
+  <meta property="og:description" content="Free REST API for anime data. Browse, search, stream episodes. No API key required." />
+  <meta property="og:image" content="/og-image.svg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0A0A12" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩</text></svg>" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg-primary: #0a0a12;
-      --bg-secondary: #111120;
-      --bg-card: rgba(18, 18, 32, 0.7);
-      --text-primary: #eee;
-      --text-secondary: #9a9ab0;
-      --accent-pink: #f43f8e;
-      --accent-purple: #a855f7;
-      --accent-red: #ec4899;
-      --accent-indigo: #6366f1;
-      --accent-green: #22c55e;
-      --border: rgba(255,255,255,0.08);
-      --glass: rgba(255,255,255,0.03);
-      --glow-pink: rgba(244,63,142,0.15);
-      --glow-purple: rgba(168,85,247,0.15);
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#0A0A12;--bg2:#111120;--bg3:#16162A;
+      --surface:rgba(17,17,32,.7);--glass:rgba(255,255,255,.03);
+      --border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.1);
+      --text:#E2E8F0;--text2:#94A3B8;--text3:#64748B;
+      --purple:#A855F7;--pink:#EC4899;--indigo:#6366F1;
+      --green:#22C55E;--cyan:#06B6D4;--amber:#F59E0B;--red:#EF4444;
+      --grad:linear-gradient(135deg,var(--purple),var(--pink));
+      --grad2:linear-gradient(135deg,var(--indigo),var(--purple));
+      --radius:12px;--radius-lg:16px;--radius-xl:20px;
     }
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+    ::selection{background:rgba(168,85,247,.3);color:#fff}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.15)}
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    /* ── Ambient ── */
+    .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.12}
+    .orb-1{width:700px;height:700px;background:var(--purple);top:-250px;left:-200px;animation:drift 30s ease-in-out infinite}
+    .orb-2{width:500px;height:500px;background:var(--pink);bottom:-200px;right:-150px;animation:drift 25s ease-in-out infinite reverse}
+    .orb-3{width:400px;height:400px;background:var(--indigo);top:40%;left:40%;animation:drift 22s ease-in-out infinite 5s}
+    @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-40px) scale(1.1)}66%{transform:translate(-30px,30px) scale(.92)}}
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── Ambient Background ── */
-    .ambient {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    .ambient .orb {
-      position: absolute; border-radius: 50%; filter: blur(100px); opacity: .18;
-    }
-    .orb-1 { width: 600px; height: 600px; background: var(--accent-pink); top: -200px; left: -100px; animation: drift 24s ease-in-out infinite; }
-    .orb-2 { width: 500px; height: 500px; background: var(--accent-purple); bottom: -150px; right: -100px; animation: drift 20s ease-in-out infinite reverse; }
-    .orb-3 { width: 350px; height: 350px; background: var(--accent-indigo); top: 40%; left: 50%; animation: drift 18s ease-in-out infinite 4s; }
-
-    @keyframes drift {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33%     { transform: translate(40px,-30px) scale(1.08); }
-      66%     { transform: translate(-20px,20px) scale(.95); }
-    }
+    /* ── Particles Canvas ── */
+    #particles{position:fixed;inset:0;z-index:0;pointer-events:none}
 
     /* ── Layout ── */
-    .wrapper { position: relative; z-index: 1; }
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .wrap{position:relative;z-index:1}
+    .container{max-width:1120px;margin:0 auto;padding:0 24px}
+    .container-lg{max-width:1280px;margin:0 auto;padding:0 24px}
 
-    /* ── Sticky Header ── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,18,.82);
-      backdrop-filter: blur(20px) saturate(1.4);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-    }
-    header .container { display: flex; align-items: center; justify-content: space-between; }
-    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo-icon { font-size: 1.6rem; }
-    .logo-text {
-      font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    nav { display: flex; gap: 6px; }
-    nav a {
-      color: var(--text-secondary); text-decoration: none; font-size: .82rem; font-weight: 500;
-      padding: 6px 14px; border-radius: 8px; transition: all .2s;
-    }
-    nav a:hover { color: var(--text-primary); background: var(--glass); }
+    /* ── Header ── */
+    header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;transition:all .35s}
+    header.scrolled{background:rgba(10,10,18,.88);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid var(--border)}
+    .header-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+    .logo svg{width:28px;height:28px}
+    .logo-text{font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
+    .logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav{display:flex;align-items:center;gap:4px}
+    nav a{color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:500;padding:6px 14px;border-radius:8px;transition:all .2s}
+    nav a:hover{color:var(--text);background:var(--glass)}
+    nav a.active{color:var(--purple)}
+    .nav-cta{margin-left:8px;background:var(--grad)!important;color:#fff!important;padding:7px 16px!important;border-radius:8px!important;font-weight:600!important}
+    .nav-cta:hover{opacity:.9;transform:translateY(-1px)}
 
     /* ── Hero ── */
-    .hero {
-      padding: 80px 0 60px; text-align: center;
-      display: flex; flex-direction: column; align-items: center; gap: 28px;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--glass); border: 1px solid var(--border);
-      padding: 6px 16px; border-radius: 100px; font-size: .78rem; color: var(--text-secondary);
-    }
-    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+    .hero{padding:140px 0 80px;text-align:center;position:relative}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border);padding:6px 16px;border-radius:100px;font-size:.75rem;color:var(--text2);margin-bottom:24px}
+    .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero h1{font-size:clamp(2.5rem,5.5vw,4rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:20px}
+    .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero-sub{color:var(--text2);font-size:1.05rem;max-width:540px;margin:0 auto 40px;line-height:1.7}
+    .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:.88rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:all .25s;font-family:inherit}
+    .btn svg{width:16px;height:16px}
+    .btn-primary{background:var(--grad);color:#fff;box-shadow:0 4px 24px rgba(168,85,247,.3)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,85,247,.4)}
+    .btn-ghost{background:var(--glass);border:1px solid var(--border2);color:var(--text)}
+    .btn-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
 
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.15; letter-spacing: -.03em;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-purple) 50%, var(--accent-indigo) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero p { color: var(--text-secondary); font-size: 1.05rem; max-width: 520px; line-height: 1.6; }
-
-    .terminal-preview {
-      width: 100%; max-width: 640px; background: var(--bg-secondary);
-      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 80px var(--glow-pink);
-    }
-    .terminal-bar {
-      display: flex; align-items: center; gap: 8px; padding: 12px 16px;
-      background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border);
-    }
-    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .terminal-dot:nth-child(1) { background: #ff5f57; }
-    .terminal-dot:nth-child(2) { background: #febc2e; }
-    .terminal-dot:nth-child(3) { background: #28c840; }
-    .terminal-title { margin-left: 10px; font-size: .75rem; color: var(--text-secondary); }
-    .terminal-body {
-      padding: 20px; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: .82rem;
-      line-height: 1.8; color: var(--text-secondary); text-align: left; overflow-x: auto;
-    }
-    .terminal-body .cmd { color: var(--accent-green); }
-    .terminal-body .url { color: var(--accent-pink); }
-    .terminal-body .comment { color: #555; }
+    /* ── Console ── */
+    .console{max-width:720px;margin:0 auto;border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--border2);background:var(--bg2);box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 120px rgba(168,85,247,.08)}
+    .console-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:rgba(255,255,255,.02);border-bottom:1px solid var(--border)}
+    .console-dot{width:10px;height:10px;border-radius:50%}
+    .console-dot:nth-child(1){background:#FF5F57}
+    .console-dot:nth-child(2){background:#FEBC2E}
+    .console-dot:nth-child(3){background:#28C840}
+    .console-title{margin-left:12px;font-size:.72rem;color:var(--text3);font-family:'JetBrains Mono',monospace}
+    .console-body{display:flex;min-height:180px}
+    .console-input{flex:1;padding:18px;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.8;color:var(--text);border:none;background:transparent;resize:none;outline:none}
+    .console-input::placeholder{color:var(--text3)}
+    .console-output{flex:1;padding:18px;border-left:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.8;color:var(--green);overflow:auto;max-height:300px;white-space:pre-wrap}
+    .console-actions{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--border);background:rgba(255,255,255,.01)}
+    .console-btn{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:'JetBrains Mono',monospace}
+    .console-btn:hover{background:var(--glass);color:var(--text)}
+    .console-btn.active{background:rgba(168,85,247,.15);color:var(--purple);border-color:rgba(168,85,247,.3)}
+    .console-send{margin-left:auto;padding:6px 16px;border-radius:6px;border:none;background:var(--grad);color:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'JetBrains Mono',monospace}
+    .console-send:hover{opacity:.9;transform:translateY(-1px)}
 
     /* ── Stats ── */
-    .stats {
-      display: flex; justify-content: center; gap: 40px; padding: 20px 0 40px;
-      flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-value {
-      font-size: 1.6rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label { font-size: .78rem; color: var(--text-secondary); margin-top: 4px; }
+    .stats{padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+    .stat-value{font-size:2rem;font-weight:900;letter-spacing:-.03em}
+    .stat-value.grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .stat-label{font-size:.78rem;color:var(--text3);margin-top:4px;font-weight:500}
 
-    /* ── Section Headings ── */
-    .section { padding: 50px 0; }
-    .section-label {
-      display: inline-flex; align-items: center; gap: 6px; font-size: .75rem;
-      text-transform: uppercase; letter-spacing: .08em; color: var(--accent-purple);
-      font-weight: 600; margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: 1.8rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px;
-    }
-    .section-desc { color: var(--text-secondary); font-size: .95rem; max-width: 560px; line-height: 1.6; margin-bottom: 32px; }
+    /* ── Section ── */
+    .section{padding:100px 0}
+    .section-label{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);font-weight:700;margin-bottom:12px}
+    .section-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:10px;line-height:1.2}
+    .section-desc{color:var(--text2);font-size:1rem;max-width:520px;line-height:1.7;margin-bottom:40px}
 
     /* ── Features Grid ── */
-    .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;
-    }
-    .feature-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 28px; transition: all .3s;
-    }
-    .feature-card:hover { border-color: rgba(244,63,142,.25); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-    .feature-icon { font-size: 1.6rem; margin-bottom: 14px; }
-    .feature-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
-    .feature-desc { color: var(--text-secondary); font-size: .84rem; line-height: 1.6; }
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;transition:all .35s;position:relative;overflow:hidden}
+    .feature-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,.05),rgba(236,72,153,.05));opacity:0;transition:opacity .35s}
+    .feature-card:hover{border-color:rgba(168,85,247,.2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
+    .feature-card:hover::before{opacity:1}
+    .feature-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative;z-index:1}
+    .feature-icon svg{width:22px;height:22px}
+    .fi-purple{background:rgba(168,85,247,.12);color:var(--purple)}
+    .fi-pink{background:rgba(236,72,153,.12);color:var(--pink)}
+    .fi-green{background:rgba(34,197,94,.12);color:var(--green)}
+    .fi-cyan{background:rgba(6,182,212,.12);color:var(--cyan)}
+    .fi-amber{background:rgba(245,158,11,.12);color:var(--amber)}
+    .fi-indigo{background:rgba(99,102,241,.12);color:var(--indigo)}
+    .feature-title{font-size:1rem;font-weight:700;margin-bottom:8px;position:relative;z-index:1}
+    .feature-desc{color:var(--text2);font-size:.84rem;line-height:1.7;position:relative;z-index:1}
 
-    /* ── Endpoint Cards ── */
-    .endpoints-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px;
-    }
-    .endpoint-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-      overflow: hidden; transition: all .3s;
-    }
-    .endpoint-card:hover { border-color: rgba(168,85,247,.3); }
-    .endpoint-header {
-      display: flex; align-items: center; gap: 10px; padding: 16px 20px;
-      cursor: pointer; user-select: none;
-    }
-    .method-badge {
-      font-size: .65rem; font-weight: 700; text-transform: uppercase; padding: 3px 8px;
-      border-radius: 6px; letter-spacing: .04em; flex-shrink: 0;
-    }
-    .method-get { background: rgba(34,197,94,.15); color: var(--accent-green); }
-    .endpoint-path {
-      font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: var(--text-primary);
-      font-weight: 500; flex: 1;
-    }
-    .endpoint-chevron {
-      color: var(--text-secondary); transition: transform .3s; font-size: .75rem;
-    }
-    .endpoint-card.open .endpoint-chevron { transform: rotate(180deg); }
-    .endpoint-body {
-      max-height: 0; overflow: hidden; transition: max-height .35s ease;
-    }
-    .endpoint-card.open .endpoint-body { max-height: 600px; }
-    .endpoint-content {
-      padding: 0 20px 18px; border-top: 1px solid var(--border);
-    }
-    .endpoint-desc {
-      color: var(--text-secondary); font-size: .82rem; line-height: 1.6; padding-top: 14px; margin-bottom: 12px;
-    }
-    .endpoint-params { margin-bottom: 14px; }
-    .param-row {
-      display: flex; gap: 12px; padding: 6px 0; font-size: .78rem;
-      border-bottom: 1px solid rgba(255,255,255,.03);
-    }
-    .param-name {
-      font-family: 'JetBrains Mono', monospace; color: var(--accent-pink); min-width: 100px; font-weight: 500;
-    }
-    .param-type { color: var(--accent-purple); min-width: 60px; }
-    .param-desc { color: var(--text-secondary); flex: 1; }
-    .endpoint-code {
-      background: rgba(0,0,0,.3); border-radius: 8px; padding: 14px;
-      font-family: 'JetBrains Mono', monospace; font-size: .75rem; line-height: 1.7;
-      color: var(--text-secondary); overflow-x: auto; white-space: pre;
-    }
-    .endpoint-code .kw { color: var(--accent-purple); }
-    .endpoint-code .str { color: var(--accent-green); }
-    .endpoint-code .cmt { color: #555; }
+    /* ── Endpoint Explorer ── */
+    .explorer{display:grid;grid-template-columns:240px 1fr;gap:1px;background:var(--border);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border)}
+    .explorer-nav{background:var(--bg2);padding:8px}
+    .explorer-nav-btn{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;border:none;background:transparent;color:var(--text2);font-size:.8rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .2s;text-align:left;font-family:inherit}
+    .explorer-nav-btn:hover{background:var(--glass);color:var(--text)}
+    .explorer-nav-btn.active{background:rgba(168,85,247,.1);color:var(--purple)}
+    .explorer-nav-btn svg{width:16px;height:16px;flex-shrink:0}
+    .explorer-panel{background:var(--bg2);padding:24px;min-height:400px}
+    .explorer-panel-title{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+    .explorer-panel-desc{color:var(--text2);font-size:.84rem;margin-bottom:20px;line-height:1.6}
+    .explorer-method{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;margin-bottom:12px}
+    .method-get{background:rgba(34,197,94,.12);color:var(--green)}
+    .explorer-path{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--text);margin-bottom:16px;padding:12px 16px;background:rgba(0,0,0,.3);border-radius:8px;border:1px solid var(--border)}
+    .explorer-params{margin-bottom:16px}
+    .explorer-params-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:600;margin-bottom:8px}
+    .param-row{display:grid;grid-template-columns:120px 80px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.8rem}
+    .param-name{font-family:'JetBrains Mono',monospace;color:var(--pink);font-weight:500}
+    .param-type{font-family:'JetBrains Mono',monospace;color:var(--purple);font-size:.75rem}
+    .param-desc{color:var(--text2)}
+    .explorer-code{background:rgba(0,0,0,.3);border-radius:8px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.8;color:var(--text2);overflow-x:auto;border:1px solid var(--border)}
+    .explorer-code .kw{color:var(--purple)}
+    .explorer-code .str{color:var(--green)}
+    .explorer-code .cmt{color:var(--text3)}
+    .explorer-code .fn{color:var(--cyan)}
+    .explorer-code .num{color:var(--amber)}
 
-    /* ── Playgrounds ── */
-    .playground {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 28px; margin-top: 32px;
-    }
-    .playground h3 {
-      font-size: 1rem; font-weight: 600; margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .playground-row {
-      display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;
-    }
-    .playground input, .playground select {
-      background: rgba(0,0,0,.3); border: 1px solid var(--border); border-radius: 8px;
-      padding: 10px 14px; color: var(--text-primary); font-size: .85rem;
-      font-family: 'JetBrains Mono', monospace; flex: 1; min-width: 180px;
-      outline: none; transition: border-color .2s;
-    }
-    .playground input:focus, .playground select:focus { border-color: var(--accent-pink); }
-    .playground input::placeholder { color: #555; }
-    .playground select option { background: var(--bg-secondary); }
-    .btn {
-      padding: 10px 22px; border-radius: 8px; border: none; font-size: .85rem;
-      font-weight: 600; cursor: pointer; transition: all .2s;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-    }
-    .btn-primary:hover { opacity: .9; transform: translateY(-1px); }
-    .btn-secondary {
-      background: var(--glass); border: 1px solid var(--border); color: var(--text-secondary);
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,.06); color: var(--text-primary); }
-    .playground-result {
-      background: rgba(0,0,0,.3); border-radius: 8px; padding: 16px;
-      font-family: 'JetBrains Mono', monospace; font-size: .78rem; line-height: 1.7;
-      color: var(--accent-green); max-height: 340px; overflow: auto; white-space: pre-wrap;
-      display: none;
-    }
-    .playground-result.visible { display: block; }
+    /* ── Code Tabs ── */
+    .code-tabs{display:flex;gap:2px;background:rgba(0,0,0,.2);border-radius:8px;padding:3px;margin-bottom:12px;width:fit-content}
+    .code-tab{padding:6px 14px;border-radius:6px;border:none;background:transparent;color:var(--text3);font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'JetBrains Mono',monospace}
+    .code-tab.active{background:rgba(168,85,247,.15);color:var(--purple)}
+    .code-tab:hover:not(.active){color:var(--text2)}
+    .code-block{display:none}
+    .code-block.active{display:block}
+
+    /* ── Playground ── */
+    .playground-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+    .playground-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .playground-header svg{width:18px;height:18px;color:var(--purple)}
+    .playground-header h3{font-size:1rem;font-weight:700}
+    .playground-body{padding:24px}
+    .playground-inputs{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+    .playground-inputs input,.playground-inputs select{flex:1;min-width:200px;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(0,0,0,.3);color:var(--text);font-size:.85rem;font-family:'JetBrains Mono',monospace;outline:none;transition:border-color .2s}
+    .playground-inputs input:focus,.playground-inputs select:focus{border-color:var(--purple)}
+    .playground-inputs input::placeholder{color:var(--text3)}
+    .playground-inputs select option{background:var(--bg2)}
+    .playground-output{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.7;color:var(--green);max-height:400px;overflow:auto;white-space:pre-wrap;display:none}
+    .playground-output.visible{display:block}
+
+    /* ── Marquee ── */
+    .marquee{padding:40px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .marquee-track{display:flex;gap:40px;animation:marquee 30s linear infinite;width:max-content}
+    .marquee-item{display:flex;align-items:center;gap:8px;color:var(--text3);font-size:.8rem;font-weight:500;white-space:nowrap}
+    .marquee-item svg{width:16px;height:16px;opacity:.5}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* ── CTA ── */
+    .cta{text-align:center;padding:100px 0}
+    .cta-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:60px 40px;position:relative;overflow:hidden}
+    .cta-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,.08),rgba(236,72,153,.08))}
+    .cta-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:12px;position:relative}
+    .cta-desc{color:var(--text2);font-size:1rem;margin-bottom:28px;position:relative}
+    .cta-actions{display:flex;gap:12px;justify-content:center;position:relative}
 
     /* ── Footer ── */
-    footer {
-      padding: 40px 0; border-top: 1px solid var(--border); margin-top: 40px;
-      text-align: center;
-    }
-    .footer-brand {
-      font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .footer-desc { color: var(--text-secondary); font-size: .82rem; margin-bottom: 20px; }
-    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-    .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: .8rem; transition: color .2s; }
-    .footer-links a:hover { color: var(--accent-pink); }
-    .footer-copy { color: #444; font-size: .72rem; }
+    footer{padding:60px 0 40px;border-top:1px solid var(--border)}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+    .footer-brand .logo{margin-bottom:12px}
+    .footer-brand p{color:var(--text3);font-size:.82rem;line-height:1.7;max-width:280px}
+    .footer-col h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:600;margin-bottom:16px}
+    .footer-col a{display:block;color:var(--text2);text-decoration:none;font-size:.84rem;padding:4px 0;transition:color .2s}
+    .footer-col a:hover{color:var(--purple)}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid var(--border);color:var(--text3);font-size:.75rem}
+    .footer-social{display:flex;gap:12px}
+    .footer-social a{color:var(--text3);transition:color .2s}
+    .footer-social a:hover{color:var(--purple)}
+    .footer-social svg{width:18px;height:18px}
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
+    /* ── Scroll Reveal ── */
+    .reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.1s}
+    .reveal-delay-2{transition-delay:.2s}
+    .reveal-delay-3{transition-delay:.3s}
+    .reveal-delay-4{transition-delay:.4s}
 
-    @media (max-width: 640px) {
-      .hero { padding: 50px 0 30px; }
-      .hero h1 { font-size: 2rem; }
-      .stats { gap: 24px; }
-      .endpoints-grid { grid-template-columns: 1fr; }
-      .playground-row { flex-direction: column; }
+    /* ── Mobile ── */
+    @media(max-width:900px){
+      .features-grid{grid-template-columns:repeat(2,1fr)}
+      .explorer{grid-template-columns:1fr}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:640px){
+      .hero{padding:100px 0 60px}
+      .hero h1{font-size:2rem}
+      .features-grid{grid-template-columns:1fr}
+      .console-body{flex-direction:column}
+      .console-output{border-left:none;border-top:1px solid var(--border)}
+      .stats-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+      .footer-grid{grid-template-columns:1fr}
+      nav{display:none}
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Background -->
   <div class="ambient">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
+  <canvas id="particles"></canvas>
 
-  <div class="wrapper">
+  <div class="wrap">
 
     <!-- Header -->
-    <header>
-      <div class="container">
+    <header id="header">
+      <div class="header-inner">
         <a href="/" class="logo">
-          <span class="logo-icon">⛩</span>
-          <span class="logo-text">AniKatoAPI</span>
+          <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="url(#g1)" stroke-width="2"/><path d="M10 20c0-4 3-7 6-7s6 3 6 7" stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="var(--purple)"/><circle cx="20" cy="12" r="2" fill="var(--pink)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="var(--purple)"/><stop offset="1" stop-color="var(--pink)"/></linearGradient></defs></svg>
+          <span class="logo-text"><span>AniKato</span>API</span>
         </a>
         <nav>
           <a href="#features">Features</a>
           <a href="#endpoints">Endpoints</a>
           <a href="#playground">Playground</a>
           <a href="https://github.com/Shineii86/AniKatoAPI" target="_blank">GitHub</a>
+          <a href="https://anikato.vercel.app/api" target="_blank" class="nav-cta">Open API</a>
         </nav>
       </div>
     </header>
 
     <!-- Hero -->
     <section class="hero container">
-      <div class="hero-badge"><span class="dot"></span> Free &middot; No API key required</div>
-      <h1>The Anime API for<br /><span>Your Next Project</span></h1>
-      <p>Scrape-free, real-time data from AniKato. Browse, search, stream &mdash; all via a simple REST endpoint.</p>
+      <div class="hero-badge"><span class="dot"></span> Free &middot; No API key &middot; Open source</div>
+      <h1>The <span class="grad">Anime Data</span> API<br/>for Your Next Project</h1>
+      <p class="hero-sub">Browse, search, and stream anime data from AniKato. Real-time scraping with 24+ endpoints, in-memory caching, and zero configuration.</p>
+      <div class="hero-actions">
+        <a href="#playground" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Try It Live
+        </a>
+        <a href="https://github.com/Shineii86/AniKatoAPI" target="_blank" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          Star on GitHub
+        </a>
+      </div>
 
-      <div class="terminal-preview">
-        <div class="terminal-bar">
-          <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
-          <span class="terminal-title">anikato.vercel.app &mdash; bash</span>
+      <!-- Live Console -->
+      <div class="console" id="heroConsole">
+        <div class="console-bar">
+          <span class="console-dot"></span><span class="console-dot"></span><span class="console-dot"></span>
+          <span class="console-title">anikato.vercel.app — API Console</span>
         </div>
-        <div class="terminal-body"><span class="comment"># Fetch trending anime</span>
-<span class="cmd">curl</span> <span class="url">https://anikato.vercel.app/api</span> | jq <span class="str">'.trending[0]'</span>
-
-<span class="comment"># Search for anime</span>
-<span class="cmd">curl</span> <span class="url">"https://anikato.vercel.app/api/search?keyword=naruto"</span>
-
-<span class="comment"># Get episode servers</span>
-<span class="cmd">curl</span> <span class="url">"https://anikato.vercel.app/api/stream?id=demon-slayer-ep-1"</span></div>
+        <div class="console-body">
+          <textarea class="console-input" id="consoleInput" rows="6" spellcheck="false">// Fetch trending anime
+fetch("https://anikato.vercel.app/api")
+  .then(r => r.json())
+  .then(data => {
+    console.log(data.trending);
+  });</textarea>
+          <div class="console-output" id="consoleOutput"><span style="color:var(--text3)">// Click "Run" to see the response</span></div>
+        </div>
+        <div class="console-actions">
+          <button class="console-btn active" onclick="setEndpoint('home')">Home</button>
+          <button class="console-btn" onclick="setEndpoint('search')">Search</button>
+          <button class="console-btn" onclick="setEndpoint('stream')">Stream</button>
+          <button class="console-btn" onclick="setEndpoint('random')">Random</button>
+          <button class="console-btn" onclick="setEndpoint('schedule')">Schedule</button>
+          <button class="console-send" onclick="runConsole()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run
+          </button>
+        </div>
       </div>
     </section>
 
     <!-- Stats -->
-    <div class="stats container">
-      <div class="stat"><div class="stat-value">24+</div><div class="stat-label">Endpoints</div></div>
-      <div class="stat"><div class="stat-value">0</div><div class="stat-label">API Keys</div></div>
-      <div class="stat"><div class="stat-value">40+</div><div class="stat-label">Genres</div></div>
-      <div class="stat"><div class="stat-value">Live</div><div class="stat-label">Data</div></div>
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="reveal"><div class="stat-value grad" data-count="24">0</div><div class="stat-label">API Endpoints</div></div>
+          <div class="reveal reveal-delay-1"><div class="stat-value grad" data-count="0">0</div><div class="stat-label">API Keys Required</div></div>
+          <div class="reveal reveal-delay-2"><div class="stat-value grad" data-count="40">0</div><div class="stat-label">Anime Genres</div></div>
+          <div class="reveal reveal-delay-3"><div class="stat-value grad">Live</div><div class="stat-label">Real-time Data</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5-min cache TTL</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Zero config</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No auth needed</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg> Vercel deployed</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Cheerio scraper</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> REST JSON</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> CORS enabled</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Open source</div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5-min cache TTL</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Zero config</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No auth needed</div>
+        <div class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg> Vercel deployed</div>
+      </div>
     </div>
 
     <!-- Features -->
-    <section class="section container" id="features">
-      <div class="section-label">Features</div>
-      <h2 class="section-title">Built for developers</h2>
-      <p class="section-desc">Everything you need to build an anime website, mobile app, or Discord bot.</p>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🔍</div>
-          <div class="feature-title">Full-text Search</div>
-          <div class="feature-desc">Search anime by keyword, genre, type, status. Get suggestions and autocomplete results.</div>
+    <section class="section" id="features">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Features
+          </div>
+          <h2 class="section-title">Built for developers</h2>
+          <p class="section-desc">Everything you need to build an anime website, mobile app, or Discord bot. No API keys, no rate limits, no hassle.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📺</div>
-          <div class="feature-title">Episode Streaming</div>
-          <div class="feature-desc">Retrieve streaming servers, source links, and m3u8 URLs for any episode.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <div class="feature-title">Rich Metadata</div>
-          <div class="feature-desc">Synopsis, MAL score, genres, characters, relations, recommendations, and more.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🗓</div>
-          <div class="feature-title">Schedule &amp; Calendar</div>
-          <div class="feature-desc">View what's airing today or fetch the full weekly schedule.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <div class="feature-title">Advanced Filters</div>
-          <div class="feature-desc">Filter by genre, type, status, season, sort order, and more.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-title">Fast &amp; Cached</div>
-          <div class="feature-desc">In-memory cache with 5-minute TTL for snappy responses and reduced scraping.</div>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon fi-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </div>
+            <div class="feature-title">Full-text Search</div>
+            <div class="feature-desc">Search by keyword, genre, type, status. Get autocomplete suggestions and paginated results.</div>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon fi-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 7h5M17 17h5"/></svg>
+            </div>
+            <div class="feature-title">Episode Streaming</div>
+            <div class="feature-desc">Retrieve streaming servers, source links, and m3u8 URLs for any episode via AJAX endpoints.</div>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon fi-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
+            <div class="feature-title">Rich Metadata</div>
+            <div class="feature-desc">Synopsis, MAL score, genres, characters, relations, recommendations, and more.</div>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon fi-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div class="feature-title">Schedule & Calendar</div>
+            <div class="feature-desc">View what's airing today or fetch the full weekly broadcast schedule.</div>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon fi-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            </div>
+            <div class="feature-title">Advanced Filters</div>
+            <div class="feature-desc">Filter by genre, type, status, season, sort order. Multi-select support.</div>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon fi-indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="feature-title">Fast & Cached</div>
+            <div class="feature-desc">In-memory cache with 5-minute TTL for snappy responses and reduced scraping overhead.</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Endpoints -->
-    <section class="section container" id="endpoints">
-      <div class="section-label">API Reference</div>
-      <h2 class="section-title">Endpoints</h2>
-      <p class="section-desc">All endpoints return JSON. Base URL: <code style="color:var(--accent-pink)">https://anikato.vercel.app/api</code></p>
-      <div class="endpoints-grid" id="endpointsGrid"></div>
+    <section class="section" id="endpoints" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            API Reference
+          </div>
+          <h2 class="section-title">Endpoints</h2>
+          <p class="section-desc">All endpoints return JSON. Base URL: <code style="color:var(--pink);background:rgba(236,72,153,.1);padding:2px 8px;border-radius:4px">https://anikato.vercel.app/api</code></p>
+        </div>
+
+        <div class="explorer reveal" id="explorer">
+          <div class="explorer-nav" id="explorerNav"></div>
+          <div class="explorer-panel" id="explorerPanel"></div>
+        </div>
+      </div>
     </section>
 
     <!-- Playground -->
-    <section class="section container" id="playground">
-      <div class="section-label">Try It</div>
-      <h2 class="section-title">Playground</h2>
-      <p class="section-desc">Test endpoints directly in your browser.</p>
-
-      <div class="playground">
-        <h3>🔍 Search Anime</h3>
-        <div class="playground-row">
-          <input id="searchInput" type="text" placeholder="e.g. naruto, one piece, demon slayer" />
-          <button class="btn btn-primary" onclick="runSearch()">Search</button>
+    <section class="section" id="playground">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Interactive
+          </div>
+          <h2 class="section-title">Playground</h2>
+          <p class="section-desc">Test endpoints directly in your browser. No signup required.</p>
         </div>
-        <div class="playground-result" id="searchResult"></div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
+          <!-- Search -->
+          <div class="playground-card reveal">
+            <div class="playground-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <h3>Search Anime</h3>
+            </div>
+            <div class="playground-body">
+              <div class="playground-inputs">
+                <input id="pgSearch" type="text" placeholder="e.g. naruto, one piece" />
+                <button class="btn btn-primary" onclick="pgRun('search')" style="padding:10px 20px">Search</button>
+              </div>
+              <div class="playground-output" id="pgSearchOut"></div>
+            </div>
+          </div>
+          <!-- Stream -->
+          <div class="playground-card reveal reveal-delay-1">
+            <div class="playground-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <h3>Stream Servers</h3>
+            </div>
+            <div class="playground-body">
+              <div class="playground-inputs">
+                <input id="pgStream" type="text" placeholder="Episode ID" />
+                <button class="btn btn-primary" onclick="pgRun('stream')" style="padding:10px 20px">Get Servers</button>
+              </div>
+              <div class="playground-output" id="pgStreamOut"></div>
+            </div>
+          </div>
+          <!-- Random -->
+          <div class="playground-card reveal reveal-delay-2">
+            <div class="playground-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+              <h3>Random Anime</h3>
+            </div>
+            <div class="playground-body">
+              <div class="playground-inputs">
+                <button class="btn btn-primary" onclick="pgRun('random')" style="padding:10px 20px">Get Random</button>
+              </div>
+              <div class="playground-output" id="pgRandomOut"></div>
+            </div>
+          </div>
+          <!-- Schedule -->
+          <div class="playground-card reveal reveal-delay-3">
+            <div class="playground-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <h3>Schedule</h3>
+            </div>
+            <div class="playground-body">
+              <div class="playground-inputs">
+                <input id="pgSchedule" type="date" />
+                <button class="btn btn-primary" onclick="pgRun('schedule')" style="padding:10px 20px">Get Schedule</button>
+              </div>
+              <div class="playground-output" id="pgScheduleOut"></div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="playground">
-        <h3>📺 Get Stream Servers</h3>
-        <div class="playground-row">
-          <input id="streamInput" type="text" placeholder="Episode ID (e.g. naruto-ep-1)" />
-          <button class="btn btn-primary" onclick="runStream()">Get Servers</button>
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2 class="cta-title">Start building with AniKatoAPI</h2>
+          <p class="cta-desc">Free, open source, no API key required. Deploy your own instance or use ours.</p>
+          <div class="cta-actions">
+            <a href="https://anikato.vercel.app/api" target="_blank" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View API
+            </a>
+            <a href="https://github.com/Shineii86/AniKatoAPI" target="_blank" class="btn btn-ghost">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              Source Code
+            </a>
+          </div>
         </div>
-        <div class="playground-result" id="streamResult"></div>
-      </div>
-
-      <div class="playground">
-        <h3>🎲 Random Anime</h3>
-        <div class="playground-row">
-          <button class="btn btn-primary" onclick="runRandom()">Get Random Anime</button>
-        </div>
-        <div class="playground-result" id="randomResult"></div>
-      </div>
-
-      <div class="playground">
-        <h3>🗓 Schedule</h3>
-        <div class="playground-row">
-          <input id="scheduleInput" type="date" />
-          <button class="btn btn-primary" onclick="runSchedule()">Get Schedule</button>
-        </div>
-        <div class="playground-result" id="scheduleResult"></div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div class="footer-brand">AniKatoAPI</div>
-        <div class="footer-desc">Free anime data API &middot; No API key required &middot; Educational use only</div>
-        <div class="footer-links">
-          <a href="https://github.com/Shineii86/AniKatoAPI" target="_blank">GitHub</a>
-          <a href="https://anikoto.vercel.app/api" target="_blank">API Status</a>
-          <a href="https://github.com/Shineii86/AniKatoAPI#readme" target="_blank">Documentation</a>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="/" class="logo">
+              <svg viewBox="0 0 32 32" fill="none" width="24" height="24"><circle cx="16" cy="16" r="14" stroke="url(#g2)" stroke-width="2"/><path d="M10 20c0-4 3-7 6-7s6 3 6 7" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="var(--purple)"/><circle cx="20" cy="12" r="2" fill="var(--pink)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="var(--purple)"/><stop offset="1" stop-color="var(--pink)"/></linearGradient></defs></svg>
+              <span class="logo-text"><span>AniKato</span>API</span>
+            </a>
+            <p>Free REST API for anime data. Browse, search, and stream from AniKato. Built with Node.js and deployed on Vercel.</p>
+          </div>
+          <div class="footer-col">
+            <h4>API</h4>
+            <a href="/api">Home</a>
+            <a href="/api/search?keyword=naruto">Search</a>
+            <a href="/api/random">Random</a>
+            <a href="/api/schedule">Schedule</a>
+            <a href="/api/top-ten">Top 10</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="https://github.com/Shineii86/AniKatoAPI" target="_blank">GitHub</a>
+            <a href="https://github.com/Shineii86/AniKatoAPI#readme" target="_blank">Documentation</a>
+            <a href="https://github.com/Shineii86/AniKatoAPI/blob/main/CHANGELOG.md" target="_blank">Changelog</a>
+            <a href="/api" target="_blank">API Status</a>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/tos.html">Terms of Service</a>
+          </div>
         </div>
-        <div class="footer-copy">&copy; 2026 AniKatoAPI &middot; Made by Sʜɪɴᴇɪ Nᴏᴜᴢᴇɴ</div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 AniKatoAPI. Educational use only.</span>
+          <div class="footer-social">
+            <a href="https://github.com/Shineii86/AniKatoAPI" target="_blank" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
-
   </div>
 
   <script>
-    /* ── Endpoint Data ── */
-    const endpoints = [
-      { path: '/api', desc: 'Home page data: spotlight, trending, popular, top-airing, genres.', params: [], code: 'fetch("https://anikato.vercel.app/api")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/info?id={slug}', desc: 'Detailed anime info: synopsis, genres, relations, recommendations.', params: [{ name: 'id', type: 'string', desc: 'Anime slug (e.g. naruto)' }], code: 'fetch("https://anikato.vercel.app/api/info?id=naruto")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/search?keyword={q}', desc: 'Search anime by keyword.', params: [{ name: 'keyword', type: 'string', desc: 'Search query' }, { name: 'page', type: 'number', desc: 'Page number (default 1)' }], code: 'fetch("https://anikato.vercel.app/api/search?keyword=naruto")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/search/suggest?keyword={q}', desc: 'Search autocomplete suggestions.', params: [{ name: 'keyword', type: 'string', desc: 'Partial query' }], code: 'fetch("https://anikato.vercel.app/api/search/suggest?keyword=dea")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/episodes/{slug}', desc: 'Episode list (loaded via AJAX).', params: [{ name: 'slug', type: 'string', desc: 'Anime slug' }], code: 'fetch("https://anikato.vercel.app/api/episodes/naruto")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/stream?id={episodeId}', desc: 'Streaming servers for an episode.', params: [{ name: 'id', type: 'string', desc: 'Episode ID' }], code: 'fetch("https://anikato.vercel.app/api/stream?id=naruto-ep-1")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/servers?ids={ids}', desc: 'Resolve streaming server links.', params: [{ name: 'ids', type: 'string', desc: 'Comma-separated link IDs' }], code: 'fetch("https://anikato.vercel.app/api/servers?ids=123,456")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/schedule?date={YYYY-MM-DD}', desc: 'Anime schedule for a date.', params: [{ name: 'date', type: 'string', desc: 'Date (default today)' }], code: 'fetch("https://anikato.vercel.app/api/schedule")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/top-ten', desc: 'Top 10 anime (today, week, month).', params: [], code: 'fetch("https://anikato.vercel.app/api/top-ten")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/random', desc: 'Random anime info.', params: [], code: 'fetch("https://anikato.vercel.app/api/random")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/most-popular?page={n}', desc: 'Most popular anime list.', params: [{ name: 'page', type: 'number', desc: 'Page (default 1)' }], code: 'fetch("https://anikato.vercel.app/api/most-popular")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/filter?keyword={q}&genre[]={g}', desc: 'Filter by genre, type, status, season.', params: [{ name: 'keyword', type: 'string', desc: 'Search keyword (required)' }, { name: 'genre[]', type: 'number', desc: 'Genre IDs' }, { name: 'type[]', type: 'number', desc: 'Type IDs' }, { name: 'status[]', type: 'number', desc: 'Status IDs' }], code: 'fetch("https://anikato.vercel.app/api/filter?keyword=&genre[]=1&genre[]=4")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/new-release?page={n}', desc: 'Recently released episodes.', params: [{ name: 'page', type: 'number', desc: 'Page (default 1)' }], code: 'fetch("https://anikato.vercel.app/api/new-release")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/spotlight', desc: 'Spotlight/featured anime.', params: [], code: 'fetch("https://anikato.vercel.app/api/spotlight")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/trending', desc: 'Currently trending anime.', params: [], code: 'fetch("https://anikato.vercel.app/api/trending")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/popular', desc: 'Popular anime list.', params: [], code: 'fetch("https://anikato.vercel.app/api/popular")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/genre/{name}', desc: 'Anime by genre.', params: [{ name: 'name', type: 'string', desc: 'Genre slug (action, comedy, etc.)' }], code: 'fetch("https://anikato.vercel.app/api/genre/action")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/type/{name}', desc: 'Anime by type.', params: [{ name: 'name', type: 'string', desc: 'Type (tv, movie, ova, etc.)' }], code: 'fetch("https://anikato.vercel.app/api/type/tv")\n  .then(r => r.json())\n  .then(console.log);' },
-      { path: '/api/status/{name}', desc: 'Anime by status.', params: [{ name: 'name', type: 'string', desc: 'Status (currently-airing, finished-airing, not-yet-aired)' }], code: 'fetch("https://anikato.vercel.app/api/status/currently-airing")\n  .then(r => r.json())\n  .then(console.log);' },
-    ];
+    /* ── Particles ── */
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + .5;
+        this.speedX = (Math.random() - .5) * .3;
+        this.speedY = (Math.random() - .5) * .3;
+        this.opacity = Math.random() * .3 + .1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168,85,247,${this.opacity})`;
+        ctx.fill();
+      }
+    }
+    for (let i = 0; i < 60; i++) particles.push(new Particle());
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
 
-    /* ── Render Endpoints ── */
-    const grid = document.getElementById('endpointsGrid');
-    endpoints.forEach((ep, i) => {
-      const card = document.createElement('div');
-      card.className = 'endpoint-card';
-      const paramsHtml = ep.params.map(p =>
-        `<div class="param-row"><span class="param-name">${p.name}</span><span class="param-type">${p.type}</span><span class="param-desc">${p.desc}</span></div>`
-      ).join('');
-      card.innerHTML = `
-        <div class="endpoint-header" onclick="this.parentElement.classList.toggle('open')">
-          <span class="method-badge method-get">GET</span>
-          <span class="endpoint-path">${ep.path}</span>
-          <span class="endpoint-chevron">▼</span>
-        </div>
-        <div class="endpoint-body">
-          <div class="endpoint-content">
-            <div class="endpoint-desc">${ep.desc}</div>
-            ${paramsHtml ? `<div class="endpoint-params">${paramsHtml}</div>` : ''}
-            <div class="endpoint-code">${ep.code}</div>
-          </div>
-        </div>`;
-      grid.appendChild(card);
+    /* ── Header Scroll ── */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    /* ── Playground Functions ── */
-    const BASE = 'https://anikato.vercel.app/api';
+    /* ── Scroll Reveal ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => revealObserver.observe(el));
 
-    async function fetchApi(url, resultId) {
-      const el = document.getElementById(resultId);
-      el.classList.add('visible');
-      el.textContent = 'Loading...';
+    /* ── Animated Counters ── */
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          let current = 0;
+          const step = Math.ceil(target / 30);
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) { current = target; clearInterval(timer); }
+            el.textContent = current;
+          }, 30);
+          obs.unobserve(el);
+        }
+      }, { threshold: .5 });
+      obs.observe(el);
+    });
+
+    /* ── Console ── */
+    const BASE = 'https://anikato.vercel.app/api';
+    const endpoints = {
+      home: { url: '/api', label: 'Home' },
+      search: { url: '/api/search?keyword=naruto', label: 'Search' },
+      stream: { url: '/api/stream?id=naruto-ep-1', label: 'Stream' },
+      random: { url: '/api/random', label: 'Random' },
+      schedule: { url: '/api/schedule', label: 'Schedule' }
+    };
+    function setEndpoint(key) {
+      const ep = endpoints[key];
+      document.getElementById('consoleInput').value = `// ${ep.label}\nfetch("${BASE}${ep.url}")\n  .then(r => r.json())\n  .then(data => console.log(data));`;
+      document.querySelectorAll('.console-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    async function runConsole() {
+      const out = document.getElementById('consoleOutput');
+      out.innerHTML = '<span style="color:var(--amber)">Loading...</span>';
+      const input = document.getElementById('consoleInput').value;
+      const urlMatch = input.match(/fetch\("([^"]+)"\)/);
+      if (!urlMatch) { out.innerHTML = '<span style="color:var(--red)">No fetch URL found</span>'; return; }
+      try {
+        const res = await fetch(urlMatch[1]);
+        const data = await res.json();
+        out.innerHTML = syntaxHighlight(JSON.stringify(data, null, 2));
+        out.scrollTop = out.scrollHeight;
+      } catch (e) {
+        out.innerHTML = `<span style="color:var(--red)">Error: ${e.message}</span>`;
+      }
+    }
+    function syntaxHighlight(json) {
+      return json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"([^"]+)"(?=\s*:)/g, '<span style="color:var(--pink)">"$1"</span>')
+        .replace(/: "([^"]*)"/g, ': <span style="color:var(--green)">"$1"</span>')
+        .replace(/: (\d+)/g, ': <span style="color:var(--amber)">$1</span>')
+        .replace(/: (true|false|null)/g, ': <span style="color:var(--cyan)">$1</span>');
+    }
+
+    /* ── Explorer ── */
+    const explorerData = [
+      { id: 'home', title: 'Home Info', desc: 'Spotlight, trending, popular, top-airing, genres, and more.', path: '/api', params: [], code: { curl: 'curl https://anikato.vercel.app/api', js: 'const res = await fetch("https://anikato.vercel.app/api");\nconst data = await res.json();\nconsole.log(data.trending);', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api")\nprint(r.json()["trending"])' } },
+      { id: 'search', title: 'Search', desc: 'Search anime by keyword with pagination.', path: '/api/search?keyword={q}&page={n}', params: [{ name: 'keyword', type: 'string', desc: 'Search query' }, { name: 'page', type: 'number', desc: 'Page (default 1)' }], code: { curl: 'curl "https://anikato.vercel.app/api/search?keyword=naruto"', js: 'const res = await fetch("https://anikato.vercel.app/api/search?keyword=naruto");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/search", params={"keyword": "naruto"})\nprint(r.json())' } },
+      { id: 'suggest', title: 'Search Suggest', desc: 'Autocomplete suggestions for search.', path: '/api/search/suggest?keyword={q}', params: [{ name: 'keyword', type: 'string', desc: 'Partial query' }], code: { curl: 'curl "https://anikato.vercel.app/api/search/suggest?keyword=dea"', js: 'const res = await fetch("https://anikato.vercel.app/api/search/suggest?keyword=dea");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/search/suggest", params={"keyword": "dea"})\nprint(r.json())' } },
+      { id: 'info', title: 'Anime Info', desc: 'Detailed info: synopsis, genres, relations, recommendations.', path: '/api/info?id={slug}', params: [{ name: 'id', type: 'string', desc: 'Anime slug' }], code: { curl: 'curl "https://anikato.vercel.app/api/info?id=naruto"', js: 'const res = await fetch("https://anikato.vercel.app/api/info?id=naruto");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/info", params={"id": "naruto"})\nprint(r.json())' } },
+      { id: 'episodes', title: 'Episodes', desc: 'Episode list loaded via AJAX.', path: '/api/episodes/{slug}', params: [{ name: 'slug', type: 'string', desc: 'Anime slug' }], code: { curl: 'curl "https://anikato.vercel.app/api/episodes/naruto"', js: 'const res = await fetch("https://anikato.vercel.app/api/episodes/naruto");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/episodes/naruto")\nprint(r.json())' } },
+      { id: 'stream', title: 'Stream Servers', desc: 'Streaming servers for an episode.', path: '/api/stream?id={episodeId}', params: [{ name: 'id', type: 'string', desc: 'Episode ID' }], code: { curl: 'curl "https://anikato.vercel.app/api/stream?id=naruto-ep-1"', js: 'const res = await fetch("https://anikato.vercel.app/api/stream?id=naruto-ep-1");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/stream", params={"id": "naruto-ep-1"})\nprint(r.json())' } },
+      { id: 'servers', title: 'Servers', desc: 'Resolve streaming server links.', path: '/api/servers?ids={ids}', params: [{ name: 'ids', type: 'string', desc: 'Comma-separated link IDs' }], code: { curl: 'curl "https://anikato.vercel.app/api/servers?ids=123,456"', js: 'const res = await fetch("https://anikato.vercel.app/api/servers?ids=123,456");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/servers", params={"ids": "123,456"})\nprint(r.json())' } },
+      { id: 'schedule', title: 'Schedule', desc: 'Anime schedule for a specific date.', path: '/api/schedule?date={YYYY-MM-DD}', params: [{ name: 'date', type: 'string', desc: 'Date (default today)' }], code: { curl: 'curl "https://anikato.vercel.app/api/schedule"', js: 'const res = await fetch("https://anikato.vercel.app/api/schedule");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/schedule")\nprint(r.json())' } },
+      { id: 'topten', title: 'Top 10', desc: 'Top 10 anime (today, week, month).', path: '/api/top-ten', params: [], code: { curl: 'curl "https://anikato.vercel.app/api/top-ten"', js: 'const res = await fetch("https://anikato.vercel.app/api/top-ten");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/top-ten")\nprint(r.json())' } },
+      { id: 'random', title: 'Random', desc: 'Random anime info.', path: '/api/random', params: [], code: { curl: 'curl "https://anikato.vercel.app/api/random"', js: 'const res = await fetch("https://anikato.vercel.app/api/random");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/random")\nprint(r.json())' } },
+      { id: 'filter', title: 'Filter', desc: 'Filter by genre, type, status, season.', path: '/api/filter?keyword={q}&genre[]={g}', params: [{ name: 'keyword', type: 'string', desc: 'Search keyword (required)' }, { name: 'genre[]', type: 'number', desc: 'Genre IDs' }, { name: 'type[]', type: 'number', desc: 'Type IDs' }], code: { curl: 'curl "https://anikato.vercel.app/api/filter?keyword=&genre[]=1&genre[]=4"', js: 'const res = await fetch("https://anikato.vercel.app/api/filter?keyword=&genre[]=1");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/filter", params={"keyword": "", "genre[]": 1})\nprint(r.json())' } },
+      { id: 'popular', title: 'Most Popular', desc: 'Most popular anime list.', path: '/api/most-popular?page={n}', params: [{ name: 'page', type: 'number', desc: 'Page (default 1)' }], code: { curl: 'curl "https://anikato.vercel.app/api/most-popular"', js: 'const res = await fetch("https://anikato.vercel.app/api/most-popular");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/most-popular")\nprint(r.json())' } },
+      { id: 'genre', title: 'Genre', desc: 'Anime by genre.', path: '/api/genre/{name}', params: [{ name: 'name', type: 'string', desc: 'Genre slug (action, comedy, etc.)' }], code: { curl: 'curl "https://anikato.vercel.app/api/genre/action"', js: 'const res = await fetch("https://anikato.vercel.app/api/genre/action");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/genre/action")\nprint(r.json())' } },
+      { id: 'type', title: 'Type', desc: 'Anime by type.', path: '/api/type/{name}', params: [{ name: 'name', type: 'string', desc: 'Type (tv, movie, ova, etc.)' }], code: { curl: 'curl "https://anikato.vercel.app/api/type/tv"', js: 'const res = await fetch("https://anikato.vercel.app/api/type/tv");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/type/tv")\nprint(r.json())' } },
+      { id: 'status', title: 'Status', desc: 'Anime by status.', path: '/api/status/{name}', params: [{ name: 'name', type: 'string', desc: 'Status (currently-airing, finished-airing)' }], code: { curl: 'curl "https://anikato.vercel.app/api/status/currently-airing"', js: 'const res = await fetch("https://anikato.vercel.app/api/status/currently-airing");\nconst data = await res.json();', python: 'import requests\nr = requests.get("https://anikato.vercel.app/api/status/currently-airing")\nprint(r.json())' } },
+    ];
+    const navEl = document.getElementById('explorerNav');
+    const panelEl = document.getElementById('explorerPanel');
+    let activeLang = 'curl';
+
+    function renderExplorer(ep) {
+      const paramsHtml = ep.params.map(p => `<div class="param-row"><span class="param-name">${p.name}</span><span class="param-type">${p.type}</span><span class="param-desc">${p.desc}</span></div>`).join('');
+      panelEl.innerHTML = `
+        <div class="explorer-method method-get">GET</div>
+        <div class="explorer-panel-title">${ep.title}</div>
+        <div class="explorer-panel-desc">${ep.desc}</div>
+        <div class="explorer-path">${ep.path}</div>
+        ${ep.params.length ? `<div class="explorer-params"><div class="explorer-params-title">Parameters</div>${paramsHtml}</div>` : ''}
+        <div class="code-tabs">
+          <button class="code-tab ${activeLang==='curl'?'active':''}" onclick="switchLang('curl',this)">cURL</button>
+          <button class="code-tab ${activeLang==='js'?'active':''}" onclick="switchLang('js',this)">JavaScript</button>
+          <button class="code-tab ${activeLang==='python'?'active':''}" onclick="switchLang('python',this)">Python</button>
+        </div>
+        <div class="explorer-code" id="explorerCode">${ep.code[activeLang]}</div>`;
+    }
+    function switchLang(lang, btn) {
+      activeLang = lang;
+      document.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const activeEp = explorerData.find(e => e.id === navEl.querySelector('.active')?.dataset.id) || explorerData[0];
+      document.getElementById('explorerCode').textContent = activeEp.code[lang];
+    }
+    explorerData.forEach((ep, i) => {
+      const btn = document.createElement('button');
+      btn.className = `explorer-nav-btn ${i===0?'active':''}`;
+      btn.dataset.id = ep.id;
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>${ep.title}`;
+      btn.onclick = () => {
+        navEl.querySelectorAll('.explorer-nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderExplorer(ep);
+      };
+      navEl.appendChild(btn);
+    });
+    renderExplorer(explorerData[0]);
+
+    /* ── Playground ── */
+    async function pgRun(type) {
+      let url, outEl;
+      if (type === 'search') {
+        const q = document.getElementById('pgSearch').value.trim();
+        if (!q) return;
+        url = `${BASE}/search?keyword=${encodeURIComponent(q)}`;
+        outEl = document.getElementById('pgSearchOut');
+      } else if (type === 'stream') {
+        const id = document.getElementById('pgStream').value.trim();
+        if (!id) return;
+        url = `${BASE}/stream?id=${encodeURIComponent(id)}`;
+        outEl = document.getElementById('pgStreamOut');
+      } else if (type === 'random') {
+        url = `${BASE}/random`;
+        outEl = document.getElementById('pgRandomOut');
+      } else if (type === 'schedule') {
+        const d = document.getElementById('pgSchedule').value;
+        url = d ? `${BASE}/schedule?date=${d}` : `${BASE}/schedule`;
+        outEl = document.getElementById('pgScheduleOut');
+      }
+      outEl.classList.add('visible');
+      outEl.innerHTML = '<span style="color:var(--amber)">Loading...</span>';
       try {
         const res = await fetch(url);
         const data = await res.json();
-        el.textContent = JSON.stringify(data, null, 2);
+        outEl.innerHTML = syntaxHighlight(JSON.stringify(data, null, 2));
       } catch (e) {
-        el.textContent = 'Error: ' + e.message;
+        outEl.innerHTML = `<span style="color:var(--red)">Error: ${e.message}</span>`;
       }
     }
-
-    function runSearch() {
-      const q = document.getElementById('searchInput').value.trim();
-      if (!q) return;
-      fetchApi(`${BASE}/search?keyword=${encodeURIComponent(q)}`, 'searchResult');
-    }
-
-    function runStream() {
-      const id = document.getElementById('streamInput').value.trim();
-      if (!id) return;
-      fetchApi(`${BASE}/stream?id=${encodeURIComponent(id)}`, 'streamResult');
-    }
-
-    function runRandom() {
-      fetchApi(`${BASE}/random`, 'randomResult');
-    }
-
-    function runSchedule() {
-      const d = document.getElementById('scheduleInput').value;
-      const url = d ? `${BASE}/schedule?date=${d}` : `${BASE}/schedule`;
-      fetchApi(url, 'scheduleResult');
-    }
-
-    document.getElementById('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
-    document.getElementById('streamInput').addEventListener('keydown', e => { if (e.key === 'Enter') runStream(); });
+    document.getElementById('pgSearch')?.addEventListener('keydown', e => { if (e.key === 'Enter') pgRun('search'); });
+    document.getElementById('pgStream')?.addEventListener('keydown', e => { if (e.key === 'Enter') pgRun('stream'); });
   </script>
-
 </body>
 </html>

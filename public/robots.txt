@@ -1,0 +1,6 @@
+# AniKatoAPI — https://anikato.vercel.app
+User-agent: *
+Allow: /
+Allow: /api
+
+Sitemap: https://anikato.vercel.app/sitemap.xml

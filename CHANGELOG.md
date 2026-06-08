@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-06-08
+
+### Added
+- `public/manifest.json` — PWA manifest with theme color, icons, display mode
+- `public/robots.txt` — Crawler directives and sitemap reference
+- `public/sitemap.xml` — XML sitemap with homepage, API, privacy, and terms pages
+- `public/og-image.svg` — SVG Open Graph image with gradient design, title, and tagline
+- `public/privacy.html` — Full privacy policy (data collection, third-party, DMCA, cookies)
+- `public/tos.html` — Full terms of service (acceptable use, rate limits, liability, DMCA)
+
+### Changed
+- Completely rebuilt `public/index.html` from scratch (premium UI/UX)
+- Replaced all emojis with inline SVG icons throughout the entire page
+- Hero section now features a live interactive API console (fetch, run, see JSON response)
+- Console has preset buttons (Home, Search, Stream, Random, Schedule) with one-click switching
+- Added scroll-reveal animations via IntersectionObserver (no external libraries)
+- Added animated particle system via canvas (60 particles, purple-tinted)
+- Added glassmorphism sticky header with scroll-aware background blur
+- Added stats section with animated counters (counts up on viewport entry)
+- Added infinite scrolling marquee with feature highlights and SVG icons
+- Added endpoint explorer with sidebar navigation, multi-language code tabs (cURL, JS, Python)
+- Added playground section with 4 interactive cards (search, stream, random, schedule)
+- Added CTA section with gradient background
+- Added full footer with 4-column grid (brand, API links, resources, legal)
+- Rebuilt `public/404.html` with glitch animation effect, scanlines, and SVG icons
+- All CSS uses custom properties, no external frameworks
+
 ## [1.5.5] - 2026-06-08
 
 ### Changed
