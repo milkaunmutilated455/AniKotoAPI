@@ -6,7 +6,7 @@ const getEpisodeList = async (req, res, next) => {
     const { id } = req.params;
 
     if (!id) {
-      return res.status(400).json({ success: false, message: "Anime ID is required" });
+      return res.status(400).json({ success: false, message: "Anime slug is required" });
     }
 
     const cacheKey = `episodes_${id}`;

@@ -5,27 +5,23 @@ import { URLS } from "../configs/dataUrl.js";
 
 const extractSchedule = async (date) => {
   try {
-    const url = URLS.schedule(date);
+    const url = `${URLS.home}?date=${date}`;
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
     const schedule = [];
     $(".schedule-item, .anime-schedule .item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
+      const slug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
+      const title = $(el).find(".film-name a, .name").text().trim() || "";
       const time = $(el).find(".time, .schedule-time").text().trim() || "";
       const episodeNo = parseInt($(el).find(".episode-no, .ep-num").text().trim()) || 0;
-      const releaseDate = $(el).find(".date, .release-date").text().trim() || "";
 
-      if (id) {
+      if (slug) {
         schedule.push({
-          id,
+          slug,
           title,
-          japaneseTitle,
           time,
-          episode_no: episodeNo,
-          releaseDate
+          episode_no: episodeNo
         });
       }
     });

@@ -9,26 +9,18 @@ const ALT_DOMAINS = [
 
 const URLS = {
   home: `${BASE_URL}/home`,
-  search: `${BASE_URL}/search`,
+  search: `${BASE_URL}/filter`,
   genre: (genre) => `${BASE_URL}/genre/${genre}`,
+  type: (type) => `${BASE_URL}/type/${type}`,
+  status: (status) => `${BASE_URL}/status/${status}`,
   azList: (letter) => `${BASE_URL}/az-list/${letter}`,
-  category: (cat) => `${BASE_URL}/${cat}`,
-  anime: (id) => `${BASE_URL}/anime/${id}`,
-  episode: (id) => `${BASE_URL}/episode/${id}`,
-  schedule: (date) => `${BASE_URL}/schedule/${date}`,
-  topTen: `${BASE_URL}/top-ten`,
-  mostPopular: `${BASE_URL}/most-popular`,
-  mostFavorite: `${BASE_URL}/most-favorite`,
-  recentlyUpdated: `${BASE_URL}/recently-updated`,
-  recentlyAdded: `${BASE_URL}/recently-added`,
-  subbedAnime: `${BASE_URL}/subbed-anime`,
-  dubbedAnime: `${BASE_URL}/dubbed-anime`,
-  movie: `${BASE_URL}/movie`,
-  ova: `${BASE_URL}/ova`,
-  ona: `${BASE_URL}/ona`,
-  special: `${BASE_URL}/special`,
-  tv: `${BASE_URL}/tv`,
-  music: `${BASE_URL}/music`
+  watch: (slug) => `${BASE_URL}/watch/${slug}`,
+  episode: (slug, ep) => `${BASE_URL}/watch/${slug}/ep-${ep}`,
+  latestUpdated: `${BASE_URL}/latest-updated`,
+  newRelease: `${BASE_URL}/new-release`,
+  mostViewed: `${BASE_URL}/most-viewed`,
+  random: `${BASE_URL}/random`,
+  serverList: `${BASE_URL}/ajax/server/list`
 };
 
 export { BASE_URL, ALT_DOMAINS, URLS };

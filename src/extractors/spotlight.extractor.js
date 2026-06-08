@@ -9,24 +9,30 @@ const extractSpotlight = async () => {
     const $ = cheerio.load(data);
 
     const spotlights = [];
-    $(".swiper-slide, .spotlight-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fdi-item:nth-child(1)").text().trim() || "";
-      const description = $(el).find(".fd-infor .desc, .film-description").text().trim() || "";
-      const showType = $(el).find(".fdi-item:nth-child(2)").text().trim() || "";
-      const duration = $(el).find(".fdi-item:nth-child(3)").text().trim() || "";
-      const releaseDate = $(el).find(".fdi-item:nth-child(4)").text().trim() || "";
+    $("#hotest .swiper-slide.item").each((i, el) => {
+      const slug = $(el).find("a.play").attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".image div").attr("style")?.match(/url\(['"]?(.+?)['"]?\)/)?.[1] || "";
+      const title = $(el).find("h2.title.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find("h2.title.d-title").attr("data-jp") || "";
+      const description = $(el).find(".desc").text().trim() || "";
+      const rating = $(el).find("i.rating").text().trim() || "";
+      const quality = $(el).find("i.quality").text().trim() || "";
+      const sub = parseInt($(el).find("i.sub").text().trim()) || 0;
+      const dub = parseInt($(el).find("i.dub").text().trim()) || 0;
+      const date = $(el).find("i.date").text().trim() || "";
 
-      if (id) {
+      if (slug) {
         spotlights.push({
-          id,
+          slug,
           poster,
           title,
           japaneseTitle,
           description,
-          tvInfo: { showType, duration, releaseDate }
+          rating,
+          quality,
+          sub,
+          dub,
+          date
         });
       }
     });

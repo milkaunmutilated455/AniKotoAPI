@@ -5,46 +5,52 @@ import { URLS } from "../configs/dataUrl.js";
 
 const extractTopTen = async () => {
   try {
-    const { data } = await axios.get(URLS.topTen, { headers });
+    const { data } = await axios.get(URLS.home, { headers });
     const $ = cheerio.load(data);
 
     const today = [];
     const week = [];
     const month = [];
 
-    $(".top-ten-list.today .top-ten-item, #top-viewed-day .top-list-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const name = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const number = parseInt($(el).find(".number").text().trim()) || i + 1;
-      const showType = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
+    $("#top-anime .tab-content[data-name='day'] a.item").each((i, el) => {
+      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".poster img").attr("src") || "";
+      const name = $(el).find(".name").text().trim() || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const type = $(el).find(".type").text().trim() || "";
+      const rank = i + 1;
 
-      if (id) {
-        today.push({ id, number, name, poster, tvInfo: { showType } });
+      if (slug) {
+        today.push({ slug, rank, name, poster, sub, dub, type });
       }
     });
 
-    $(".top-ten-list.week .top-ten-item, #top-viewed-week .top-list-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const name = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const number = parseInt($(el).find(".number").text().trim()) || i + 1;
-      const showType = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
+    $("#top-anime .tab-content[data-name='week'] a.item").each((i, el) => {
+      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".poster img").attr("src") || "";
+      const name = $(el).find(".name").text().trim() || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const type = $(el).find(".type").text().trim() || "";
+      const rank = i + 1;
 
-      if (id) {
-        week.push({ id, number, name, poster, tvInfo: { showType } });
+      if (slug) {
+        week.push({ slug, rank, name, poster, sub, dub, type });
       }
     });
 
-    $(".top-ten-list.month .top-ten-item, #top-viewed-month .top-list-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const name = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const number = parseInt($(el).find(".number").text().trim()) || i + 1;
-      const showType = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
+    $("#top-anime .tab-content[data-name='month'] a.item").each((i, el) => {
+      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".poster img").attr("src") || "";
+      const name = $(el).find(".name").text().trim() || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const type = $(el).find(".type").text().trim() || "";
+      const rank = i + 1;
 
-      if (id) {
-        month.push({ id, number, name, poster, tvInfo: { showType } });
+      if (slug) {
+        month.push({ slug, rank, name, poster, sub, dub, type });
       }
     });
 

@@ -114,12 +114,12 @@
             <div class="endpoint">
                 <span class="method">GET</span>
                 <span class="path">/api/</span>
-                <p class="description">Get home page data including spotlight, trending, top airing, etc.</p>
+                <p class="description">Get home page data including spotlight, trending, top anime, etc.</p>
             </div>
 
             <div class="endpoint">
                 <span class="method">GET</span>
-                <span class="path">/api/info?id={anime-id}</span>
+                <span class="path">/api/info?id={anime-slug}</span>
                 <p class="description">Get detailed information about a specific anime</p>
             </div>
 
@@ -137,14 +137,14 @@
 
             <div class="endpoint">
                 <span class="method">GET</span>
-                <span class="path">/api/episodes/{anime-id}</span>
+                <span class="path">/api/episodes/{anime-slug}</span>
                 <p class="description">Get episode list for an anime</p>
             </div>
 
             <div class="endpoint">
                 <span class="method">GET</span>
-                <span class="path">/api/stream?id={episode-id}&server={server}&type={sub/dub}</span>
-                <p class="description">Get streaming information for an episode</p>
+                <span class="path">/api/stream?id={episode-id}</span>
+                <p class="description">Get streaming servers for an episode</p>
             </div>
 
             <div class="endpoint">
@@ -192,20 +192,48 @@
             <div class="endpoint">
                 <span class="method">GET</span>
                 <span class="path">/api/filter?{params}</span>
-                <p class="description">Filter anime by type, status, genre, etc.</p>
+                <p class="description">Filter anime by genre, type, status, etc.</p>
             </div>
 
             <div class="endpoint">
                 <span class="method">GET</span>
                 <span class="path">/api/{category}?page={page}</span>
-                <p class="description">Get anime by category (movie, tv, ova, ona, etc.)</p>
+                <p class="description">Get anime by category (genre/action, type/tv, etc.)</p>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>URL Structure</h2>
+            <div class="endpoint">
+                <span class="path">Anime: /watch/{anime-slug}</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Episode: /watch/{anime-slug}/ep-{number}</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Search: /filter?keyword={query}</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Genre: /genre/{genre-slug}</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Type: /type/{type-slug}</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Status: /status/{status-slug}</span>
             </div>
         </div>
 
         <div class="api-section">
             <h2>Categories</h2>
             <div class="endpoint">
-                <span class="path">top-airing, most-popular, most-favorite, completed, recently-updated, recently-added, subbed-anime, dubbed-anime, movie, tv, ova, ona, special, music</span>
+                <span class="path">Genres: action, adventure, cars, comedy, dementia, demons, drama, ecchi, fantasy, game, harem, historical, horror, isekai, josei, kids, magic, mahou-shoujo, martial-arts, mecha, military, music, mystery, parody, police, psychological, romance, samurai, school, sci-fi, seinen, shoujo, shoujo-ai, shounen, shounen-ai, slice-of-life, space, sports, super-power, supernatural, thriller, unknown, vampire</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Types: movie, music, ona, ova, special, tv</span>
+            </div>
+            <div class="endpoint">
+                <span class="path">Status: currently-airing, finished-airing, not-yet-aired</span>
             </div>
         </div>
 

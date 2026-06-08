@@ -2,9 +2,8 @@ import * as cheerio from "cheerio";
 import axios from "axios";
 import { headers } from "../configs/header.config.js";
 import { URLS } from "../configs/dataUrl.js";
-import { countPages } from "../helper/countPages.helper.js";
-
 import { extractPages } from "../helper/extractPages.helper.js";
+import { countPages } from "../helper/countPages.helper.js";
 
 const extractSearchResults = async (keyword, page = 1) => {
   try {
@@ -13,23 +12,28 @@ const extractSearchResults = async (keyword, page = 1) => {
     const totalPages = countPages($);
 
     const results = [];
-    $(".film_list-wrap .flw-item, .search-list .film-detail").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
+    $(".film_list-wrap .flw-item, .film-detail").each((i, el) => {
+      const slug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
       const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
-      const showType = $(el).find(".fd-infor .fdi-item:nth-child(2)").text().trim() || "";
-      const sub = parseInt($(el).find(".tick-sub").text().trim()) || 0;
-      const dub = parseInt($(el).find(".tick-dub").text().trim()) || 0;
-      const eps = parseInt($(el).find(".tick-eps").text().trim()) || 0;
+      const title = $(el).find(".film-name a, .name.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find(".name.d-title").attr("data-jp") || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const total = parseInt($(el).find(".ep-status.total span").text().trim()) || 0;
+      const type = $(el).find(".meta .inner .right, .fdi-item:nth-child(2)").text().trim() || "";
+      const rating = $(el).find(".rating, .fdi-item:nth-child(3)").text().trim() || "";
 
-      if (id) {
+      if (slug) {
         results.push({
-          id,
+          slug,
           poster,
           title,
           japaneseTitle,
-          tvInfo: { showType, sub, dub, eps }
+          sub,
+          dub,
+          total,
+          type,
+          rating
         });
       }
     });
@@ -48,13 +52,12 @@ const extractSearchSuggestions = async (keyword) => {
 
     const suggestions = [];
     $(".search-suggest .film-detail, .nav-item a").each((i, el) => {
-      const id = $(el).attr("href")?.split("/").pop() || "";
+      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
       const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name, .dynamic-name").text().trim() || "";
-      const showType = $(el).find(".fdi-item:first-child").text().trim() || "";
+      const title = $(el).find(".film-name, .name").text().trim() || "";
 
-      if (id) {
-        suggestions.push({ id, poster, title, showType });
+      if (slug) {
+        suggestions.push({ slug, poster, title });
       }
     });
 

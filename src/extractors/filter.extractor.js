@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 import axios from "axios";
 import { headers } from "../configs/header.config.js";
-import { BASE_URL } from "../configs/dataUrl.js";
+import { URLS } from "../configs/dataUrl.js";
 import { countPages } from "../helper/countPages.helper.js";
 import { extractPages } from "../helper/extractPages.helper.js";
 
@@ -9,44 +9,43 @@ const extractFilter = async (params) => {
   try {
     const queryParams = new URLSearchParams();
     
+    if (params.keyword) queryParams.set("keyword", params.keyword);
+    if (params.genre) queryParams.set("genre", params.genre);
+    if (params.season) queryParams.set("season", params.season);
+    if (params.year) queryParams.set("year", params.year);
     if (params.type) queryParams.set("type", params.type);
     if (params.status) queryParams.set("status", params.status);
-    if (params.rated) queryParams.set("rated", params.rated);
-    if (params.score) queryParams.set("score", params.score);
-    if (params.season) queryParams.set("season", params.season);
     if (params.language) queryParams.set("language", params.language);
-    if (params.genres) queryParams.set("genres", params.genres);
+    if (params.rating) queryParams.set("rating", params.rating);
     if (params.sort) queryParams.set("sort", params.sort);
-    if (params.sy) queryParams.set("sy", params.sy);
-    if (params.sm) queryParams.set("sm", params.sm);
-    if (params.sd) queryParams.set("sd", params.sd);
-    if (params.ey) queryParams.set("ey", params.ey);
-    if (params.em) queryParams.set("em", params.em);
-    if (params.ed) queryParams.set("ed", params.ed);
-    if (params.keyword) queryParams.set("keyword", params.keyword);
 
-    const url = `${BASE_URL}/filter?${queryParams.toString()}`;
+    const url = `${URLS.search}?${queryParams.toString()}`;
     const $ = await extractPages(url, params.page || 1);
     const totalPages = countPages($);
 
     const results = [];
     $(".film_list-wrap .flw-item, .film-detail").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
+      const slug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
       const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
-      const showType = $(el).find(".fd-infor .fdi-item:nth-child(2)").text().trim() || "";
-      const sub = parseInt($(el).find(".tick-sub").text().trim()) || 0;
-      const dub = parseInt($(el).find(".tick-dub").text().trim()) || 0;
-      const eps = parseInt($(el).find(".tick-eps").text().trim()) || 0;
+      const title = $(el).find(".film-name a, .name.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find(".name.d-title").attr("data-jp") || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const total = parseInt($(el).find(".ep-status.total span").text().trim()) || 0;
+      const type = $(el).find(".meta .inner .right, .fdi-item:nth-child(2)").text().trim() || "";
+      const rating = $(el).find(".rating, .fdi-item:nth-child(3)").text().trim() || "";
 
-      if (id) {
+      if (slug) {
         results.push({
-          id,
+          slug,
           poster,
           title,
           japaneseTitle,
-          tvInfo: { showType, sub, dub, eps }
+          sub,
+          dub,
+          total,
+          type,
+          rating
         });
       }
     });

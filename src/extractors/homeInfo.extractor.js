@@ -9,111 +9,86 @@ const extractHomeInfo = async () => {
     const $ = cheerio.load(data);
 
     const spotlights = [];
-    $(".swiper-slide, .spotlight-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fdi-item:nth-child(1)").text().trim() || "";
-      const description = $(el).find(".fd-infor .desc, .film-description").text().trim() || "";
-      const showType = $(el).find(".fdi-item:nth-child(2)").text().trim() || "";
-      const duration = $(el).find(".fdi-item:nth-child(3)").text().trim() || "";
-      const releaseDate = $(el).find(".fdi-item:nth-child(4)").text().trim() || "";
+    $("#hotest .swiper-slide.item").each((i, el) => {
+      const slug = $(el).find("a.play").attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".image div").attr("style")?.match(/url\(['"]?(.+?)['"]?\)/)?.[1] || "";
+      const title = $(el).find("h2.title.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find("h2.title.d-title").attr("data-jp") || "";
+      const description = $(el).find(".desc").text().trim() || "";
+      const rating = $(el).find("i.rating").text().trim() || "";
+      const quality = $(el).find("i.quality").text().trim() || "";
+      const sub = parseInt($(el).find("i.sub").text().trim()) || 0;
+      const dub = parseInt($(el).find("i.dub").text().trim()) || 0;
+      const date = $(el).find("i.date").text().trim() || "";
 
-      if (id) {
+      if (slug) {
         spotlights.push({
-          id,
+          slug,
           poster,
           title,
           japaneseTitle,
           description,
-          tvInfo: { showType, duration, releaseDate }
+          rating,
+          quality,
+          sub,
+          dub,
+          date
         });
       }
     });
 
     const trending = [];
-    $(".trending-list .film-detail, .trending-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const number = parseInt($(el).find(".number").text().trim()) || i + 1;
+    $(".section-updated .item, #recent-update .item").each((i, el) => {
+      const slug = $(el).find("a.name.d-title").attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".poster img").attr("src") || "";
+      const title = $(el).find("a.name.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find("a.name.d-title").attr("data-jp") || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const total = parseInt($(el).find(".ep-status.total span").text().trim()) || 0;
+      const type = $(el).find(".meta .inner .right").text().trim() || "";
 
-      if (id) {
-        trending.push({ id, number, poster, title });
+      if (slug) {
+        trending.push({
+          slug,
+          poster,
+          title,
+          japaneseTitle,
+          sub,
+          dub,
+          total,
+          type
+        });
       }
     });
 
     const topAiring = [];
-    $(".section-id-02 .film-detail, .top-airing .film-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
+    $("#top-anime .tab-content[data-name='day'] a.item").each((i, el) => {
+      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".poster img").attr("src") || "";
+      const title = $(el).find(".name").text().trim() || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const type = $(el).find(".type").text().trim() || "";
 
-      if (id) {
-        topAiring.push({ id, poster, title, japaneseTitle });
-      }
-    });
-
-    const mostPopular = [];
-    $(".section-id-03 .film-detail, .popular .film-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-
-      if (id) {
-        mostPopular.push({ id, poster, title });
-      }
-    });
-
-    const mostFavorite = [];
-    $(".section-id-04 .film-detail, .favorite .film-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-
-      if (id) {
-        mostFavorite.push({ id, poster, title });
-      }
-    });
-
-    const latestCompleted = [];
-    $(".section-id-05 .film-detail, .completed .film-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-
-      if (id) {
-        latestCompleted.push({ id, poster, title });
-      }
-    });
-
-    const latestEpisode = [];
-    $(".section-id-06 .film-detail, .latest .film-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const episode = $(el).find(".tick-eps, .tick-sub").text().trim() || "";
-
-      if (id) {
-        latestEpisode.push({ id, poster, title, episode });
+      if (slug) {
+        topAiring.push({ slug, poster, title, sub, dub, type });
       }
     });
 
     const genres = [];
-    $(".genre-item, .genres a").each((i, el) => {
+    $("#menu ul.c4 li a").each((i, el) => {
       const genre = $(el).text().trim();
-      if (genre) genres.push(genre);
+      const href = $(el).attr("href") || "";
+      if (genre && href.includes("/genre/")) {
+        genres.push(genre);
+      }
     });
 
     return {
       spotlights,
       trending,
       topAiring,
-      mostPopular,
-      mostFavorite,
-      latestCompleted,
-      latestEpisode,
       genres
     };
   } catch (error) {

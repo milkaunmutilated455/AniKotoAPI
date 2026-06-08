@@ -5,7 +5,7 @@ const getAnimeInfo = async (req, res, next) => {
   try {
     const { id } = req.query;
     if (!id) {
-      return res.status(400).json({ success: false, message: "Anime ID is required" });
+      return res.status(400).json({ success: false, message: "Anime slug is required" });
     }
 
     const cacheKey = `anime_${id}`;

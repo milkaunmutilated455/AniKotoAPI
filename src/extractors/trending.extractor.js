@@ -9,15 +9,27 @@ const extractTrending = async () => {
     const $ = cheerio.load(data);
 
     const trending = [];
-    $(".trending-list .film-detail, .trending-item").each((i, el) => {
-      const id = $(el).find("a").attr("href")?.split("/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
-      const number = parseInt($(el).find(".number").text().trim()) || i + 1;
+    $(".section-updated .item, #recent-update .item").each((i, el) => {
+      const slug = $(el).find("a.name.d-title").attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".poster img").attr("src") || "";
+      const title = $(el).find("a.name.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find("a.name.d-title").attr("data-jp") || "";
+      const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
+      const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
+      const total = parseInt($(el).find(".ep-status.total span").text().trim()) || 0;
+      const type = $(el).find(".meta .inner .right").text().trim() || "";
 
-      if (id) {
-        trending.push({ id, number, poster, title, japaneseTitle });
+      if (slug) {
+        trending.push({
+          slug,
+          poster,
+          title,
+          japaneseTitle,
+          sub,
+          dub,
+          total,
+          type
+        });
       }
     });
 

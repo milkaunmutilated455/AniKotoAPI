@@ -1,19 +1,20 @@
 import * as cheerio from "cheerio";
 import axios from "axios";
 import { headers } from "../configs/header.config.js";
-import { BASE_URL } from "../configs/dataUrl.js";
+import { URLS } from "../configs/dataUrl.js";
 
-const extractAnimeInfo = async (id) => {
+const extractAnimeInfo = async (slug) => {
   try {
-    const url = `${BASE_URL}/anime/${id}`;
+    const url = URLS.watch(slug);
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
-    const title = $(".film-name h1, .anisc-detail .film-name").text().trim() || "";
-    const japaneseTitle = $(".film-name .alternate-title, .anisc-detail .film-name small").text().trim() || "";
-    const poster = $(".film-poster img").attr("src") || "";
-    const showType = $(".film-info .row .col1 .item:first-child .name").text().trim() || "";
-    const quality = $(".film-info .row .col1 .item:nth-child(2) .name").text().trim() || "";
+    const title = $(".anisc-detail .film-name, .film-name h1").text().trim() || "";
+    const japaneseTitle = $(".anisc-detail .film-name .alternate-title, .film-name small").text().trim() || "";
+    const poster = $(".film-poster img, .anisc-poster img").attr("src") || "";
+    const type = $(".film-info .row .col1 .item:first-child .name").text().trim() || "";
+    const rating = $(".film-info .row .col1 .item:nth-child(2) .name").text().trim() || "";
+    const quality = $(".film-info .row .col1 .item:nth-child(3) .name").text().trim() || "";
 
     const animeInfo = {};
     $(".anisc-info .item").each((i, el) => {
@@ -32,66 +33,63 @@ const extractAnimeInfo = async (id) => {
       if (genre) genres.push(genre);
     });
 
-    const seasons = [];
-    $(".seasons .season-item, .ss-list a").each((i, el) => {
-      const seasonId = $(el).attr("href")?.split("/").pop() || "";
-      const seasonTitle = $(el).text().trim() || "";
-      const seasonPoster = $(el).find("img").attr("src") || "";
+    const episodes = [];
+    $(".episodes-list .ep-item, .ss-list a").each((i, el) => {
+      const epId = $(el).attr("data-id") || $(el).attr("href")?.split("/").pop() || "";
+      const epNumber = parseInt($(el).find(".ep-number, .ep-num").text().trim()) || i + 1;
+      const title = $(el).find(".ep-title, .ep-name").text().trim() || "";
 
-      if (seasonId) {
-        seasons.push({
-          id: seasonId,
-          title: seasonTitle,
-          poster: seasonPoster
+      if (epId) {
+        episodes.push({
+          id: epId,
+          episode_no: epNumber,
+          title
         });
       }
     });
 
     const relatedData = [];
     $(".related-content .film-detail, .film-list-block .film-detail").each((i, el) => {
-      const relId = $(el).find("a").attr("href")?.split("/").pop() || "";
+      const relSlug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
       const relPoster = $(el).find("img").attr("src") || "";
       const relTitle = $(el).find(".film-name a").text().trim() || "";
-      const relType = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
 
-      if (relId) {
+      if (relSlug) {
         relatedData.push({
-          id: relId,
+          slug: relSlug,
           poster: relPoster,
-          title: relTitle,
-          type: relType
+          title: relTitle
         });
       }
     });
 
     const recommendedData = [];
     $(".recommend-content .film-detail, .film-list-block .film-detail").each((i, el) => {
-      const recId = $(el).find("a").attr("href")?.split("/").pop() || "";
+      const recSlug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
       const recPoster = $(el).find("img").attr("src") || "";
       const recTitle = $(el).find(".film-name a").text().trim() || "";
-      const recType = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
 
-      if (recId) {
+      if (recSlug) {
         recommendedData.push({
-          id: recId,
+          slug: recSlug,
           poster: recPoster,
-          title: recTitle,
-          type: recType
+          title: recTitle
         });
       }
     });
 
     return {
-      id,
+      slug,
       title,
       japaneseTitle,
       poster,
-      showType,
+      type,
+      rating,
       quality,
       overview,
       animeInfo,
       genres,
-      seasons,
+      episodes,
       relatedData,
       recommendedData
     };

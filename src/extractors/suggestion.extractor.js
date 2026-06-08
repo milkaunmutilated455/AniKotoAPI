@@ -11,15 +11,13 @@ const extractSuggestions = async (keyword) => {
 
     const suggestions = [];
     $(".search-suggest .film-detail, .nav-item a").each((i, el) => {
-      const id = $(el).attr("href")?.split("/").pop() || "";
+      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
       const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name, .dynamic-name").text().trim() || "";
-      const japaneseTitle = $(el).find(".fd-infor .fdi-item:first-child").text().trim() || "";
-      const showType = $(el).find(".fdi-item:first-child").text().trim() || "";
-      const releaseDate = $(el).find(".fdi-item:nth-child(2)").text().trim() || "";
+      const title = $(el).find(".film-name, .name").text().trim() || "";
+      const type = $(el).find(".fdi-item:first-child").text().trim() || "";
 
-      if (id) {
-        suggestions.push({ id, poster, title, japaneseTitle, showType, releaseDate });
+      if (slug) {
+        suggestions.push({ slug, poster, title, type });
       }
     });
 
