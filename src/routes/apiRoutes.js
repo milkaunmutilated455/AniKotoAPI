@@ -58,6 +58,24 @@ import { categoryRoutes } from "./category.route.js";
  */
 const createApiRoutes = (app, jsonResponse, jsonError) => {
   // ══════════════════════════════════════════════════════════════
+  // REQUEST COUNTER (must be before all routes)
+  // ══════════════════════════════════════════════════════════════
+
+const startTime = Date.now();
+let requestCount = 0;
+let errorCount = 0;
+
+app.use((req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    requestCount++;
+    res.on("finish", () => {
+      if (res.statusCode >= 400) errorCount++;
+    });
+  }
+  next();
+});
+
+  // ══════════════════════════════════════════════════════════════
   // HOME
   // ══════════════════════════════════════════════════════════════
 
@@ -332,21 +350,6 @@ categoryRoutes(app, jsonResponse, jsonError);
 // HEALTH & STATS
 // ══════════════════════════════════════════════════════════════
 
-const startTime = Date.now();
-let requestCount = 0;
-let errorCount = 0;
-
-// Middleware to count requests
-app.use((req, res, next) => {
-  if (req.path.startsWith("/api")) {
-    requestCount++;
-    res.on("finish", () => {
-      if (res.statusCode >= 400) errorCount++;
-    });
-  }
-  next();
-});
-
 // ---- FEATURE: Health check endpoint ----
 app.get("/api/health", (req, res) => {
   const uptime = Math.floor((Date.now() - startTime) / 1000);
@@ -359,7 +362,7 @@ app.get("/api/health", (req, res) => {
     results: {
       status: "healthy",
       version: "1.7.2",
-      uptime: `${hours}h ${minutes}m ${s}s`,
+      uptime: `${hours}h ${minutes}m ${seconds}s`,
       uptimeSeconds: uptime,
       timestamp: new Date().toISOString(),
       node: process.version,
