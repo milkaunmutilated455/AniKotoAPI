@@ -11,7 +11,7 @@
   "author": "Sʜɪɴᴇɪ Nᴏᴜᴢᴇɴ",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.0",
+    "axios": "^1.8.0",
     "cheerio": "^1.0.0-rc.12",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

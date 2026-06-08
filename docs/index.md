@@ -57,7 +57,7 @@ curl "https://anikototvapi.vercel.app/api/info?id=road-of-naruto-ggjw8"
 
 ## Features
 
-- **27 Endpoints** — Home, search, info, episodes, streaming, schedule, and more
+- **30 Endpoints** — Home, search, info, episodes, streaming, schedule, and more
 - **No API Key** — Just make requests, no registration needed
 - **In-Memory Cache** — 5-minute TTL for fast responses
 - **CORS Enabled** — Access from any domain

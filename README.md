@@ -20,7 +20,7 @@
   <img src="https://img.shields.io/badge/Vercel-Serverless-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&logo=mit&logoColor=white" alt="License"/>
   <img src="https://img.shields.io/badge/Version-1.8.0-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
-  <img src="https://img.shields.io/badge/Endpoints-27-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
+  <img src="https://img.shields.io/badge/Endpoints-30-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
   <img src="https://img.shields.io/badge/Anime-10000+-a855f7?style=flat-square&logoColor=white" alt="Anime Database"/>
 </p>
 
@@ -84,7 +84,7 @@
 
 ### Why AniKotoAPI?
 
-- 🎬 **27 Endpoints** — Complete coverage of anikototv.to data
+- 🎬 **30 Endpoints** — Complete coverage of anikototv.to data
 - 🔍 **Full-Text Search** — Search anime by keyword with suggestions
 - 📺 **Episode Lists** — AJAX-loaded episode data with server info
 - 🎯 **Smart Filtering** — Genre, type, status, rating, sort, season, year
@@ -135,7 +135,7 @@ flowchart TD
 ### ⚡ Core
 - **Real-time scraping** from anikototv.to
 - **Smart caching** with 5-minute TTL
-- **27 RESTful endpoints** covering all data
+- **30 RESTful endpoints** covering all data
 - **AJAX episode loading** for accurate data
 - **Mapper API integration** for extra servers
 - **Graceful error handling** per endpoint
@@ -183,7 +183,7 @@ flowchart TD
 
 | Feature | Description | Status |
 |:---|:---|:---:|
-| 🎬 27 API Endpoints | Complete coverage of anime data | ✅ |
+| 🎬 30 API Endpoints | Complete coverage of anime data | ✅ |
 | 🔍 Full-Text Search | Keyword search with pagination | ✅ |
 | 📺 Episode Lists | AJAX-loaded episode data | ✅ |
 | 🎯 Advanced Filtering | Genre, type, status, rating, sort | ✅ |
@@ -301,7 +301,7 @@ AniKotoAPI/
 │   │
 │   ├── 📂 docs/                          #    📚 API documentation
 │   │   ├── 📄 index.md                   #       Overview, quick start
-│   │   ├── 📄 endpoints.md               #       Full API reference (27 endpoints)
+│   │   ├── 📄 endpoints.md               #       Full API reference (30 endpoints)
 │   │   ├── 📄 streaming.md               #       Streaming flow guide
 │   │   ├── 📄 examples.md                #       Code examples (cURL, JS, Python)
 │   │   └── 📄 architecture.md            #       Project structure, tech stack
@@ -341,7 +341,7 @@ AniKotoAPI/
 │   │   └── 📄 formatTitle.helper.js      #       🔤 Title formatter
 │   │
 │   └── 📂 routes/                        #    🛤️ Express routes
-│       ├── 📄 apiRoutes.js               #       🌐 Main API routes (24 endpoints)
+│       ├── 📄 apiRoutes.js               #       🌐 Main API routes (30 endpoints)
 │       └── 📄 category.route.js          #       🏷️ Category routes
 │
 ├── 📄 server.js                          # 🚀 Express server entry point
@@ -2054,7 +2054,7 @@ The API can access 10,000+ anime titles from anikototv.to. The most-popular endp
 
 ### ✅ Completed
 
-- [x] 🎬 27 API endpoints covering all data
+- [x] 🎬 30 API endpoints covering all data
 - [x] 🔍 Full-text search with pagination
 - [x] 📺 Episode lists via AJAX loading
 - [x] 🎯 Advanced filtering (genre, type, status, rating, sort)

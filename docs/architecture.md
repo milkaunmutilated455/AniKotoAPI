@@ -21,7 +21,7 @@ AniKotoAPI/
 │
 ├── docs/                              # API documentation
 │   ├── index.md                       # Overview, quick start, features
-│   ├── endpoints.md                   # Full API reference (27 endpoints)
+│   ├── endpoints.md                   # Full API reference (30 endpoints)
 │   ├── streaming.md                   # Streaming flow guide (3-step)
 │   ├── examples.md                    # cURL, JavaScript, Python, Node.js
 │   └── architecture.md                # This file

@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `server.js` — Added `__dirname` computation (was missing)
 - `search.controller.js` — Fixed cache key collision with suggestion controller
 - `apiRoutes.js` — Made endpoint count dynamic (was hardcoded 27)
+- Updated endpoint count from 27→30 across all documentation files
+- Fixed axios version in package.json (^1.7.0 → ^1.8.0)
 - `vercel.json` — Removed duplicate CORS header (server.js handles it)
 
 ### Changed
