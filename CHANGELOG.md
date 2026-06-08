@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-06-08
+
+### Added
+- Watch page endpoint (`/api/watch?slug={slug}&ep={ep}`)
+- AZ List endpoint (`/api/az-list/:letter?page={page}`)
+- New Release endpoint (`/api/new-release?page={page}`)
+- Newly Added endpoint (`/api/newly-added?page={page}`)
+- Status endpoint (`/api/status/:status?page={page}`)
+- Trending Sidebar endpoint (`/api/trending-sidebar`)
+- Complete episode navigation (prev/next)
+- Related & recommended anime on watch page
+- Server list for video playback
+- Next episode schedule data
+
 ## [1.1.0] - 2026-06-08
 
 ### Fixed

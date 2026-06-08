@@ -11,12 +11,17 @@ A RESTful API for anime data from [anikototv.to](https://anikototv.to). Built wi
 ## Features
 
 - Home page data (spotlight, trending, top anime)
+- Watch page data (episode info, servers, next ep schedule)
 - Anime details & info
 - Search with suggestions
-- Episode lists
+- Episode lists with navigation
 - Streaming server info
 - Top 10 rankings (day/week/month)
 - Filter by genre, type, status, rating
+- AZ List alphabetical browsing
+- New Release & Newly Added sections
+- Ongoing & Completed anime lists
+- Trending sidebar data
 - Category browsing
 - Random anime
 - 5-minute response caching
@@ -80,6 +85,17 @@ Search anime by keyword.
 GET /api/search/suggest?keyword={keyword}
 ```
 
+### Watch Page
+```
+GET /api/watch?slug={anime-slug}&ep={episode-number}
+```
+Returns complete watch page data including anime info, episode list, servers, related & recommended anime, and next episode schedule.
+
+| Param | Type | Required |
+|---|---|---|
+| `slug` | string | Yes |
+| `ep` | number | Yes |
+
 ### Episodes
 ```
 GET /api/episodes/{anime-slug}
@@ -91,6 +107,39 @@ Returns episode list for an anime.
 GET /api/stream?id={episode-id}
 ```
 Returns available servers and links for an episode.
+
+### New Release
+```
+GET /api/new-release?page={page}
+```
+Returns newly released anime.
+
+### Newly Added
+```
+GET /api/newly-added?page={page}
+```
+Returns recently added anime.
+
+### AZ List
+```
+GET /api/az-list/{letter}?page={page}
+```
+Browse anime alphabetically. Use `all`, `0-9`, `a`-`z`, or `other`.
+
+### Status
+```
+GET /api/status/{status}?page={page}
+```
+Browse anime by airing status.
+- `currently-airing`
+- `finished-airing`
+- `not-yet-aired`
+
+### Trending Sidebar
+```
+GET /api/trending-sidebar
+```
+Returns trending anime (day/week/month) and latest episodes for sidebar.
 
 ### Schedule
 ```
