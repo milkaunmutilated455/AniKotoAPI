@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2024-12-19
+## [1.1.0] - 2026-06-08
+
+### Fixed
+- Corrected HTML selectors based on actual website analysis
+- Updated episode list extraction
+- Fixed stream info endpoint to use AJAX server list
+- Improved error handling
+
+## [1.0.0] - 2026-06-08
 
 ### Added
 - Initial project setup
@@ -39,11 +47,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed ID-based lookups to slug-based lookups
 - Updated URL patterns to match actual website structure
 - Improved CSS selectors for better accuracy
-
-## [1.1.0] - 2024-12-19
-
-### Fixed
-- Corrected HTML selectors based on actual website analysis
-- Updated episode list extraction
-- Fixed stream info endpoint to use AJAX server list
-- Improved error handling
