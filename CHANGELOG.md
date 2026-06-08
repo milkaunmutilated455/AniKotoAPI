@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-06-08
+
+### Changed
+- Complete documentation rewrite of ALL source files (50+ files)
+- Added box-style header comments (Project, Author, License) to every file
+- Added section headers using double-line box decorators (`═════`)
+- Added feature markers (`// ---- FEATURE: XYZ ----`) before every major function
+- Added JSDoc comments for EVERY function with @param, @returns, @example
+- Added inline notes (NOTE, WARNING, TIP) for non-obvious logic
+- Added footer END markers to every module/file
+- Matched code style to AlisaReactionBot repository format
+- All files now searchable by feature name via grep
+
 ## [1.4.0] - 2026-06-08
 
 ### Fixed

@@ -1,14 +1,60 @@
+/*
+ * ======= • ======= • ======= • ======= • =======• =======
+ * AniKatoAPI — spotlight.extractor.js
+ * Repository: https://github.com/Shineii86/AniKatoAPI
+ *
+ * @description
+ *   Extracts spotlight/featured anime items from the homepage.
+ *   Scrapes the "hottest" carousel section for trending anime.
+ *
+ * @exports
+ *   extractSpotlight
+ *
+ * @author  Shinei Nouzen
+ * @license MIT
+ * ======= • ======= • ======= • ======= • =======• =======
+ */
+
 import * as cheerio from "cheerio";
 import axios from "axios";
 import { headers } from "../configs/header.config.js";
 import { URLS } from "../configs/dataUrl.js";
 
+// ══════════════════════════════════════════════════════════════
+// SPOTLIGHT EXTRACTION
+// ══════════════════════════════════════════════════════════════
+
+// ---- FEATURE: Extract featured/spotlight anime from homepage ----
+/**
+ * Fetches and parses the spotlight carousel from the homepage.
+ * Returns an array of featured anime with metadata like poster, title,
+ * rating, quality, and episode counts.
+ *
+ * @returns {Promise<Array<Object>>} Array of spotlight anime objects
+ * @returns {string} return.slug - URL slug for the anime
+ * @returns {string} return.poster - Poster image URL
+ * @returns {string} return.title - English title
+ * @returns {string} return.japaneseTitle - Japanese title
+ * @returns {string} return.description - Short description
+ * @returns {string} return.rating - Anime rating
+ * @returns {string} return.quality - Video quality (e.g., HD)
+ * @returns {number} return.sub - Subbed episode count
+ * @returns {number} return.dub - Dubbed episode count
+ * @returns {string} return.date - Release date
+ *
+ * @example
+ *   const spotlights = await extractSpotlight();
+ *   console.log(spotlights[0].title);
+ */
 const extractSpotlight = async () => {
   try {
+    // NOTE: The homepage contains the spotlight carousel in #hotest section
     const { data } = await axios.get(URLS.home, { headers });
     const $ = cheerio.load(data);
 
     const spotlights = [];
+
+    // NOTE: Each slide in the swiper carousel represents a featured anime
     $("#hotest .swiper-slide.item").each((i, el) => {
       const slug = $(el).find("a.play").attr("href")?.split("/watch/").pop() || "";
       const poster = $(el).find(".image div").attr("style")?.match(/url\(['"]?(.+?)['"]?\)/)?.[1] || "";
@@ -21,6 +67,7 @@ const extractSpotlight = async () => {
       const dub = parseInt($(el).find("i.dub").text().trim()) || 0;
       const date = $(el).find("i.date").text().trim() || "";
 
+      // NOTE: Only include items with valid slugs
       if (slug) {
         spotlights.push({
           slug,
@@ -44,3 +91,5 @@ const extractSpotlight = async () => {
 };
 
 export { extractSpotlight };
+
+// ══════════════════════════════════════════════════════════════ END: spotlight.extractor.js

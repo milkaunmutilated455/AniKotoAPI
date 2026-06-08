@@ -1,14 +1,52 @@
+/*
+ * ======= • ======= • ======= • ======= • =======• =======
+ * AniKatoAPI — episodeList.extractor.js
+ * Repository: https://github.com/Shineii86/AniKatoAPI
+ *
+ * @description
+ *   Extracts the full episode list for a given anime from anikototv.to.
+ *   First resolves the anime ID from the watch page, then fetches the
+ *   episode list via AJAX endpoint.
+ *
+ * @exports
+ *   extractEpisodeList
+ *
+ * @author  Shinei Nouzen
+ * @license MIT
+ * ======= • ======= • ======= • ======= • =======• =======
+ */
+
 import * as cheerio from "cheerio";
 import axios from "axios";
 import { headers } from "../configs/header.config.js";
 import { URLS, BASE_URL } from "../configs/dataUrl.js";
 
+// ══════════════════════════════════════════════════════════════
+// EPISODE LIST EXTRACTOR
+// ══════════════════════════════════════════════════════════════
+
+// ---- FEATURE: Extract complete episode list for an anime by slug ----
+/**
+ * Fetches the anime watch page to resolve the internal anime ID, then
+ * queries the AJAX episode list endpoint to get all episodes with their
+ * metadata (ID, number, slug, title, active state, href).
+ *
+ * @param {string} slug - The anime slug identifier (e.g. "naruto-shippuden")
+ * @returns {Promise<Object>} Object with animeId, slug, totalEpisodes, and episodes array
+ *
+ * @example
+ *   const episodeData = await extractEpisodeList("one-piece");
+ *   console.log(episodeData.totalEpisodes); // e.g. 1100+
+ *   console.log(episodeData.episodes[0].episode_no); // 1
+ */
 const extractEpisodeList = async (slug) => {
   try {
+    // NOTE: First fetch the watch page to extract the internal anime ID
     const infoUrl = URLS.watch(slug);
     const { data: infoData } = await axios.get(infoUrl, { headers });
     const $ = cheerio.load(infoData);
 
+    // NOTE: data-id on #watch-main is the anime ID used for the AJAX episode list call
     const animeId = parseInt($("#watch-main").attr("data-id")) || 0;
 
     if (!animeId) {
@@ -16,6 +54,7 @@ const extractEpisodeList = async (slug) => {
     }
 
     try {
+      // NOTE: AJAX endpoint requires X-Requested-With header to return HTML fragment
       const ajaxUrl = `${BASE_URL}/ajax/episode/list/${animeId}`;
       const { data: ajaxData } = await axios.get(ajaxUrl, {
         headers: {
@@ -26,13 +65,17 @@ const extractEpisodeList = async (slug) => {
 
       const $ep = cheerio.load(ajaxData);
 
+      // ---- FEATURE: Parse episode list from AJAX response HTML ----
+      // NOTE: Episode links have either data-num or data-ep-id attributes
       const episodes = [];
       $ep("a[data-num], a[data-ep-id]").each((i, el) => {
         const epId = $ep(el).attr("data-ep-id") || $ep(el).attr("data-id") || "";
         const epNum = parseInt($ep(el).attr("data-num")) || i + 1;
         const epSlug = $ep(el).attr("data-slug") || "";
         const href = $ep(el).attr("href") || "";
+        // NOTE: Episode title is in .ep-title or .ep-name span
         const epTitle = $ep(el).find(".ep-title, .ep-name").text().trim() || "";
+        // NOTE: Active class indicates the currently-playing episode
         const isActive = $ep(el).hasClass("active") || false;
 
         episodes.push({
@@ -52,6 +95,7 @@ const extractEpisodeList = async (slug) => {
         episodes
       };
     } catch (ajaxError) {
+      // NOTE: Gracefully return empty list if AJAX call fails (e.g. network issue)
       return {
         animeId,
         slug,
@@ -65,3 +109,5 @@ const extractEpisodeList = async (slug) => {
 };
 
 export { extractEpisodeList };
+
+// ══════════════════════════════════════════════════════════════ END: episodeList.extractor.js

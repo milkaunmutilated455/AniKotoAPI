@@ -1,6 +1,41 @@
+/*
+ * ======= • ======= • ======= • ======= • =======• =======
+ * AniKatoAPI — homeInfo.controller.js
+ * Repository: https://github.com/Shineii86/AniKatoAPI
+ *
+ * @description
+ *   Controller for the homepage data endpoint. Extracts featured
+ *   anime, spotlight, trending, and other homepage sections.
+ *   Uses in-memory caching to avoid repeated scraping.
+ *
+ * @exports
+ *   getHomeInfo - Express route handler for GET /api/
+ *
+ * @author  Shinei Nouzen
+ * @license MIT
+ * ======= • ======= • ======= • ======= • =======• =======
+ */
+
 import { extractHomeInfo } from "../extractors/homeInfo.extractor.js";
 import { getCache, setCache } from "../helper/cache.helper.js";
 
+// ══════════════════════════════════════════════════════════════
+// CONTROLLER: HOME INFO
+// ══════════════════════════════════════════════════════════════
+
+// ---- FEATURE: Homepage data endpoint ----
+/**
+ * Handles GET /api/ requests by extracting homepage data
+ * from the source site. Returns cached data if available.
+ *
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ *
+ * @example
+ *   GET /api/
+ *   Response: { success: true, results: { spotlight, trending, ... } }
+ */
 const getHomeInfo = async (req, res, next) => {
   try {
     const cacheKey = "home";
@@ -8,7 +43,6 @@ const getHomeInfo = async (req, res, next) => {
     if (cached) {
       return res.json({ success: true, results: cached });
     }
-
     const data = await extractHomeInfo();
     setCache(cacheKey, data);
     res.json({ success: true, results: data });
@@ -18,3 +52,5 @@ const getHomeInfo = async (req, res, next) => {
 };
 
 export { getHomeInfo };
+
+// ══════════════════════════════════════════════════════════════ END: homeInfo.controller.js
