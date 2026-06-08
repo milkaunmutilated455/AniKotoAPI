@@ -75,6 +75,19 @@ app.use((req, res, next) => {
 app.use(express.static(publicDir, { redirect: false }));
 
 // ══════════════════════════════════════════════════════════════
+// CLEAN URL ROUTES
+// ══════════════════════════════════════════════════════════════
+
+// Serve HTML files without .html extension
+app.get("/tos", (req, res) => {
+  res.sendFile(path.join(publicDir, "tos.html"));
+});
+
+app.get("/privacy", (req, res) => {
+  res.sendFile(path.join(publicDir, "privacy.html"));
+});
+
+// ══════════════════════════════════════════════════════════════
 // RESPONSE HELPERS
 // ══════════════════════════════════════════════════════════════
 

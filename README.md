@@ -292,11 +292,11 @@ AniKotoAPI/
 ├── 📂 public/                            # 🌐 Static files
 │   ├── 📄 index.html                     #    📖 Premium landing page (SVG icons, live console)
 │   ├── 📄 404.html                       #    ❌ Custom 404 error page (glitch animation)
-│   ├── 📄 tos.html                       #    📋 Terms of Service page
-│   ├── 📄 privacy.html                   #    🔒 Privacy Policy page
+│   ├── 📄 tos.html                       #    📋 Terms of Service (served at /tos)
+│   ├── 📄 privacy.html                   #    🔒 Privacy Policy (served at /privacy)
 │   ├── 📄 manifest.json                  #    📱 PWA manifest (theme: #A855F7)
 │   ├── 📄 robots.txt                     #    🤖 Crawler directives
-│   ├── 📄 sitemap.xml                    #    🗺️ Sitemap (4 pages)
+│   ├── 📄 sitemap.xml                    #    🗺️ Sitemap (4 pages: /, /tos, /privacy, /api)
 │   ├── 📄 og-image.svg                   #    🖼️ SVG Open Graph image
 │   │
 │   ├── 📂 docs/                          #    📚 API documentation

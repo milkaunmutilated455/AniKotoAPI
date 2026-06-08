@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `docs/streaming.md` — Streaming flow guide (3-step with real data)
   - `docs/examples.md` — Code examples in cURL, JavaScript, Python, Node.js (all tested)
   - `docs/architecture.md` — Project structure, tech stack, design decisions
+
+### Fixed
+- Clean URLs: `/tos` and `/privacy` instead of `/tos.html` and `/privacy.html`
+- Added Express routes for clean URL serving
   - `docs/architecture.md` — Project structure, tech stack, design decisions
 
 ### Fixed

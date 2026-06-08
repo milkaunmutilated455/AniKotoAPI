@@ -14,10 +14,10 @@ AniKotoAPI/
 │   ├── 404.html                       # Glitch animation error page
 │   ├── manifest.json                  # PWA manifest (theme: #A855F7)
 │   ├── robots.txt                     # Crawler directives
-│   ├── sitemap.xml                    # 4 pages (home, api, privacy, tos)
+│   ├── sitemap.xml                    # 4 pages (/, /tos, /privacy, /api)
 │   ├── og-image.svg                   # SVG Open Graph image
-│   ├── privacy.html                   # Privacy policy
-│   └── tos.html                       # Terms of service
+│   ├── privacy.html                   # Privacy policy (served at /privacy)
+│   └── tos.html                       # Terms of service (served at /tos)
 │
 ├── docs/                              # API documentation
 │   ├── index.md                       # Overview, quick start, features
