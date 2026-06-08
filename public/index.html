@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniKatoAPI - Anime API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #e94560, #0f3460);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.2rem;
+        }
+        .api-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .api-section h2 {
+            color: #e94560;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .endpoint {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .method {
+            background: #e94560;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .path {
+            color: #0f3460;
+            font-weight: bold;
+        }
+        .description {
+            color: #a0a0a0;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #a0a0a0;
+        }
+        .badge {
+            display: inline-block;
+            background: #e94560;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AniKatoAPI</h1>
+            <p class="subtitle">RESTful API for Anime Data from anikototv.to</p>
+            <div style="margin-top: 20px;">
+                <span class="badge">Node.js</span>
+                <span class="badge">Express</span>
+                <span class="badge">Cheerio</span>
+                <span class="badge">Vercel</span>
+            </div>
+        </header>
+
+        <div class="api-section">
+            <h2>Base URL</h2>
+            <div class="endpoint">
+                <span class="path">https://anikatoapi.vercel.app/api</span>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>API Endpoints</h2>
+            
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/</span>
+                <p class="description">Get home page data including spotlight, trending, top airing, etc.</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/info?id={anime-id}</span>
+                <p class="description">Get detailed information about a specific anime</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/search?keyword={keyword}&page={page}</span>
+                <p class="description">Search for anime by keyword</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/search/suggest?keyword={keyword}</span>
+                <p class="description">Get search suggestions</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/episodes/{anime-id}</span>
+                <p class="description">Get episode list for an anime</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/stream?id={episode-id}&server={server}&type={sub/dub}</span>
+                <p class="description">Get streaming information for an episode</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/schedule?date={YYYY-MM-DD}</span>
+                <p class="description">Get anime schedule for a specific date</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/spotlight</span>
+                <p class="description">Get spotlight/featured anime</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/trending</span>
+                <p class="description">Get trending anime</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/top-ten</span>
+                <p class="description">Get top 10 anime (today, week, month)</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/suggestions?keyword={keyword}</span>
+                <p class="description">Get anime suggestions</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/random</span>
+                <p class="description">Get random anime information</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/most-popular?page={page}</span>
+                <p class="description">Get most popular anime</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/filter?{params}</span>
+                <p class="description">Filter anime by type, status, genre, etc.</p>
+            </div>
+
+            <div class="endpoint">
+                <span class="method">GET</span>
+                <span class="path">/api/{category}?page={page}</span>
+                <p class="description">Get anime by category (movie, tv, ova, ona, etc.)</p>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>Categories</h2>
+            <div class="endpoint">
+                <span class="path">top-airing, most-popular, most-favorite, completed, recently-updated, recently-added, subbed-anime, dubbed-anime, movie, tv, ova, ona, special, music</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Made by Sʜɪɴᴇɪ Nᴏᴜᴢᴇɴ</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">This API is for educational purposes only</p>
+        </div>
+    </div>
+</body>
+</html>
