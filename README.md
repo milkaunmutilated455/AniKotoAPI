@@ -440,46 +440,21 @@ console.log(resp.data);
   "success": true,
   "results": {
     "spotlights": [
-      {
-        "slug": "one-piece-odmau",
-        "poster": "https://image.tmdb.org/t/p/original/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg",
-        "title": "One Piece",
-        "japaneseTitle": "One Piece",
-        "description": "",
-        "rating": "PG-13",
-        "quality": "HD",
-        "sub": 0,
-        "dub": 0,
-        "date": "Oct 20, 1999 to ?"
-      }
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns", "poster": "https://cdn.anipixcdn.co/background/0a53175c11a0c2c1_1780649103.webp", "title": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "japaneseTitle": "Iya na Kao sare nagara Opantsu Misete Moraitai Returns", "description": "", "rating": "", "quality": "HD", "sub": 0, "dub": 0, "date": "Apr 30, 2026 to Jun 4, 2026" },
+      { "slug": "wistoria-wand-and-sword-season-2-dua04", "poster": "https://cdn.anipixcdn.co/background/101f58336250ee0d_1779363645.webp", "title": "Wistoria: Wand and Sword Season 2", "japaneseTitle": "Tsue to Tsurugi no Wistoria Season 2", "rating": "PG-13", "quality": "HD", "date": "Apr 12, 2026 to ?" },
+      { "slug": "one-piece-odmau", "poster": "https://image.tmdb.org/t/p/original/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg", "title": "One Piece", "japaneseTitle": "One Piece", "rating": "PG-13", "quality": "HD", "date": "Oct 20, 1999 to ?" }
     ],
     "trending": [
-      {
-        "slug": "one-piece-odmau/ep-1165",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-        "title": "One Piece",
-        "japaneseTitle": "One Piece",
-        "sub": 1165,
-        "dub": 1133,
-        "total": 0,
-        "type": "TV"
-      }
+      { "slug": "digimon-beatbreak-u2o7s/ep-34", "poster": "https://cdn.anipixcdn.co/thumbnail/12d6b5e5a791029b893bf3f08733aec2.jpg", "title": "Digimon Beatbreak", "japaneseTitle": "Digimon Beatbreak", "sub": 34, "dub": 25, "total": 0, "type": "TV" },
+      { "slug": "ghost-concert-missing-songs-ndxfn/ep-10", "poster": "https://cdn.anipixcdn.co/thumbnail/21c1f9ec2efafedf9e2bd429875471c0.jpg", "title": "Ghost Concert: Missing Songs", "sub": 10, "dub": 0, "total": 12, "type": "TV" },
+      { "slug": "one-piece-odmau/ep-1165", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "title": "One Piece", "sub": 1165, "dub": 1133, "total": 0, "type": "TV" }
     ],
     "topAiring": [
-      {
-        "slug": "one-piece-odmau",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-        "title": "One Piece",
-        "sub": 1165,
-        "dub": 1133,
-        "type": ""
-      }
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns", "poster": "https://cdn.anipixcdn.co/thumbnail/1dea34fcedb64cd270f5d2de28f485f1.jpg", "title": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "sub": 6, "dub": 0, "type": "" },
+      { "slug": "wistoria-wand-and-sword-season-2-dua04", "poster": "https://cdn.anipixcdn.co/thumbnail/4739d8dbd05dddb73604f6240b83ea68.jpg", "title": "Wistoria: Wand and Sword Season 2", "sub": 9, "dub": 7, "type": "" },
+      { "slug": "one-piece-odmau", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "title": "One Piece", "sub": 1165, "dub": 1133, "type": "" }
     ],
-    "genres": [
-      "Action", "Adventure", "Comedy", "Drama", "Fantasy",
-      "Horror", "Isekai", "Mecha", "Mystery", "Romance",
-      "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller"
-    ]
+    "genres": ["Action","Adventure","Cars","Comedy","Dementia","Demons","Drama","Ecchi","Fantasy","Game","Harem","Historical","Horror","Isekai","Josei","Kids","Magic","Mahou Shoujo","Martial Arts","Mecha","Military","Music","Mystery","Parody","Police","Psychological","Romance","Samurai","School","Sci-Fi","Seinen","Shoujo","Shoujo Ai","Shounen","Shounen Ai","Slice of Life","Space","Sports","Super Power","Supernatural","Thriller","unknown","Vampire"]
   }
 }
 ```
@@ -517,32 +492,9 @@ console.log(resp.data);
   "results": {
     "totalPages": 11,
     "data": [
-      {
-        "slug": "one-piece-episode-of-luffy-hand-island-adventure-br7lf/ep-1",
-        "animeId": "769",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/4f16c818875d9fcb6867c7bdc89be7eb.jpg",
-        "title": "One Piece: Episode of Luffy - Hand Island Adventure",
-        "japaneseTitle": "One Piece: Episode of Luffy - Hand Island no Bouken",
-        "sub": 1,
-        "dub": 0,
-        "total": 0,
-        "type": "Special",
-        "rating": "7.68",
-        "genres": ["Action", "Adventure", "Fantasy", "Comedy", "Shounen", "Super Power"]
-      },
-      {
-        "slug": "one-piece-odmau/ep-1",
-        "animeId": "1642",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-        "title": "One Piece",
-        "japaneseTitle": "One Piece",
-        "sub": 1165,
-        "dub": 1133,
-        "total": 0,
-        "type": "TV",
-        "rating": "8.73",
-        "genres": ["Action", "Adventure", "Fantasy", "Comedy", "Shounen", "Super Power", "Drama"]
-      }
+      { "slug": "one-piece-episode-of-luffy-hand-island-adventure-br7lf/ep-1", "animeId": "769", "poster": "https://cdn.anipixcdn.co/thumbnail/4f16c818875d9fcb6867c7bdc89be7eb.jpg", "title": "One Piece: Episode of Luffy - Hand Island Adventure", "japaneseTitle": "One Piece: Episode of Luffy - Hand Island no Bouken", "sub": 1, "dub": 0, "total": 0, "type": "Special", "rating": "7.68", "genres": ["Action","Adventure","Fantasy","Comedy","Shounen","Super Power"] },
+      { "slug": "one-piece-dead-end-n6fbv/ep-1", "animeId": "262", "poster": "https://cdn.anipixcdn.co/thumbnail/242c100dc94f871b6d7215b868a875f8.jpg", "title": "One Piece: Dead End", "japaneseTitle": "One Piece Movie 4: Dead End no Bouken", "sub": 1, "dub": 0, "total": 0, "type": "Movie", "rating": "7.6", "genres": ["Action","Adventure","Fantasy","Comedy","Shounen","Super Power"] },
+      { "slug": "one-piece-odmau/ep-1", "animeId": "1642", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "title": "One Piece", "japaneseTitle": "One Piece", "sub": 1165, "dub": 1133, "total": 0, "type": "TV", "rating": "8.73", "genres": ["Action","Adventure","Fantasy","Comedy","Shounen","Super Power","Drama"] }
     ]
   }
 }
@@ -578,13 +530,9 @@ console.log(resp.data);
 {
   "success": true,
   "results": [
-    {
-      "slug": "one-piece-odmau/ep-1",
-      "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-      "title": "One Piece",
-      "japaneseTitle": "One Piece",
-      "type": "TV"
-    }
+    { "slug": "one-piece-episode-of-luffy-hand-island-adventure-br7lf/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/4f16c818875d9fcb6867c7bdc89be7eb.jpg", "title": "One Piece: Episode of Luffy - Hand Island Adventure", "type": "Special" },
+    { "slug": "one-piece-dead-end-n6fbv/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/242c100dc94f871b6d7215b868a875f8.jpg", "title": "One Piece: Dead End", "type": "Movie" },
+    { "slug": "one-piece-wano-kuni-sp-r0xwk/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/8849f0a976aa5332853e848655a1d28f.jpg", "title": "One Piece - Wano Kuni SP", "type": "Special" }
   ]
 }
 ```
@@ -623,22 +571,22 @@ console.log(resp.data);
     "animeId": 1642,
     "title": "One Piece",
     "japaneseTitle": "One Piece",
-    "altNames": "",
+    "altNames": "One Piece;OP ONE PIECE One Piece; One Piece, One Piece, OP, ONE PIECE",
     "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-    "backgroundImage": "...",
-    "synopsis": "Gol D. Roger was known as the Pirate King...",
+    "backgroundImage": "https://image.tmdb.org/t/p/original/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg",
+    "synopsis": "Gold Roger was known as the \"Pirate King,\" the strongest and most infamous being to have sailed the Grand Line. The capture and execution of Roger by the World Government brought a change throughout the world...",
     "type": "TV",
-    "premiered": "Fall 1999",
-    "aired": "Oct 20, 1999",
+    "premiered": "&NBSP 1999",
+    "aired": "Oct 20, 1999 to ?",
     "status": "Currently Airing",
     "malScore": "8.73",
     "duration": "24 min",
-    "episodes": "Unknown",
+    "episodes": "?",
     "studios": ["Toei Animation"],
-    "producers": [],
+    "producers": ["Shueisha", "Funimation", "Fuji TV", "Toei Animation", "4Kids Entertainment", "TAP"],
     "genres": ["Action", "Adventure", "Fantasy", "Comedy", "Shounen", "Super Power", "Drama"],
-    "rating": "8.73",
-    "reviewCount": "0"
+    "rating": "8.73   8.73 /10",
+    "reviewCount": "2667420"
   }
 }
 ```
@@ -676,35 +624,34 @@ console.log(resp.data);
   "results": {
     "slug": "one-piece-odmau",
     "animeId": 1642,
-    "animeUrl": "/watch/one-piece-odmau",
+    "animeUrl": "https://anikototv.to/watch/one-piece-odmau",
     "title": "One Piece",
     "japaneseTitle": "One Piece",
     "episodeNumber": 1165,
-    "synopsis": "Gol D. Roger was known as the Pirate King...",
+    "synopsis": "Gold Roger was known as the \"Pirate King,\" the strongest and most infamous being to have sailed the Grand Line...",
     "type": "TV",
     "status": "Currently Airing",
     "malScore": "8.73",
     "duration": "24 min",
-    "episodes": "Unknown",
+    "episodes": "?",
     "studios": ["Toei Animation"],
-    "genres": ["Action", "Adventure", "Fantasy"],
-    "rating": "8.73",
+    "genres": ["Action", "Adventure", "Fantasy", "Comedy", "Shounen", "Super Power", "Drama"],
+    "rating": "8.73   8.73 /10",
     "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-    "backgroundImage": "...",
-    "nextEpisodeDate": "",
-    "nextEpisodeTimestamp": 0,
-    "servers": [
-      {
-        "linkId": "...",
-        "epId": "...",
-        "cmId": "...",
-        "svId": "...",
-        "name": "Vidstreaming",
-        "type": "sub"
-      }
+    "backgroundImage": "https://image.tmdb.org/t/p/original/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg",
+    "nextEpisodeDate": "× The next episode is predicted to arrive on 2026/06/14 02:16 PM GMT ()",
+    "nextEpisodeTimestamp": 1781446560,
+    "servers": [],
+    "trending": [
+      { "slug": "solo-leveling-season-2-arise-from-the-shadow-3eukp", "poster": "https://cdn.anipixcdn.co/thumbnail/4b5ed938de41e4ff532c02c27dfd143a.jpg", "title": "Solo Leveling Season 2: Arise from the Shadow", "type": "13 Eps", "score": "8.87" },
+      { "slug": "one-piece-odmau", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "title": "One Piece", "type": "? Eps", "score": "8.73" },
+      { "slug": "sakamoto-days-sfdxz", "poster": "https://cdn.anipixcdn.co/thumbnail/908e9281295d180348ec77afe6be6b01.jpg", "title": "Sakamoto Days", "type": "11 Eps", "score": "7.71" }
     ],
-    "trending": [...],
-    "recommended": [...]
+    "recommended": [
+      { "slug": "one-piece-episode-of-sabo-the-three-brothers-bond-hamg1", "poster": "https://cdn.anipixcdn.co/thumbnail/2f885d0fbe2e131bfc9d98363e55d1d4.jpg", "title": "One Piece: Episode of Sabo - The Three Brothers' Bond", "type": "Unknown" },
+      { "slug": "one-piece-episode-of-east-blue-f58nd", "poster": "https://cdn.anipixcdn.co/thumbnail/6766aa2750c19aad2fa1b32f36ed4aee.jpg", "title": "One Piece: Episode of East Blue", "type": "Unknown" },
+      { "slug": "fullmetal-alchemist-brotherhood-9s0fl", "poster": "https://cdn.anipixcdn.co/thumbnail/c4ca4238a0b923820dcc509a6f75849b.jpeg", "title": "Fullmetal Alchemist: Brotherhood", "type": "2009" }
+    ]
   }
 }
 ```
@@ -934,19 +881,19 @@ console.log(resp.data);
   "success": true,
   "results": {
     "today": [
-      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "poster": "...", "sub": 1165, "dub": 1133, "type": "" },
-      { "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851", "rank": 2, "name": "That Time I Got Reincarnated as a Slime Season 4", "sub": 9, "dub": 7 },
-      { "slug": "wistoria-wand-and-sword-season-2-dua04", "rank": 3, "name": "Wistoria: Wand and Sword Season 2", "sub": 9, "dub": 7 }
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns", "rank": 1, "name": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "poster": "https://cdn.anipixcdn.co/thumbnail/1dea34fcedb64cd270f5d2de28f485f1.jpg", "sub": 6, "dub": 0, "type": "" },
+      { "slug": "wistoria-wand-and-sword-season-2-dua04", "rank": 2, "name": "Wistoria: Wand and Sword Season 2", "poster": "https://cdn.anipixcdn.co/thumbnail/4739d8dbd05dddb73604f6240b83ea68.jpg", "sub": 9, "dub": 7, "type": "" },
+      { "slug": "one-piece-odmau", "rank": 3, "name": "One Piece", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "sub": 1165, "dub": 1133, "type": "" }
     ],
     "week": [
-      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "sub": 1165, "dub": 1133 },
-      { "slug": "re-zero-starting-life-in-another-world-season-4-4hk9h", "rank": 2, "name": "Re:ZERO Season 4", "sub": 9, "dub": 9 },
-      { "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851", "rank": 3, "name": "Tensei Slime Season 4", "sub": 9, "dub": 7 }
+      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "sub": 1165, "dub": 1133, "type": "" },
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns", "rank": 2, "name": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "sub": 6, "dub": 0, "type": "" },
+      { "slug": "re-zero-starting-life-in-another-world-season-4-4hk9h", "rank": 3, "name": "Re:ZERO -Starting Life in Another World- Season 4", "sub": 9, "dub": 9, "type": "" }
     ],
     "month": [
-      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "sub": 1165, "dub": 1133 },
-      { "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851", "rank": 2, "name": "Tensei Slime Season 4", "sub": 9, "dub": 7 },
-      { "slug": "wistoria-wand-and-sword-season-2-dua04", "rank": 3, "name": "Wistoria Season 2", "sub": 9, "dub": 7 }
+      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "sub": 1165, "dub": 1133, "type": "" },
+      { "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851", "rank": 2, "name": "That Time I Got Reincarnated as a Slime Season 4", "sub": 9, "dub": 7, "type": "" },
+      { "slug": "wistoria-wand-and-sword-season-2-dua04", "rank": 3, "name": "Wistoria: Wand and Sword Season 2", "sub": 9, "dub": 7, "type": "" }
     ]
   }
 }
@@ -977,24 +924,34 @@ console.log(resp.data);
   "success": true,
   "results": [
     {
+      "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns",
+      "poster": "https://cdn.anipixcdn.co/background/0a53175c11a0c2c1_1780649103.webp",
+      "title": "I Want You To Show Me Your Panties With a Disgusted Face Returns",
+      "japaneseTitle": "Iya na Kao sare nagara Opantsu Misete Moraitai Returns",
+      "description": "",
+      "rating": "",
+      "quality": "HD",
+      "sub": 0,
+      "dub": 0,
+      "date": "Apr 30, 2026 to Jun 4, 2026"
+    },
+    {
+      "slug": "wistoria-wand-and-sword-season-2-dua04",
+      "poster": "https://cdn.anipixcdn.co/background/101f58336250ee0d_1779363645.webp",
+      "title": "Wistoria: Wand and Sword Season 2",
+      "japaneseTitle": "Tsue to Tsurugi no Wistoria Season 2",
+      "rating": "PG-13",
+      "quality": "HD",
+      "date": "Apr 12, 2026 to ?"
+    },
+    {
       "slug": "one-piece-odmau",
       "poster": "https://image.tmdb.org/t/p/original/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg",
       "title": "One Piece",
       "japaneseTitle": "One Piece",
-      "description": "",
       "rating": "PG-13",
       "quality": "HD",
-      "sub": 0,
-      "dub": 0,
       "date": "Oct 20, 1999 to ?"
-    },
-    {
-      "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851",
-      "poster": "https://cdn.anipixcdn.co/background/14c2f4ab3ad95f50_1778862809.jpg",
-      "title": "That Time I Got Reincarnated as a Slime Season 4",
-      "japaneseTitle": "Tensei shitara Slime Datta Ken 4th Season",
-      "rating": "PG-13",
-      "quality": "HD"
     }
   ]
 }
@@ -1025,6 +982,26 @@ console.log(resp.data);
   "success": true,
   "results": [
     {
+      "slug": "digimon-beatbreak-u2o7s/ep-34",
+      "poster": "https://cdn.anipixcdn.co/thumbnail/12d6b5e5a791029b893bf3f08733aec2.jpg",
+      "title": "Digimon Beatbreak",
+      "japaneseTitle": "Digimon Beatbreak",
+      "sub": 34,
+      "dub": 25,
+      "total": 0,
+      "type": "TV"
+    },
+    {
+      "slug": "ghost-concert-missing-songs-ndxfn/ep-10",
+      "poster": "https://cdn.anipixcdn.co/thumbnail/21c1f9ec2efafedf9e2bd429875471c0.jpg",
+      "title": "Ghost Concert: Missing Songs",
+      "japaneseTitle": "Ghost Concert: Missing Songs",
+      "sub": 10,
+      "dub": 0,
+      "total": 12,
+      "type": "TV"
+    },
+    {
       "slug": "one-piece-odmau/ep-1165",
       "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
       "title": "One Piece",
@@ -1032,15 +1009,6 @@ console.log(resp.data);
       "sub": 1165,
       "dub": 1133,
       "total": 0,
-      "type": "TV"
-    },
-    {
-      "slug": "wistoria-wand-and-sword-season-2-dua04/ep-9",
-      "poster": "https://cdn.anipixcdn.co/thumbnail/4739d8dbd05dddb73604f6240b83ea68.jpg",
-      "title": "Wistoria: Wand and Sword Season 2",
-      "sub": 9,
-      "dub": 7,
-      "total": 12,
       "type": "TV"
     }
   ]
@@ -1072,14 +1040,14 @@ console.log(resp.data);
   "success": true,
   "results": {
     "slug": "https://anikototv.to/random",
-    "animeId": 998,
-    "title": "Saint Young Men (Movie)",
-    "japaneseTitle": "Saint Oniisan (Movie)",
-    "poster": "https://cdn.anipixcdn.co/thumbnail/6081594975a764c8e3a691fa2b3a321d.jpg",
-    "type": "Movie",
-    "synopsis": "What if Jesus and Buddha were living on Earth in modern times?",
-    "rating": "7.86   7.86 /10",
-    "genres": ["Comedy", "Slice of Life", "Seinen"],
+    "animeId": 2298,
+    "title": "Keep it a Secret from Maria-sama",
+    "japaneseTitle": "Maria-sama ga Miteru 4th Specials",
+    "poster": "https://cdn.anipixcdn.co/thumbnail/f35a2bc72dfdc2aae569a0c7370bd7f5.jpg",
+    "type": "Special",
+    "synopsis": "A series of specials included on the Maria-sama ga Miteru 4th DVD releases.",
+    "rating": "7.23   7.23 /10",
+    "genres": ["Comedy"],
     "url": "https://anikototv.to/random"
   }
 }
@@ -1122,22 +1090,36 @@ console.log(resp.data);
         "animeId": "7457",
         "poster": "https://cdn.anipixcdn.co/thumbnail/4b5ed938de41e4ff532c02c27dfd143a.jpg",
         "title": "Solo Leveling Season 2: Arise from the Shadow",
-        "sub": 13, "dub": 13, "total": 13,
-        "type": "TV", "rating": "8.87"
+        "japaneseTitle": "Ore dake Level Up na Ken Season 2: Arise from the Shadow",
+        "sub": 13,
+        "dub": 13,
+        "total": 13,
+        "type": "TV",
+        "rating": "8.87"
       },
       {
         "slug": "one-piece-odmau/ep-1",
         "animeId": "1642",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
         "title": "One Piece",
-        "sub": 1165, "dub": 1133,
-        "type": "TV", "rating": "8.73"
+        "japaneseTitle": "One Piece",
+        "sub": 1165,
+        "dub": 1133,
+        "total": 0,
+        "type": "TV",
+        "rating": "8.73"
       },
       {
-        "slug": "dandadan-lzcmw/ep-1",
-        "animeId": "4",
-        "title": "Dandadan",
-        "sub": 12, "dub": 12,
-        "type": "TV", "rating": "8.75"
+        "slug": "sakamoto-days-sfdxz/ep-1",
+        "animeId": "7498",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/908e9281295d180348ec77afe6be6b01.jpg",
+        "title": "Sakamoto Days",
+        "japaneseTitle": "Sakamoto Days",
+        "sub": 11,
+        "dub": 11,
+        "total": 11,
+        "type": "TV",
+        "rating": "7.71"
       }
     ]
   }
@@ -1174,24 +1156,11 @@ console.log(resp.data);
 {
   "success": true,
   "results": {
-    "totalPages": 50,
+    "totalPages": 293,
     "data": [
-      {
-        "slug": "given-movie-2024-xt2kv/ep-1",
-        "animeId": "7386",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/b4067f8aa165e643477e6c2eaf8e978c.jpg",
-        "title": "Given Movie (2024)",
-        "japaneseTitle": "Given Movie (2024)",
-        "sub": 1, "dub": 1, "total": 1,
-        "type": "Movie", "rating": "8"
-      },
-      {
-        "slug": "jujutsu-kaisen-hidden-inventory-premature-death-wjoxj/ep-1",
-        "animeId": "8584",
-        "title": "Jujutsu Kaisen: Hidden Inventory/Premature Death",
-        "sub": 1, "dub": 1, "total": 1,
-        "type": "Movie", "rating": "8.1"
-      }
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/1dea34fcedb64cd270f5d2de28f485f1.jpg", "title": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "japaneseTitle": "Iya na Kao sare nagara Opantsu Misete Moraitai Returns", "sub": 6, "dub": 0, "total": 6, "type": "ONA", "rating": "" },
+      { "slug": "rd-sennou-chousashitsu/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/4a17dad8441755f040555701f22d2751.jpg", "title": "RD Sennou Chousashitsu", "japaneseTitle": "RD Sennou Chousashitsu", "sub": 26, "dub": 0, "total": 26, "type": "TV", "rating": "" },
+      { "slug": "crusher-joe-the-movie/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/e6a31e4f7c3077e162f9c39c485b71fd.jpg", "title": "Crusher Joe: The Movie", "japaneseTitle": "Crusher Joe", "sub": 1, "dub": 0, "total": 0, "type": "MOVIE", "rating": "" }
     ]
   }
 }
@@ -1222,18 +1191,24 @@ console.log(resp.data);
   "success": true,
   "results": {
     "day": [
-      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "sub": 1165, "dub": 1133 },
-      { "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851", "rank": 2, "name": "Tensei Slime S4", "sub": 9, "dub": 7 }
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns", "rank": 1, "name": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "poster": "https://cdn.anipixcdn.co/thumbnail/1dea34fcedb64cd270f5d2de28f485f1.jpg", "sub": 6, "dub": 0, "type": "" },
+      { "slug": "wistoria-wand-and-sword-season-2-dua04", "rank": 2, "name": "Wistoria: Wand and Sword Season 2", "poster": "https://cdn.anipixcdn.co/thumbnail/4739d8dbd05dddb73604f6240b83ea68.jpg", "sub": 9, "dub": 7, "type": "" },
+      { "slug": "one-piece-odmau", "rank": 3, "name": "One Piece", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "sub": 1165, "dub": 1133, "type": "" }
     ],
-    "week": [...],
-    "month": [...],
+    "week": [
+      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "sub": 1165, "dub": 1133, "type": "" },
+      { "slug": "i-want-you-to-show-me-your-panties-with-a-disgusted-face-returns", "rank": 2, "name": "I Want You To Show Me Your Panties With a Disgusted Face Returns", "sub": 6, "dub": 0, "type": "" },
+      { "slug": "re-zero-starting-life-in-another-world-season-4-4hk9h", "rank": 3, "name": "Re:ZERO Season 4", "sub": 9, "dub": 9, "type": "" }
+    ],
+    "month": [
+      { "slug": "one-piece-odmau", "rank": 1, "name": "One Piece", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "sub": 1165, "dub": 1133, "type": "" },
+      { "slug": "that-time-i-got-reincarnated-as-a-slime-season-4-0u851", "rank": 2, "name": "That Time I Got Reincarnated as a Slime Season 4", "sub": 9, "dub": 7, "type": "" },
+      { "slug": "wistoria-wand-and-sword-season-2-dua04", "rank": 3, "name": "Wistoria: Wand and Sword Season 2", "sub": 9, "dub": 7, "type": "" }
+    ],
     "latestEpisodes": [
-      {
-        "slug": "one-piece-odmau/ep-1165",
-        "title": "One Piece",
-        "sub": 1165, "dub": 1133,
-        "type": "TV"
-      }
+      { "slug": "digimon-beatbreak-u2o7s/ep-34", "poster": "https://cdn.anipixcdn.co/thumbnail/12d6b5e5a791029b893bf3f08733aec2.jpg", "title": "Digimon Beatbreak", "japaneseTitle": "Digimon Beatbreak", "sub": 34, "dub": 25, "total": 0, "type": "TV" },
+      { "slug": "ghost-concert-missing-songs-ndxfn/ep-10", "poster": "https://cdn.anipixcdn.co/thumbnail/21c1f9ec2efafedf9e2bd429875471c0.jpg", "title": "Ghost Concert: Missing Songs", "sub": 10, "dub": 0, "total": 12, "type": "TV" },
+      { "slug": "one-piece-odmau/ep-1165", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "title": "One Piece", "sub": 1165, "dub": 1133, "total": 0, "type": "TV" }
     ]
   }
 }
@@ -1269,23 +1244,11 @@ console.log(resp.data);
 {
   "success": true,
   "results": {
-    "totalPages": 150,
+    "totalPages": 293,
     "data": [
-      {
-        "slug": "one-piece-odmau/ep-1",
-        "animeId": "1642",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-        "title": "One Piece",
-        "sub": 1165, "dub": 1133, "total": 0,
-        "type": "TV", "rating": "8.73"
-      },
-      {
-        "slug": "wistoria-wand-and-sword-season-2-dua04/ep-1",
-        "animeId": "8737",
-        "title": "Wistoria: Wand and Sword Season 2",
-        "sub": 9, "dub": 7, "total": 12,
-        "type": "TV", "rating": "8.12"
-      }
+      { "slug": "digimon-beatbreak-u2o7s/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/12d6b5e5a791029b893bf3f08733aec2.jpg", "title": "Digimon Beatbreak", "japaneseTitle": "Digimon Beatbreak", "sub": 34, "dub": 25, "total": 0, "type": "TV" },
+      { "slug": "ghost-concert-missing-songs-ndxfn/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/21c1f9ec2efafedf9e2bd429875471c0.jpg", "title": "Ghost Concert: Missing Songs", "japaneseTitle": "Ghost Concert: Missing Songs", "sub": 10, "dub": 0, "total": 12, "type": "TV" },
+      { "slug": "one-piece-odmau/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg", "title": "One Piece", "japaneseTitle": "One Piece", "sub": 1165, "dub": 1133, "total": 0, "type": "TV" }
     ]
   }
 }
@@ -1383,16 +1346,11 @@ console.log(resp.data);
 {
   "success": true,
   "results": {
-    "totalPages": 89,
+    "totalPages": 114,
     "data": [
-      {
-        "slug": "one-piece-odmau/ep-1",
-        "animeId": "1642",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-        "title": "One Piece",
-        "sub": 1165, "dub": 1133, "total": 0,
-        "type": "TV", "rating": "8.73"
-      }
+      { "slug": "loner-life-in-another-world-g9rqp/ep-1", "animeId": "2", "poster": "https://cdn.anipixcdn.co/thumbnail/63ea2c642aaee001d818604fe1d9a811.jpg", "title": "Loner Life in Another World", "japaneseTitle": "Hitoribocchi no Isekai Kouryaku", "sub": 12, "dub": 12, "total": 12, "type": "TV", "rating": "6.23" },
+      { "slug": "dandadan-lzcmw/ep-1", "animeId": "4", "poster": "https://cdn.anipixcdn.co/thumbnail/56705e032d3b13b849ca05bb7799013e.jpg", "title": "Dandadan", "japaneseTitle": "Dandadan", "sub": 12, "dub": 12, "total": 12, "type": "TV", "rating": "8.75" },
+      { "slug": "my-hero-academia-kuzfp/ep-1", "animeId": "6", "poster": "https://cdn.anipixcdn.co/thumbnail/5737c6ec2e0716f3d8a7a5c4e0de0d9a.jpg", "title": "My Hero Academia", "japaneseTitle": "Boku no Hero Academia", "sub": 13, "dub": 13, "total": 13, "type": "TV", "rating": "8.18" }
     ]
   }
 }
@@ -1429,23 +1387,11 @@ console.log(resp.data);
 {
   "success": true,
   "results": {
-    "totalPages": 89,
+    "totalPages": 114,
     "data": [
-      {
-        "slug": "one-piece-odmau/ep-1",
-        "animeId": "1642",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
-        "title": "One Piece",
-        "sub": 1165, "dub": 1133, "total": 0,
-        "type": "TV", "rating": "8.73"
-      },
-      {
-        "slug": "solo-leveling-season-2-arise-from-the-shadow-3eukp/ep-1",
-        "animeId": "7457",
-        "title": "Solo Leveling Season 2: Arise from the Shadow",
-        "sub": 13, "dub": 13, "total": 13,
-        "type": "TV", "rating": "8.87"
-      }
+      { "slug": "loner-life-in-another-world-g9rqp/ep-1", "animeId": "2", "poster": "https://cdn.anipixcdn.co/thumbnail/63ea2c642aaee001d818604fe1d9a811.jpg", "title": "Loner Life in Another World", "japaneseTitle": "Hitoribocchi no Isekai Kouryaku", "sub": 12, "dub": 12, "total": 12, "type": "TV", "rating": "6.23" },
+      { "slug": "dandadan-lzcmw/ep-1", "animeId": "4", "poster": "https://cdn.anipixcdn.co/thumbnail/56705e032d3b13b849ca05bb7799013e.jpg", "title": "Dandadan", "japaneseTitle": "Dandadan", "sub": 12, "dub": 12, "total": 12, "type": "TV", "rating": "8.75" },
+      { "slug": "my-hero-academia-kuzfp/ep-1", "animeId": "6", "poster": "https://cdn.anipixcdn.co/thumbnail/5737c6ec2e0716f3d8a7a5c4e0de0d9a.jpg", "title": "My Hero Academia", "japaneseTitle": "Boku no Hero Academia", "sub": 13, "dub": 13, "total": 13, "type": "TV", "rating": "8.18" }
     ]
   }
 }
@@ -1592,21 +1538,9 @@ console.log(resp.data);
     "totalPages": 19,
     "letter": "a",
     "data": [
-      {
-        "slug": "a-silent-voice-fghla/ep-1",
-        "poster": "https://cdn.anipixcdn.co/thumbnail/6512bd43d9caa6e02c990b0a82652dca.jpg",
-        "title": "A Silent Voice",
-        "japaneseTitle": "Koe no Katachi",
-        "sub": 1, "dub": 1, "total": 0,
-        "type": "Movie", "rating": ""
-      },
-      {
-        "slug": "attack-on-titan-bgaoa/ep-1",
-        "title": "Attack on Titan",
-        "japaneseTitle": "Shingeki no Kyojin",
-        "sub": 25, "dub": 25, "total": 25,
-        "type": "TV", "rating": "8.52"
-      }
+      { "slug": "acro-trip-kbuyh/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/42a35b21c91691fb5cd8724fa1a105ec.jpg", "title": "Acro Trip", "japaneseTitle": "Acro Trip", "sub": 12, "dub": 0, "total": 12, "type": "TV", "rating": "" },
+      { "slug": "a-herbivorous-dragon-of-5-000-years-gets-unfairly-villainized-2nd-season-8ajen/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/beb3eda36d64806731fdaa64351fa7a0.jpg", "title": "A Herbivorous Dragon of 5,000 Years Gets Unfairly Villainized 2nd Season", "japaneseTitle": "Shi Cao Lao Long Bei Guan Yi E Long Zhi Ming 2nd Season", "sub": 12, "dub": 0, "total": 12, "type": "TV", "rating": "" },
+      { "slug": "a-silent-voice-fghla/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/6512bd43d9caa6e02c990b0a82652dca.jpg", "title": "A Silent Voice", "japaneseTitle": "Koe no Katachi", "sub": 1, "dub": 1, "total": 0, "type": "Movie", "rating": "" }
     ]
   }
 }
@@ -1642,22 +1576,9 @@ console.log(resp.data);
 {
   "success": true,
   "results": [
-    {
-      "slug": "naruto-shippuden-c8gov/ep-1",
-      "poster": "https://cdn.anipixcdn.co/thumbnail/82cec96096d4281b7c95cd7e74623496.jpg",
-      "title": "Naruto: Shippuden",
-      "japaneseTitle": "Naruto: Shippuuden",
-      "type": "TV",
-      "sub": 500,
-      "dub": 500
-    },
-    {
-      "slug": "the-last-naruto-the-movie-whib1/ep-1",
-      "title": "The Last: Naruto the Movie",
-      "type": "Movie",
-      "sub": 1,
-      "dub": 1
-    }
+    { "slug": "road-of-naruto-ggjw8/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/abfd676ad3a01f1e8860fecff9f5b8e0.jpg", "title": "Road of Naruto", "japaneseTitle": "Road of Naruto", "type": "ONA", "sub": 1, "dub": 0 },
+    { "slug": "naruto-shippuuden-movie-6-road-to-ninja-w2wqq/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/43dd49b4fdb9bede653e94468ff8df1e.jpg", "title": "Naruto: Shippuuden Movie 6: Road to Ninja", "japaneseTitle": "Naruto: Shippuuden Movie 6 - Road to Ninja", "type": "Movie", "sub": 1, "dub": 1 },
+    { "slug": "the-last-naruto-the-movie-whib1/ep-1", "poster": "https://cdn.anipixcdn.co/thumbnail/6c3cf77d52820cd0fe646d38bc2145ca.jpg", "title": "The Last: Naruto the Movie", "japaneseTitle": "The Last: Naruto the Movie", "type": "Movie", "sub": 1, "dub": 1 }
   ]
 }
 ```
