@@ -1,12 +1,18 @@
 {
   "name": "AniKotoAPI",
   "short_name": "AniKotoAPI",
-  "description": "Free REST API for anime data. Browse, search, stream episodes. No API key required.",
+  "description": "Free REST API for anime data. Browse, search, stream episodes. 27+ endpoints, no API key required.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0A12",
   "theme_color": "#A855F7",
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "/og-image.svg",
       "sizes": "any",

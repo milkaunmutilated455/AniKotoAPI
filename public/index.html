@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AniKotoAPI — Free Anime Data API</title>
-  <meta name="description" content="Free REST API for anime data. Browse, search, stream episodes. No API key required. Built with Node.js, Express, Cheerio." />
-  <meta name="keywords" content="anime api, free api, rest api, anime data, streaming, episode servers, nodejs, express" />
+
+  <!-- ──────────────── Basic OG Tags ──────────────── -->
   <meta property="og:title" content="AniKotoAPI — Free Anime Data API" />
-  <meta property="og:description" content="Free REST API for anime data. Browse, search, stream episodes. No API key required." />
-  <meta property="og:image" content="/og-image.svg" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://anikototvapi.vercel.app" />
+  <meta property="og:image" content="https://anikototvapi.vercel.app/og-image.svg" />
+  <meta property="og:description" content="Free REST API for anime data. Browse, search, stream episodes. 27+ endpoints, no API key required." />
+  <meta property="og:site_name" content="AniKotoAPI" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ──────────────── Image Optimization ──────────────── -->
+  <meta property="og:image:secure_url" content="https://anikototvapi.vercel.app/og-image.svg" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="AniKotoAPI - Free Anime Data REST API" />
+
+  <!-- ──────────────── Twitter Card Tags ──────────────── -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Shineii86" />
+  <meta name="twitter:creator" content="@Shineii86" />
+  <meta name="twitter:title" content="AniKotoAPI — Free Anime Data API" />
+  <meta name="twitter:description" content="Free REST API for anime data. Browse, search, stream episodes. 27+ endpoints." />
+  <meta name="twitter:image" content="https://anikototvapi.vercel.app/og-image.svg" />
+  <meta name="twitter:image:alt" content="AniKotoAPI - Free Anime Data REST API" />
+  <meta name="twitter:domain" content="anikototvapi.vercel.app" />
+
+  <!-- ──────────────── Generic Meta ──────────────── -->
+  <meta name="description" content="Free REST API for anime data. Browse, search, stream episodes. 27+ endpoints, no API key required. Built with Node.js, Express, Cheerio." />
+  <meta name="keywords" content="anime api, free api, rest api, anime data, streaming, episode servers, nodejs, express, anime database, anime search" />
+  <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#0A0A12" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩</text></svg>" />
+  <link rel="canonical" href="https://anikototvapi.vercel.app" />
+
+  <!-- ──────────────── Favicon ──────────────── -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
+
+  <!-- ──────────────── Fonts ──────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -237,6 +268,27 @@
       nav{display:none}
     }
   </style>
+
+  <!-- ──────────────── JSON-LD Structured Data ──────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebAPI",
+    "name": "AniKotoAPI",
+    "description": "Free REST API for anime data. Browse, search, stream episodes. 27+ endpoints, no API key required.",
+    "url": "https://anikototvapi.vercel.app",
+    "documentation": "https://github.com/Shineii86/AniKotoAPI",
+    "provider": {
+      "@type": "Organization",
+      "name": "AniKotoAPI",
+      "url": "https://github.com/Shineii86/AniKotoAPI"
+    },
+    "category": "Anime Data API",
+    "endpoint": "https://anikototvapi.vercel.app/api",
+    "programmingModel": "REST",
+    "documentationUrl": "https://github.com/Shineii86/AniKotoAPI/tree/main/docs"
+  }
+  </script>
 </head>
 <body>
 
