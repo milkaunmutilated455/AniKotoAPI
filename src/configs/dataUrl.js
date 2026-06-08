@@ -45,7 +45,6 @@ const BASE_URL = "https://anikototv.to";
 const ALT_DOMAINS = [
   "https://anikoto.cz",
   "https://anikoto.me",
-  "https://anikototv.to",
   "https://anikoto.net",
   "https://anikoto.se"
 ];

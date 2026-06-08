@@ -29,7 +29,7 @@ const tests = [
   { name: "Schedule", url: "/schedule" },
   { name: "Genre", url: "/genre/action" },
   { name: "Type", url: "/type/tv" },
-  { name: "Status", url: "/status/currently-airing" },
+  { name: "Status", url: "/status/airing" },
   { name: "Health", url: "/health" },
   { name: "Stats", url: "/stats" },
   { name: "OpenAPI", url: "/openapi" },

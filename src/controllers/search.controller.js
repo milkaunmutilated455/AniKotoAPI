@@ -85,7 +85,7 @@ const getSearchSuggestions = async (req, res, next) => {
     if (!keyword) {
       return res.status(400).json({ success: false, message: "Keyword is required" });
     }
-    const cacheKey = `suggest_${keyword}`;
+    const cacheKey = `search_suggest_${keyword}`;
     const cached = getCache(cacheKey);
     if (cached) {
       return res.json({ success: true, results: cached });

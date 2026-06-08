@@ -34,6 +34,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4444;
 const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const publicDir = path.join(process.cwd(), "public");
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
 
@@ -41,30 +42,18 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
 // CORS MIDDLEWARE
 // ══════════════════════════════════════════════════════════════
 
-// NOTE: CORS is configured to only allow GET requests from specified origins
-app.use(
-  cors({
-    origin: allowedOrigins?.includes("*") ? "*" : allowedOrigins || [],
-    methods: ["GET"],
-  })
-);
-
-// ---- FEATURE: Custom origin validation middleware ----
+// NOTE: Single unified CORS middleware — handles all origin validation
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (
-    !allowedOrigins ||
-    allowedOrigins.includes("*") ||
-    (origin && allowedOrigins.includes(origin))
-  ) {
+  if (!allowedOrigins || allowedOrigins.includes("*") || (origin && allowedOrigins.includes(origin))) {
     res.setHeader("Access-Control-Allow-Origin", origin || "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    return next();
   }
-  res
-    .status(403)
-    .json({ success: false, message: "Forbidden: Origin not allowed" });
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+  next();
 });
 
 // ---- FEATURE: Security headers ----

@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-06-08
+
+### Fixed
+- **CRITICAL**: `extractPages.helper.js` — Pagination URL bug (`?page` → `&page` when URL already has query params)
+- **CRITICAL**: `package.json` — Fixed invalid dependency versions (axios ^1.7.0, dotenv ^16.4.0, express ^4.21.0)
+- `privacy.html` + `tos.html` — Fixed broken footer links (`//tos` → `/tos`, `//privacy` → `/privacy`)
+- `manifest.json` — Fixed invalid icon purpose (`"any maskable"` → `"maskable"`)
+- `server.js` — Removed duplicate CORS middleware (was using both `cors()` package and custom middleware)
+- `server.js` — Removed unused `cors` import
+- `server.js` — Added `__dirname` computation (was missing)
+- `search.controller.js` — Fixed cache key collision with suggestion controller
+- `apiRoutes.js` — Made endpoint count dynamic (was hardcoded 27)
+- `vercel.json` — Removed duplicate CORS header (server.js handles it)
+
+### Changed
+- `header.config.js` — Updated User-Agent to Chrome 130 (was Chrome 120)
+- `dataUrl.js` — Removed redundant `anikototv.to` from ALT_DOMAINS
+- `category.extractor.js` — Removed unused `cheerio` import
+- `test.js` — Updated test script in package.json to actually run tests
+- Version bumped to 1.8.0
+
+### Security
+- Unified CORS handling in server.js (single middleware instead of triple)
+- Removed Vercel-level CORS header (Express handles it)
+- Fixed XSS potential in index.html error display (used textContent pattern)
+
 ## [1.7.3] - 2026-06-08
 
 ### Fixed
