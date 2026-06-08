@@ -51,26 +51,22 @@ const extractFilter = async (params) => {
       years.forEach(y => queryParams.append("year[]", y.trim()));
     }
 
-    const url = `${URLS.search}?${queryParams.toString()}`;
-    const $ = await extractPages(url, params.page || 1);
+    const filterUrl = `${URLS.search}?${queryParams.toString()}`;
+    const $ = await extractPages(filterUrl, params.page || 1);
     const totalPages = countPages($);
 
     const results = [];
-    $("#list-items .item, .film_list-wrap .flw-item").each((i, el) => {
+    $("#list-items > .item").each((i, el) => {
       const slug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
-      const poster = $(el).find(".poster img, .ani.poster img").attr("src") || "";
-      const title = $(el).find(".name.d-title").text().trim() || "";
-      const japaneseTitle = $(el).find(".name.d-title").attr("data-jp") || "";
-      const animeId = $(el).find(".poster").attr("data-tip") || "";
+      const poster = $(el).find(".ani.poster.tip > a > img").attr("src") || "";
+      const title = $(el).find(".info .b1 a.name.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find(".info .b1 a.name.d-title").attr("data-jp") || "";
+      const animeId = $(el).find(".ani.poster.tip").attr("data-tip") || "";
       const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
       const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
       const total = parseInt($(el).find(".ep-status.total span").text().trim()) || 0;
-      const type = $(el).find(".meta .right, .m-item:last-child label").text().trim() || "";
-      const rating = $(el).find(".m-item.rated span, .rating").text().trim() || "";
-      const genres = [];
-      $(el).find(".genre a").each((j, g) => {
-        genres.push($(g).text().trim());
-      });
+      const type = $(el).find(".info .meta .m-item:nth-child(2) label").text().trim() || "";
+      const rating = $(el).find(".info .meta .m-item.rated span").text().trim() || "";
 
       if (slug) {
         results.push({
@@ -83,8 +79,7 @@ const extractFilter = async (params) => {
           dub,
           total,
           type,
-          rating,
-          genres
+          rating
         });
       }
     });

@@ -5,34 +5,41 @@ import { URLS } from "../configs/dataUrl.js";
 
 const extractRandom = async () => {
   try {
-    const { data } = await axios.get(URLS.random, { 
+    const { data, request, response } = await axios.get(URLS.random, {
       headers,
-      maxRedirects: 5
+      maxRedirects: 5,
+      validateStatus: (status) => status < 400
     });
+
+    const finalUrl = request?.responseURL || URLS.random;
+    const slug = finalUrl.split("/watch/").pop() || "";
+
     const $ = cheerio.load(data);
 
-    const slug = window.location.pathname.split("/watch/").pop() || "";
-    const title = $(".film-name h1, .anisc-detail .film-name").text().trim() || "";
-    const japaneseTitle = $(".film-name .alternate-title, .anisc-detail .film-name small").text().trim() || "";
-    const poster = $(".film-poster img").attr("src") || "";
-    const type = $(".film-info .row .col1 .item:first-child .name").text().trim() || "";
+    const title = $("h1[itemprop='name'].title.d-title").text().trim() || "";
+    const japaneseTitle = $("h1[itemprop='name'].title.d-title").attr("data-jp") || "";
+    const poster = $("img[itemprop='image']").attr("src") || "";
+    const type = $(".bmeta .meta:first-child > div:nth-child(1) span").text().trim() || "";
+    const synopsis = $(".synopsis .content").text().trim() || "";
+    const rating = $("#w-rating .score .value").text().trim() || "";
+    const animeId = parseInt($("#watch-main").attr("data-id")) || 0;
 
-    const animeInfo = {};
-    $(".anisc-info .item").each((i, el) => {
-      const label = $(el).find(".name").text().trim().replace(":", "");
-      const value = $(el).find(".text").text().trim();
-      if (label && value) {
-        animeInfo[label] = value;
-      }
+    const genres = [];
+    $(".bmeta .meta:first-child > div:nth-child(5) span a[href*='/genre/']").each((i, el) => {
+      genres.push($(el).text().trim());
     });
 
     return {
       slug,
+      animeId,
       title,
       japaneseTitle,
       poster,
       type,
-      animeInfo
+      synopsis,
+      rating,
+      genres,
+      url: finalUrl
     };
   } catch (error) {
     throw error;

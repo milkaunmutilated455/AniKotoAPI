@@ -12,20 +12,26 @@ const extractSearchResults = async (keyword, page = 1) => {
     const totalPages = countPages($);
 
     const results = [];
-    $(".film_list-wrap .flw-item, .film-detail").each((i, el) => {
+    $("#list-items > .item").each((i, el) => {
       const slug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name a, .name.d-title").text().trim() || "";
-      const japaneseTitle = $(el).find(".name.d-title").attr("data-jp") || "";
+      const poster = $(el).find(".ani.poster.tip > a > img").attr("src") || "";
+      const title = $(el).find(".info .b1 a.name.d-title").text().trim() || "";
+      const japaneseTitle = $(el).find(".info .b1 a.name.d-title").attr("data-jp") || "";
+      const animeId = $(el).find(".ani.poster.tip").attr("data-tip") || "";
       const sub = parseInt($(el).find(".ep-status.sub span").text().trim()) || 0;
       const dub = parseInt($(el).find(".ep-status.dub span").text().trim()) || 0;
       const total = parseInt($(el).find(".ep-status.total span").text().trim()) || 0;
-      const type = $(el).find(".meta .inner .right, .fdi-item:nth-child(2)").text().trim() || "";
-      const rating = $(el).find(".rating, .fdi-item:nth-child(3)").text().trim() || "";
+      const type = $(el).find(".info .meta .m-item:nth-child(2) label").text().trim() || "";
+      const rating = $(el).find(".info .meta .m-item.rated span").text().trim() || "";
+      const genres = [];
+      $(el).find(".info .b1 .genre a").each((j, g) => {
+        genres.push($(g).text().trim());
+      });
 
       if (slug) {
         results.push({
           slug,
+          animeId,
           poster,
           title,
           japaneseTitle,
@@ -33,7 +39,8 @@ const extractSearchResults = async (keyword, page = 1) => {
           dub,
           total,
           type,
-          rating
+          rating,
+          genres
         });
       }
     });
@@ -51,17 +58,18 @@ const extractSearchSuggestions = async (keyword) => {
     const $ = cheerio.load(data);
 
     const suggestions = [];
-    $(".search-suggest .film-detail, .nav-item a").each((i, el) => {
-      const slug = $(el).attr("href")?.split("/watch/").pop() || "";
-      const poster = $(el).find("img").attr("src") || "";
-      const title = $(el).find(".film-name, .name").text().trim() || "";
+    $("#list-items > .item").each((i, el) => {
+      const slug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
+      const poster = $(el).find(".ani.poster.tip > a > img").attr("src") || "";
+      const title = $(el).find(".info .b1 a.name.d-title").text().trim() || "";
+      const type = $(el).find(".info .meta .m-item:nth-child(2) label").text().trim() || "";
 
       if (slug) {
-        suggestions.push({ slug, poster, title });
+        suggestions.push({ slug, poster, title, type });
       }
     });
 
-    return suggestions;
+    return suggestions.slice(0, 10);
   } catch (error) {
     throw error;
   }

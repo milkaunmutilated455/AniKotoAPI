@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-06-08
+
+### Fixed
+- Fixed ALL CSS selectors to match actual anikototv.to HTML structure
+- Fixed search results (was returning empty data array)
+- Fixed anime info page (was returning empty fields)
+- Fixed episode list (was returning 0 episodes)
+- Fixed most-popular (was returning empty data array)
+- Fixed random endpoint (was returning 500 error)
+- Fixed filter endpoint (was returning 500 error)
+- Fixed suggestions (was returning empty array)
+- Added /api/genre/:name, /api/type/:name routes (was returning 404)
+- Fixed watch page server/episode extraction
+- Fixed rating field to return clean value
+
 ## [1.3.0] - 2026-06-08
 
 ### Added

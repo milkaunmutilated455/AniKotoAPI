@@ -9,57 +9,38 @@ const extractWatchPage = async (slug, ep) => {
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
-    const animeId = parseInt($("#watch-main").attr("data-id")) || parseInt($("div[data-id]").attr("data-id")) || 0;
+    const animeId = parseInt($("#watch-main").attr("data-id")) || 0;
     const animeUrl = $("#watch-main").attr("data-url") || "";
-    const title = $(".heading-name a").text().trim() || slug;
-    const japaneseTitle = $(".heading-name .alternate-title").text().trim() || "";
+    const title = $("h1[itemprop='name'].title.d-title").text().trim() || slug;
+    const japaneseTitle = $("h1[itemprop='name'].title.d-title").attr("data-jp") || "";
     const episodeNumber = parseInt(ep) || 0;
 
-    const synopsis = $(".synopsis .content, .film-description .text").text().trim() || "";
+    const synopsis = $(".synopsis .content").text().trim() || "";
+    const rating = $("#w-rating .score .value").text().trim() || "";
+    const poster = $("img[itemprop='image']").attr("src") || "";
+    const backgroundImage = $("#player").css("background-image")?.match(/url\(['"]?(.+?)['"]?\)/)?.[1] || "";
 
-    const animeInfo = {};
-    $(".bmeta .meta div").each((i, el) => {
-      const label = $(el).find("strong, b").text().trim().replace(":", "");
-      const value = $(el).find("span, a").text().trim();
-      if (label && value) {
-        animeInfo[label] = value;
-      }
-    });
+    const type = $(".bmeta .meta:first-child > div:nth-child(1) span").text().trim() || "";
+    const status = $(".bmeta .meta:first-child > div:nth-child(4) span a").text().trim() || "";
+    const malScore = $(".bmeta .meta:nth-child(2) > div:nth-child(1) span").text().trim() || "";
+    const duration = $(".bmeta .meta:nth-child(2) > div:nth-child(2) span").text().trim() || "";
+    const episodes = $(".bmeta .meta:nth-child(2) > div:nth-child(3) span").text().trim() || "";
 
     const genres = [];
-    $(".bmeta .meta div:contains('Genres') a").each((i, el) => {
-      const genre = $(el).text().trim();
-      if (genre) genres.push(genre);
+    $(".bmeta .meta:first-child > div:nth-child(5) span a[href*='/genre/']").each((i, el) => {
+      genres.push($(el).text().trim());
     });
 
-    const rating = $(".brating .score .value, #w-rating .score").text().trim() || "";
-    const MALScore = $(".bmeta .meta div:contains('MAL') span").text().trim() || "";
-
-    const poster = $(".poster img[itemprop='image'], .binfo .poster img").attr("src") || "";
-    const backgroundImage = $("#player").css("background-image")?.match(/url\(['"]?(.+?)['"]?\)/)?.[1] || "";
+    const studios = [];
+    $(".bmeta .meta:nth-child(2) > div:nth-child(4) span a[itemprop='director'] span[itemprop='name']").each((i, el) => {
+      studios.push($(el).text().trim());
+    });
 
     const nextEpisodeDate = $(".next-episode, .alert.next-episode").text().trim() || "";
     const nextEpisodeTimestamp = parseInt($(".count-down").attr("data-target")) || 0;
 
-    const episodeList = [];
-    $("#w-episodes .ep-item, .episodes-list a, .ss-list a").each((i, el) => {
-      const epId = $(el).attr("data-id") || $(el).attr("data-ep-id") || "";
-      const epNum = parseInt($(el).find(".ep-number, .ep-num").text().trim()) || i + 1;
-      const epTitle = $(el).find(".ep-title, .ep-name").text().trim() || "";
-      const isActive = $(el).hasClass("active") || $(el).hasClass("selected") || false;
-
-      if (epId || epNum) {
-        episodeList.push({
-          id: epId,
-          episode_no: epNum,
-          title: epTitle,
-          active: isActive
-        });
-      }
-    });
-
     const servers = [];
-    $("#w-servers .servers .type li, #w-servers li").each((i, el) => {
+    $("#w-servers .servers .type li, #w-servers li[data-link-id]").each((i, el) => {
       const linkId = $(el).attr("data-link-id") || "";
       const epId = $(el).attr("data-ep-id") || "";
       const cmId = $(el).attr("data-cmid") || "";
@@ -80,7 +61,7 @@ const extractWatchPage = async (slug, ep) => {
     });
 
     const trending = [];
-    $(".w-side-section .scaff.side.items a.item").each((i, el) => {
+    $(".w-side-section:first .scaff.side.items a.item, #watch-order a.item").each((i, el) => {
       const trendSlug = $(el).attr("href")?.split("/watch/").pop() || "";
       const trendPoster = $(el).find(".poster img").attr("src") || "";
       const trendTitle = $(el).find(".name").text().trim() || "";
@@ -123,15 +104,18 @@ const extractWatchPage = async (slug, ep) => {
       japaneseTitle,
       episodeNumber,
       synopsis,
-      animeInfo,
+      type,
+      status,
+      malScore,
+      duration,
+      episodes,
+      studios,
       genres,
       rating,
-      MALScore,
       poster,
       backgroundImage,
       nextEpisodeDate,
       nextEpisodeTimestamp,
-      episodeList,
       servers,
       trending,
       recommended

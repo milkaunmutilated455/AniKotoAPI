@@ -214,14 +214,6 @@ const createApiRoutes = (app, jsonResponse, jsonError) => {
     }
   });
 
-  app.get("/api/status/:status", async (req, res, next) => {
-    try {
-      await getStatus(req, res, next);
-    } catch (error) {
-      jsonError(res, error.message);
-    }
-  });
-
   categoryRoutes(app, jsonResponse, jsonError);
 };
 

@@ -9,89 +9,62 @@ const extractAnimeInfo = async (slug) => {
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
-    const title = $(".anisc-detail .film-name, .film-name h1").text().trim() || "";
-    const japaneseTitle = $(".anisc-detail .film-name .alternate-title, .film-name small").text().trim() || "";
-    const poster = $(".film-poster img, .anisc-poster img").attr("src") || "";
-    const type = $(".film-info .row .col1 .item:first-child .name").text().trim() || "";
-    const rating = $(".film-info .row .col1 .item:nth-child(2) .name").text().trim() || "";
-    const quality = $(".film-info .row .col1 .item:nth-child(3) .name").text().trim() || "";
+    const title = $("h1[itemprop='name'].title.d-title").text().trim() || "";
+    const japaneseTitle = $("h1[itemprop='name'].title.d-title").attr("data-jp") || "";
+    const altNames = $(".names.font-italic").text().trim() || "";
+    const poster = $("img[itemprop='image']").attr("src") || "";
+    const synopsis = $(".synopsis .content").text().trim() || "";
+    const rating = $("#w-rating .score .value").text().trim() || "";
+    const ratingValue = $("#w-rating span[itemprop='ratingValue']").text().trim() || "";
+    const reviewCount = $("#w-rating span[itemprop='reviewCount']").text().trim() || "";
+    const animeId = parseInt($("#watch-main").attr("data-id")) || 0;
 
-    const animeInfo = {};
-    $(".anisc-info .item").each((i, el) => {
-      const label = $(el).find(".name").text().trim().replace(":", "");
-      const value = $(el).find(".text").text().trim();
-      if (label && value) {
-        animeInfo[label] = value;
-      }
+    const type = $(".bmeta .meta:first-child > div:nth-child(1) span").text().trim() || "";
+    const premiered = $(".bmeta .meta:first-child > div:nth-child(2) span").text().trim() || "";
+    const aired = $(".bmeta .meta:first-child > div:nth-child(3) span").text().trim() || "";
+    const status = $(".bmeta .meta:first-child > div:nth-child(4) span a").text().trim() || "";
+    const malScore = $(".bmeta .meta:nth-child(2) > div:nth-child(1) span").text().trim() || "";
+    const duration = $(".bmeta .meta:nth-child(2) > div:nth-child(2) span").text().trim() || "";
+    const episodes = $(".bmeta .meta:nth-child(2) > div:nth-child(3) span").text().trim() || "";
+
+    const studios = [];
+    $(".bmeta .meta:nth-child(2) > div:nth-child(4) span a[itemprop='director'] span[itemprop='name']").each((i, el) => {
+      studios.push($(el).text().trim());
     });
 
-    const overview = $(".anisc-detail .description, .film-description .text").text().trim() || "";
+    const producers = [];
+    $(".bmeta .meta:nth-child(2) > div:nth-child(5) span a[itemprop='director'] span[itemprop='name']").each((i, el) => {
+      producers.push($(el).text().trim());
+    });
 
     const genres = [];
-    $(".anisc-info .item:last-child a, .genres a").each((i, el) => {
-      const genre = $(el).text().trim();
-      if (genre) genres.push(genre);
+    $(".bmeta .meta:first-child > div:nth-child(5) span a[href*='/genre/']").each((i, el) => {
+      genres.push($(el).text().trim());
     });
 
-    const episodes = [];
-    $(".episodes-list .ep-item, .ss-list a").each((i, el) => {
-      const epId = $(el).attr("data-id") || $(el).attr("href")?.split("/").pop() || "";
-      const epNumber = parseInt($(el).find(".ep-number, .ep-num").text().trim()) || i + 1;
-      const title = $(el).find(".ep-title, .ep-name").text().trim() || "";
-
-      if (epId) {
-        episodes.push({
-          id: epId,
-          episode_no: epNumber,
-          title
-        });
-      }
-    });
-
-    const relatedData = [];
-    $(".related-content .film-detail, .film-list-block .film-detail").each((i, el) => {
-      const relSlug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
-      const relPoster = $(el).find("img").attr("src") || "";
-      const relTitle = $(el).find(".film-name a").text().trim() || "";
-
-      if (relSlug) {
-        relatedData.push({
-          slug: relSlug,
-          poster: relPoster,
-          title: relTitle
-        });
-      }
-    });
-
-    const recommendedData = [];
-    $(".recommend-content .film-detail, .film-list-block .film-detail").each((i, el) => {
-      const recSlug = $(el).find("a").attr("href")?.split("/watch/").pop() || "";
-      const recPoster = $(el).find("img").attr("src") || "";
-      const recTitle = $(el).find(".film-name a").text().trim() || "";
-
-      if (recSlug) {
-        recommendedData.push({
-          slug: recSlug,
-          poster: recPoster,
-          title: recTitle
-        });
-      }
-    });
+    const backgroundImage = $("#player").css("background-image")?.match(/url\(['"]?(.+?)['"]?\)/)?.[1] || "";
 
     return {
       slug,
+      animeId,
       title,
       japaneseTitle,
+      altNames,
       poster,
+      backgroundImage,
+      synopsis,
       type,
-      rating,
-      quality,
-      overview,
-      animeInfo,
-      genres,
+      premiered,
+      aired,
+      status,
+      malScore,
+      duration,
       episodes,
-      relatedData,
-      recommendedData
+      studios,
+      producers,
+      genres,
+      rating: rating || ratingValue,
+      reviewCount
     };
   } catch (error) {
     throw error;

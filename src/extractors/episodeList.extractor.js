@@ -9,24 +9,30 @@ const extractEpisodeList = async (slug) => {
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
-    const episodes = [];
-    $(".episodes-list .ep-item, .ss-list a").each((i, el) => {
-      const epId = $(el).attr("data-id") || $(el).attr("href")?.split("/ep-").pop() || "";
-      const epNumber = parseInt($(el).find(".ep-number, .ep-num").text().trim()) || i + 1;
-      const title = $(el).find(".ep-title, .ep-name").text().trim() || "";
-      const filler = $(el).hasClass("filler") || false;
+    const animeId = parseInt($("#watch-main").attr("data-id")) || 0;
 
-      if (epId) {
-        episodes.push({
-          id: epId,
-          episode_no: epNumber,
-          title,
-          filler
-        });
-      }
+    const episodes = [];
+    $("#w-episodes a[data-num], #w-episodes a[data-slug]").each((i, el) => {
+      const epId = $(el).attr("data-id") || $(el).attr("data-ep-id") || "";
+      const epNum = parseInt($(el).attr("data-num")) || i + 1;
+      const epSlug = $(el).attr("data-slug") || "";
+      const epTitle = $(el).find(".ep-title, .ep-name").text().trim() || "";
+      const isActive = $(el).hasClass("active") || false;
+      const href = $(el).attr("href") || "";
+
+      episodes.push({
+        id: epId,
+        episode_no: epNum,
+        slug: epSlug,
+        title: epTitle,
+        active: isActive,
+        href
+      });
     });
 
     return {
+      animeId,
+      slug,
       totalEpisodes: episodes.length,
       episodes
     };
