@@ -2,7 +2,8 @@ import { getHomeInfo } from "../controllers/homeInfo.controller.js";
 import { getAnimeInfo } from "../controllers/animeInfo.controller.js";
 import { getSearchResults, getSearchSuggestions } from "../controllers/search.controller.js";
 import { getEpisodeList } from "../controllers/episodeList.controller.js";
-import { getStreamInfo } from "../controllers/streamInfo.controller.js";
+import { getEpisodeListAjax } from "../controllers/episodeListAjax.controller.js";
+import { getStreamInfo, getServerList, getMapperServers } from "../controllers/streamInfo.controller.js";
 import { getSchedule } from "../controllers/schedule.controller.js";
 import { getSpotlight } from "../controllers/spotlight.controller.js";
 import { getTrending } from "../controllers/trending.controller.js";
@@ -16,6 +17,8 @@ import { getAzList } from "../controllers/azList.controller.js";
 import { getNewRelease, getNewlyAdded } from "../controllers/newRelease.controller.js";
 import { getStatus } from "../controllers/status.controller.js";
 import { getTrendingSidebar } from "../controllers/trendingSidebar.controller.js";
+import { getSeasons } from "../controllers/seasons.controller.js";
+import { getWatchOrder } from "../controllers/watchOrder.controller.js";
 import { categoryRoutes } from "./category.route.js";
 
 const createApiRoutes = (app, jsonResponse, jsonError) => {
@@ -67,9 +70,33 @@ const createApiRoutes = (app, jsonResponse, jsonError) => {
     }
   });
 
+  app.get("/api/episodes-ajax/:id", async (req, res, next) => {
+    try {
+      await getEpisodeListAjax(req, res, next);
+    } catch (error) {
+      jsonError(res, error.message);
+    }
+  });
+
   app.get("/api/stream", async (req, res, next) => {
     try {
       await getStreamInfo(req, res, next);
+    } catch (error) {
+      jsonError(res, error.message);
+    }
+  });
+
+  app.get("/api/servers", async (req, res, next) => {
+    try {
+      await getServerList(req, res, next);
+    } catch (error) {
+      jsonError(res, error.message);
+    }
+  });
+
+  app.get("/api/mapper-servers", async (req, res, next) => {
+    try {
+      await getMapperServers(req, res, next);
     } catch (error) {
       jsonError(res, error.message);
     }
@@ -158,6 +185,22 @@ const createApiRoutes = (app, jsonResponse, jsonError) => {
   app.get("/api/trending-sidebar", async (req, res, next) => {
     try {
       await getTrendingSidebar(req, res, next);
+    } catch (error) {
+      jsonError(res, error.message);
+    }
+  });
+
+  app.get("/api/seasons/:id", async (req, res, next) => {
+    try {
+      await getSeasons(req, res, next);
+    } catch (error) {
+      jsonError(res, error.message);
+    }
+  });
+
+  app.get("/api/watch-order/:id", async (req, res, next) => {
+    try {
+      await getWatchOrder(req, res, next);
     } catch (error) {
       jsonError(res, error.message);
     }

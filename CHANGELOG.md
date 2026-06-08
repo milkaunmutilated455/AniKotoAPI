@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-06-08
+
+### Added
+- Stream URL extraction via `/ajax/server?get={linkId}` endpoint
+- Server list endpoint (`/api/servers?ids={episodeIds}`)
+- Mapper API integration for gogoanime/anivibe servers (`/api/mapper-servers`)
+- Seasons endpoint (`/api/seasons/:id`)
+- Watch order endpoint (`/api/watch-order/:id`)
+- Episode list AJAX endpoint (`/api/episodes-ajax/:id`)
+- Genre ID mapping for correct filter parameters
+- Type, Status, Rating, Sort ID mappings
+
+### Fixed
+- Stream extractor now properly extracts video embed URLs
+- Filter endpoint now uses correct numeric IDs for genres/types/status
+- Watch page extractor captures all data attributes (data-id, data-url, etc.)
+- Server list extraction includes all data attributes (link-id, ep-id, cmid, sv-id)
+
 ## [1.2.0] - 2026-06-08
 
 ### Added

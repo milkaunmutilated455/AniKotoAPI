@@ -1,49 +1,79 @@
-import * as cheerio from "cheerio";
 import axios from "axios";
 import { headers } from "../configs/header.config.js";
-import { URLS } from "../configs/dataUrl.js";
+import { BASE_URL } from "../configs/dataUrl.js";
 
-const extractStreamInfo = async (episodeId) => {
+const extractStreamInfo = async (linkId) => {
   try {
-    const url = `${URLS.serverList}?episodeId=${episodeId}`;
-    const { data } = await axios.get(url, { 
+    const url = `${BASE_URL}/ajax/server?get=${linkId}`;
+    const { data } = await axios.get(url, {
       headers: {
         ...headers,
         "X-Requested-With": "XMLHttpRequest"
       }
     });
-    
-    const $ = cheerio.load(data);
 
-    const servers = [];
-    $(".servers .server-item, .type-list .server-item").each((i, el) => {
-      const serverId = $(el).attr("data-id") || $(el).attr("data-server-id") || "";
-      const serverName = $(el).text().trim() || "";
-      const serverType = $(el).hasClass("sub") ? "sub" : "dub";
-
-      if (serverId) {
-        servers.push({ id: serverId, name: serverName, type: serverType });
-      }
-    });
-
-    const links = [];
-    $("li[data-link-id]").each((i, el) => {
-      const linkId = $(el).attr("data-link-id") || "";
-      const linkType = $(el).attr("data-type") || "hls";
-
-      if (linkId) {
-        links.push({ id: linkId, type: linkType });
-      }
-    });
+    if (!data || !data.result) {
+      return { linkId, url: null, skipData: null };
+    }
 
     return {
-      episodeId,
-      servers,
-      links
+      linkId,
+      url: data.result.url || null,
+      skipData: data.result.skip_data || null
     };
   } catch (error) {
     throw error;
   }
 };
 
-export { extractStreamInfo };
+const extractServerList = async (episodeIds) => {
+  try {
+    const url = `${BASE_URL}/ajax/server/list?servers=${episodeIds}`;
+    const { data } = await axios.get(url, {
+      headers: {
+        ...headers,
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    });
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const extractMapperServers = async (malId, slug, timestamp) => {
+  try {
+    const url = `https://mapper.nekostream.site/api/mal/${malId}/${slug}/${timestamp}`;
+    const { data } = await axios.get(url, { headers });
+
+    const servers = [];
+
+    if (data && typeof data === "object") {
+      for (const [provider, sources] of Object.entries(data)) {
+        if (sources && sources.sub) {
+          servers.push({
+            provider,
+            type: "sub",
+            url: sources.sub.url || null,
+            download: sources.sub.download || null
+          });
+        }
+        if (sources && sources.dub) {
+          servers.push({
+            provider,
+            type: "dub",
+            url: sources.dub.url || null,
+            download: sources.dub.download || null
+          });
+        }
+      }
+    }
+
+    return servers;
+  } catch (error) {
+    return [];
+  }
+};
+
+export { extractStreamInfo, extractServerList, extractMapperServers };
