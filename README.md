@@ -19,8 +19,8 @@
   <img src="https://img.shields.io/badge/Cheerio-1.0-3572A5?style=flat-square&logoColor=white" alt="Cheerio"/>
   <img src="https://img.shields.io/badge/Vercel-Serverless-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&logo=mit&logoColor=white" alt="License"/>
-  <img src="https://img.shields.io/badge/Version-1.5.0-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
-  <img src="https://img.shields.io/badge/Endpoints-24-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
+  <img src="https://img.shields.io/badge/Version-1.7.2-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
+  <img src="https://img.shields.io/badge/Endpoints-27-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
   <img src="https://img.shields.io/badge/Anime-10000+-a855f7?style=flat-square&logoColor=white" alt="Anime Database"/>
 </p>
 
@@ -84,7 +84,7 @@
 
 ### Why AniKotoAPI?
 
-- 🎬 **24 Endpoints** — Complete coverage of anikototv.to data
+- 🎬 **27 Endpoints** — Complete coverage of anikototv.to data
 - 🔍 **Full-Text Search** — Search anime by keyword with suggestions
 - 📺 **Episode Lists** — AJAX-loaded episode data with server info
 - 🎯 **Smart Filtering** — Genre, type, status, rating, sort, season, year
@@ -135,7 +135,7 @@ flowchart TD
 ### ⚡ Core
 - **Real-time scraping** from anikototv.to
 - **Smart caching** with 5-minute TTL
-- **24 RESTful endpoints** covering all data
+- **27 RESTful endpoints** covering all data
 - **AJAX episode loading** for accurate data
 - **Mapper API integration** for extra servers
 - **Graceful error handling** per endpoint
@@ -183,7 +183,7 @@ flowchart TD
 
 | Feature | Description | Status |
 |:---|:---|:---:|
-| 🎬 24 API Endpoints | Complete coverage of anime data | ✅ |
+| 🎬 27 API Endpoints | Complete coverage of anime data | ✅ |
 | 🔍 Full-Text Search | Keyword search with pagination | ✅ |
 | 📺 Episode Lists | AJAX-loaded episode data | ✅ |
 | 🎯 Advanced Filtering | Genre, type, status, rating, sort | ✅ |
@@ -414,6 +414,21 @@ The `vercel.json` file handles:
 ### Base URL
 ```
 https://anikototvapi.vercel.app/api
+```
+
+### Streaming Flow
+
+To get a stream URL, follow these 3 steps:
+
+```bash
+# Step 1: Get episodes (returns server_ids)
+curl "https://anikototvapi.vercel.app/api/episodes/road-of-naruto-ggjw8"
+
+# Step 2: Get servers (pass server_ids from Step 1)
+curl "https://anikototvapi.vercel.app/api/servers?ids=SlNVT25JaFlCMnZOe..."
+
+# Step 3: Get stream URL (pass link_id from Step 2)
+curl "https://anikototvapi.vercel.app/api/stream?id=MTF1dkFtaW9BRTZPbz..."
 ```
 
 ---
@@ -1868,7 +1883,7 @@ CMD ["node", "server.js"]
 | 💾 Cache TTL | 5 minutes |
 | ⏱️ Timeout per request | 15 seconds |
 | 🎬 Total anime indexed | 10,000+ |
-| 📦 Total codebase | ~80KB |
+| 📦 Total codebase | ~120KB |
 
 ### Optimization Features
 
@@ -1885,7 +1900,11 @@ CMD ["node", "server.js"]
 
 | Version | Date | Key Changes |
 |:---|:---|:---|
-| **1.5.0** | 2026-06-08 | Complete documentation rewrite — 50+ files with AlisaReactionBot style |
+| **1.7.2** | 2026-06-08 | Full rebrand AniKotoAPI → AniKotoAPI, docs folder with real data, streaming fix |
+| **1.7.1** | 2026-06-08 | Updated Vercel URL to anikototvapi.vercel.app |
+| **1.7.0** | 2026-06-08 | Premium landing page with SVG icons, live console, particles, glassmorphism |
+| **1.6.0** | 2026-06-08 | Anti-bot bypass, public files, GitHub repo topics |
+| **1.5.0** | 2026-06-08 | Complete documentation rewrite with AlisaReactionBot style |
 | **1.4.0** | 2026-06-08 | Fixed ALL CSS selectors to match actual anikototv.to HTML structure |
 | **1.3.0** | 2026-06-08 | Added streaming, mapper API, seasons, watch order, episode AJAX |
 | **1.2.0** | 2026-06-08 | Added watch page, AZ list, new release, newly added, trending sidebar |
@@ -1992,7 +2011,7 @@ The API can access 10,000+ anime titles from anikototv.to. The most-popular endp
 
 ### ✅ Completed
 
-- [x] 🎬 24 API endpoints covering all data
+- [x] 🎬 27 API endpoints covering all data
 - [x] 🔍 Full-text search with pagination
 - [x] 📺 Episode lists via AJAX loading
 - [x] 🎯 Advanced filtering (genre, type, status, rating, sort)
@@ -2002,8 +2021,11 @@ The API can access 10,000+ anime titles from anikototv.to. The most-popular endp
 - [x] 📋 AZ List alphabetical browsing
 - [x] 🔄 Smart caching with 5-min TTL
 - [x] 🚀 One-click Vercel deployment
-- [x] 📖 Comprehensive documentation
+- [x] 📖 Comprehensive documentation with real API data
 - [x] 🏗️ AlisaReactionBot-style code comments
+- [x] 🌐 Premium landing page with SVG icons
+- [x] 📱 PWA manifest and Open Graph image
+- [x] 📚 Full docs/ folder with examples
 
 ---
 
