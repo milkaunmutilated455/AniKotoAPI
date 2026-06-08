@@ -413,7 +413,7 @@ The `vercel.json` file handles:
 
 ### Base URL
 ```
-https://anikoto.vercel.app/api
+https://anikototvapi.vercel.app/api
 ```
 
 ---
@@ -433,12 +433,12 @@ https://anikoto.vercel.app/api
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/"
+curl "https://anikototvapi.vercel.app/api/"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/");
 console.log(resp.data);
 ```
 
@@ -485,12 +485,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/top-ten"
+curl "https://anikototvapi.vercel.app/api/top-ten"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/top-ten");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/top-ten");
 console.log(resp.data);
 ```
 
@@ -539,12 +539,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/search?keyword=one+piece"
+curl "https://anikototvapi.vercel.app/api/search?keyword=one+piece"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/search", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/search", {
   params: { keyword: "one piece", page: 1 }
 });
 console.log(resp.data);
@@ -585,12 +585,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/info?id=one-piece-odmau"
+curl "https://anikototvapi.vercel.app/api/info?id=one-piece-odmau"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/info", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/info", {
   params: { id: "one-piece-odmau" }
 });
 console.log(resp.data);
@@ -643,12 +643,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/random"
+curl "https://anikototvapi.vercel.app/api/random"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/random");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/random");
 console.log(resp.data);
 ```
 
@@ -691,12 +691,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/schedule?date=2026-06-08"
+curl "https://anikototvapi.vercel.app/api/schedule?date=2026-06-08"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/schedule", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/schedule", {
   params: { date: "2026-06-08" }
 });
 console.log(resp.data);
@@ -740,12 +740,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/episodes/one-piece-odmau"
+curl "https://anikototvapi.vercel.app/api/episodes/one-piece-odmau"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/episodes/one-piece-odmau");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/episodes/one-piece-odmau");
 console.log(resp.data);
 ```
 
@@ -783,12 +783,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/watch?slug=one-piece-odmau&ep=1165"
+curl "https://anikototvapi.vercel.app/api/watch?slug=one-piece-odmau&ep=1165"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/watch", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/watch", {
   params: { slug: "one-piece-odmau", ep: 1165 }
 });
 console.log(resp.data);
@@ -853,12 +853,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/servers?ids={episodeIds}"
+curl "https://anikototvapi.vercel.app/api/servers?ids={episodeIds}"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/servers", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/servers", {
   params: { ids: "yourEpisodeIds" }
 });
 console.log(resp.data);
@@ -902,12 +902,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
+curl "https://anikototvapi.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/mapper-servers", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/mapper-servers", {
   params: { malId: 21, slug: "one-piece", timestamp: 1717900000 }
 });
 console.log(resp.data);
@@ -946,12 +946,12 @@ Server list for an episode — returns available streaming servers with their na
 | `ids` | `string` | **required** | Episode IDs |
 
 ```bash
-curl "https://anikoto.vercel.app/api/servers?ids={episodeIds}"
+curl "https://anikototvapi.vercel.app/api/servers?ids={episodeIds}"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/servers", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/servers", {
   params: { ids: "yourEpisodeIds" }
 });
 console.log(resp.data);
@@ -989,12 +989,12 @@ Mapper API — fetches additional streaming servers from gogoanime/anivibe via t
 | `timestamp` | `number` | **required** | Current timestamp |
 
 ```bash
-curl "https://anikoto.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
+curl "https://anikototvapi.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/mapper-servers", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/mapper-servers", {
   params: { malId: 21, slug: "one-piece", timestamp: 1717900000 }
 });
 console.log(resp.data);
@@ -1031,12 +1031,12 @@ console.log(resp.data);
 Top 10 anime rankings for day, week, and month.
 
 ```bash
-curl "https://anikoto.vercel.app/api/top-ten"
+curl "https://anikototvapi.vercel.app/api/top-ten"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/top-ten");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/top-ten");
 console.log(resp.data);
 ```
 
@@ -1084,12 +1084,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/spotlight"
+curl "https://anikototvapi.vercel.app/api/spotlight"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/spotlight");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/spotlight");
 console.log(resp.data);
 ```
 
@@ -1150,12 +1150,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/trending"
+curl "https://anikototvapi.vercel.app/api/trending"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/trending");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/trending");
 console.log(resp.data);
 ```
 
@@ -1218,12 +1218,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/most-popular?page=1"
+curl "https://anikototvapi.vercel.app/api/most-popular?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/most-popular", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/most-popular", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1297,12 +1297,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/new-release?page=1"
+curl "https://anikototvapi.vercel.app/api/new-release?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/new-release", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/new-release", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1343,12 +1343,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/newly-added?page=1"
+curl "https://anikototvapi.vercel.app/api/newly-added?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/newly-added", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/newly-added", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1387,12 +1387,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/trending-sidebar"
+curl "https://anikototvapi.vercel.app/api/trending-sidebar"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/trending-sidebar");
+const resp = await axios.get("https://anikototvapi.vercel.app/api/trending-sidebar");
 console.log(resp.data);
 ```
 
@@ -1446,12 +1446,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/genre/action?page=1"
+curl "https://anikototvapi.vercel.app/api/genre/action?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/genre/action", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/genre/action", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1491,12 +1491,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/type/movie?page=1"
+curl "https://anikototvapi.vercel.app/api/type/movie?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/type/movie", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/type/movie", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1549,12 +1549,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/status/currently-airing?page=1"
+curl "https://anikototvapi.vercel.app/api/status/currently-airing?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/status/currently-airing", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/status/currently-airing", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1606,12 +1606,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/az-list/a?page=1"
+curl "https://anikototvapi.vercel.app/api/az-list/a?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/az-list/a", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/az-list/a", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1668,12 +1668,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/filter?genre=action&type=tv&page=1"
+curl "https://anikototvapi.vercel.app/api/filter?genre=action&type=tv&page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/filter", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/filter", {
   params: { genre: "action", type: "tv", page: 1 }
 });
 console.log(resp.data);
@@ -1714,12 +1714,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikoto.vercel.app/api/suggestions?keyword=naruto"
+curl "https://anikototvapi.vercel.app/api/suggestions?keyword=naruto"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikoto.vercel.app/api/suggestions", {
+const resp = await axios.get("https://anikototvapi.vercel.app/api/suggestions", {
   params: { keyword: "naruto" }
 });
 console.log(resp.data);
@@ -1946,7 +1946,7 @@ Use <code>/api/filter</code> with query params. The <code>keyword</code> param i
 <details>
 <summary><b>📡 Can I use this in my frontend app?</b></summary>
 <br/>
-Yes! CORS is enabled for all origins (<code>*</code>). Just make fetch requests to the API endpoints. No API key needed. Example: <code>fetch('https://anikoto.vercel.app/api/search?keyword=naruto')</code>
+Yes! CORS is enabled for all origins (<code>*</code>). Just make fetch requests to the API endpoints. No API key needed. Example: <code>fetch('https://anikototvapi.vercel.app/api/search?keyword=naruto')</code>
 </details>
 
 <details>

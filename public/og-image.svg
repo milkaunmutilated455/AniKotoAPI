@@ -24,7 +24,7 @@
   <circle cx="600" cy="315" r="120" stroke="url(#grad)" stroke-width="2" fill="none" opacity="0.15"/>
   <text x="600" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="72" fill="url(#grad)">AniKotoAPI</text>
   <text x="600" y="340" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="500" font-size="24" fill="#94A3B8">Free Anime Data REST API</text>
-  <text x="600" y="380" text-anchor="middle" font-family="monospace" font-weight="400" font-size="16" fill="#64748B">anikoto.vercel.app/api</text>
+  <text x="600" y="380" text-anchor="middle" font-family="monospace" font-weight="400" font-size="16" fill="#64748B">anikototvapi.vercel.app/api</text>
   <rect x="480" y="410" width="240" height="40" rx="20" fill="url(#grad)" opacity="0.9"/>
   <text x="600" y="436" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="600" font-size="14" fill="#fff">No API Key Required</text>
   <circle cx="120" cy="540" r="4" fill="#A855F7" opacity="0.4"/>

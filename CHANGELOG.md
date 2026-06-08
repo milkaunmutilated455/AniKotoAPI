@@ -5,14 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.1] - 2026-06-08
+
+### Changed
+- Updated all Vercel URLs from `anikoto.vercel.app` to `anikototvapi.vercel.app`
+- Updated across 80 references in HTML, JS, MD, XML, SVG, JSON files
+
 ## [1.7.0] - 2026-06-08
 
 ### Changed
 - **BREAKING**: Rebranded entire project from `AniKatoAPI` to `AniKotoAPI`
-- Renamed all references across 50+ source files (controllers, extractors, configs, routes)
+- Renamed all references across 66 files (controllers, extractors, configs, routes)
 - Updated README.md, package.json, server.js, all public pages
 - Updated GitHub repository URLs from `AniKatoAPI` to `AniKotoAPI`
-- Updated Vercel URLs from `anikato.vercel.app` to `anikoto.vercel.app`
+- Updated Vercel URLs from `anikato.vercel.app` to `anikototvapi.vercel.app`
 - Preserved `anikototv.to` domain references (source website, not project name)
 
 ## [1.6.0] - 2026-06-08
