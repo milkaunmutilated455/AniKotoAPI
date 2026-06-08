@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — formatTitle.helper.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — formatTitle.helper.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   String utility function for normalizing anime titles into

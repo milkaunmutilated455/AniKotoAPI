@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — streamInfo.controller.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — streamInfo.controller.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Controller for streaming information. Provides stream URLs,

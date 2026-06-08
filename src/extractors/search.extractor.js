@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — search.extractor.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — search.extractor.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Provides search functionality for anikototv.to — supports paginated

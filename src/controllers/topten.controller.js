@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — topten.controller.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — topten.controller.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Controller for top 10 ranked anime. Returns the current top 10

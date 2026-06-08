@@ -1,11 +1,11 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — header.config.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — header.config.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   HTTP request header configuration for making API calls to the
- *   AniKato streaming site. Includes browser-like headers to
+ *   AniKoto streaming site. Includes browser-like headers to
  *   mimic legitimate web traffic and avoid detection.
  *
  * @exports
@@ -24,7 +24,7 @@
 /**
  * Standard HTTP headers that mimic a real browser request.
  * Used with axios/fetch to make requests appear as legitimate
- * browser traffic to the AniKato streaming site.
+ * browser traffic to the AniKoto streaming site.
  *
  * @type {Object}
  * @property {string} User-Agent - Browser identification string

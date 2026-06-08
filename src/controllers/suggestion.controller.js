@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — suggestion.controller.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — suggestion.controller.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Controller for anime suggestions/autocomplete. Returns a list

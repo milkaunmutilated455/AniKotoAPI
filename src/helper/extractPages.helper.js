@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — extractPages.helper.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — extractPages.helper.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   HTTP client utility for fetching and parsing HTML content from

@@ -1,5 +1,5 @@
 {
-  "name": "AniKatoAPI",
+  "name": "AniKotoAPI",
   "version": "1.0.0",
   "description": "A restful API to provide all information about anime from anikototv.to",
   "main": "./server.js",
@@ -24,6 +24,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Shineii86/AniKatoAPI.git"
+    "url": "https://github.com/Shineii86/AniKotoAPI.git"
   }
 }

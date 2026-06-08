@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — watchOrder.controller.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — watchOrder.controller.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Controller for recommended watch order. Returns the optimal

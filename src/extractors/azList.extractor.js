@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — azList.extractor.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — azList.extractor.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Extracts anime from A-Z listing pages with pagination.

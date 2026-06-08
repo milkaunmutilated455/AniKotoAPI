@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — schedule.extractor.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — schedule.extractor.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Extracts anime schedule for a specific date.

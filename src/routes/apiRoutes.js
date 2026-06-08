@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — apiRoutes.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — apiRoutes.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Central API router that maps all Express GET endpoints to their

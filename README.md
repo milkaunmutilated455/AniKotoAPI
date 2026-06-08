@@ -1,16 +1,16 @@
 <div align="center">
   
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=AniKatoAPI&fontAlignY=30&fontSize=90&desc=Real-Time%20Anime%20Streaming%20Data%20API&descSize=30" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=AniKotoAPI&fontAlignY=30&fontSize=90&desc=Real-Time%20Anime%20Streaming%20Data%20API&descSize=30" />
 
 </div>
 
 <p align="center">
-  <a href="https://github.com/Shineii86/AniKatoAPI/stargazers"><img src="https://img.shields.io/github/stars/Shineii86/AniKatoAPI?style=for-the-badge&logo=github&color=f43f8e&logoColor=white" alt="Stars"/></a>
-  <a href="https://github.com/Shineii86/AniKatoAPI/network/members"><img src="https://img.shields.io/github/forks/Shineii86/AniKatoAPI?style=for-the-badge&logo=github&color=a855f7&logoColor=white" alt="Forks"/></a>
-  <a href="https://github.com/Shineii86/AniKatoAPI/issues"><img src="https://img.shields.io/github/issues/Shineii86/AniKatoAPI?style=for-the-badge&logo=github&color=7c3aed&logoColor=white" alt="Issues"/></a>
-  <a href="https://github.com/Shineii86/AniKatoAPI/pulls"><img src="https://img.shields.io/github/issues-pr/Shineii86/AniKatoAPI?style=for-the-badge&logo=github&color=ec4899&logoColor=white" alt="Pull Requests"/></a>
-  <a href="https://github.com/Shineii86/AniKatoAPI/commits"><img src="https://img.shields.io/github/last-commit/Shineii86/AniKatoAPI?style=for-the-badge&logo=github&color=6366f1&logoColor=white" alt="Last Commit"/></a>
-  <a href="https://github.com/Shineii86/AniKatoAPI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Shineii86/AniKatoAPI?style=for-the-badge&logo=mit&color=22c55e&logoColor=white" alt="License"/></a>
+  <a href="https://github.com/Shineii86/AniKotoAPI/stargazers"><img src="https://img.shields.io/github/stars/Shineii86/AniKotoAPI?style=for-the-badge&logo=github&color=f43f8e&logoColor=white" alt="Stars"/></a>
+  <a href="https://github.com/Shineii86/AniKotoAPI/network/members"><img src="https://img.shields.io/github/forks/Shineii86/AniKotoAPI?style=for-the-badge&logo=github&color=a855f7&logoColor=white" alt="Forks"/></a>
+  <a href="https://github.com/Shineii86/AniKotoAPI/issues"><img src="https://img.shields.io/github/issues/Shineii86/AniKotoAPI?style=for-the-badge&logo=github&color=7c3aed&logoColor=white" alt="Issues"/></a>
+  <a href="https://github.com/Shineii86/AniKotoAPI/pulls"><img src="https://img.shields.io/github/issues-pr/Shineii86/AniKotoAPI?style=for-the-badge&logo=github&color=ec4899&logoColor=white" alt="Pull Requests"/></a>
+  <a href="https://github.com/Shineii86/AniKotoAPI/commits"><img src="https://img.shields.io/github/last-commit/Shineii86/AniKotoAPI?style=for-the-badge&logo=github&color=6366f1&logoColor=white" alt="Last Commit"/></a>
+  <a href="https://github.com/Shineii86/AniKotoAPI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Shineii86/AniKotoAPI?style=for-the-badge&logo=mit&color=22c55e&logoColor=white" alt="License"/></a>
 </p>
 
 <p align="center">
@@ -78,11 +78,11 @@
 
 ## 🌸 Overview
 
-**AniKatoAPI** is a serverless anime data API that scrapes and serves real-time information from **anikototv.to** — including anime details, episode lists, streaming servers, search, filtering, rankings, and more — all through a clean REST API with zero database setup.
+**AniKotoAPI** is a serverless anime data API that scrapes and serves real-time information from **anikototv.to** — including anime details, episode lists, streaming servers, search, filtering, rankings, and more — all through a clean REST API with zero database setup.
 
 > 💡 No database, no auth, no complex setup. Just deploy to Vercel and you have a production API.
 
-### Why AniKatoAPI?
+### Why AniKotoAPI?
 
 - 🎬 **24 Endpoints** — Complete coverage of anikototv.to data
 - 🔍 **Full-Text Search** — Search anime by keyword with suggestions
@@ -202,11 +202,11 @@ flowchart TD
 
 | Source | Domain | Status | Data |
 |:---|:---|:---|:---|
-| **AniKato** | `anikototv.to` | ✅ Active | Primary source |
-| **AniKato** | `anikoto.cz` | ✅ Active | Mirror domain |
-| **AniKato** | `anikoto.me` | ✅ Active | Mirror domain |
-| **AniKato** | `anikoto.net` | ✅ Active | Mirror domain |
-| **AniKato** | `anikoto.se` | ✅ Active | Mirror domain |
+| **AniKoto** | `anikototv.to` | ✅ Active | Primary source |
+| **AniKoto** | `anikoto.cz` | ✅ Active | Mirror domain |
+| **AniKoto** | `anikoto.me` | ✅ Active | Mirror domain |
+| **AniKoto** | `anikoto.net` | ✅ Active | Mirror domain |
+| **AniKoto** | `anikoto.se` | ✅ Active | Mirror domain |
 
 ### Data Available
 
@@ -288,7 +288,7 @@ flowchart TD
 ## 📁 Project Structure
 
 ```
-AniKatoAPI/
+AniKotoAPI/
 ├── 📂 public/                            # 🌐 Static files
 │   ├── 📄 index.html                     #    📖 API documentation page
 │   └── 📄 404.html                       #    ❌ Custom 404 error page
@@ -354,8 +354,8 @@ AniKatoAPI/
 
 ```bash
 # 1️⃣ Clone the repository
-git clone https://github.com/Shineii86/AniKatoAPI.git
-cd AniKatoAPI
+git clone https://github.com/Shineii86/AniKotoAPI.git
+cd AniKotoAPI
 
 # 2️⃣ Install dependencies
 npm install
@@ -413,7 +413,7 @@ The `vercel.json` file handles:
 
 ### Base URL
 ```
-https://anikato.vercel.app/api
+https://anikoto.vercel.app/api
 ```
 
 ---
@@ -433,12 +433,12 @@ https://anikato.vercel.app/api
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/"
+curl "https://anikoto.vercel.app/api/"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/");
+const resp = await axios.get("https://anikoto.vercel.app/api/");
 console.log(resp.data);
 ```
 
@@ -485,12 +485,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/top-ten"
+curl "https://anikoto.vercel.app/api/top-ten"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/top-ten");
+const resp = await axios.get("https://anikoto.vercel.app/api/top-ten");
 console.log(resp.data);
 ```
 
@@ -539,12 +539,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/search?keyword=one+piece"
+curl "https://anikoto.vercel.app/api/search?keyword=one+piece"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/search", {
+const resp = await axios.get("https://anikoto.vercel.app/api/search", {
   params: { keyword: "one piece", page: 1 }
 });
 console.log(resp.data);
@@ -585,12 +585,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/info?id=one-piece-odmau"
+curl "https://anikoto.vercel.app/api/info?id=one-piece-odmau"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/info", {
+const resp = await axios.get("https://anikoto.vercel.app/api/info", {
   params: { id: "one-piece-odmau" }
 });
 console.log(resp.data);
@@ -643,12 +643,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/random"
+curl "https://anikoto.vercel.app/api/random"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/random");
+const resp = await axios.get("https://anikoto.vercel.app/api/random");
 console.log(resp.data);
 ```
 
@@ -691,12 +691,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/schedule?date=2026-06-08"
+curl "https://anikoto.vercel.app/api/schedule?date=2026-06-08"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/schedule", {
+const resp = await axios.get("https://anikoto.vercel.app/api/schedule", {
   params: { date: "2026-06-08" }
 });
 console.log(resp.data);
@@ -740,12 +740,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/episodes/one-piece-odmau"
+curl "https://anikoto.vercel.app/api/episodes/one-piece-odmau"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/episodes/one-piece-odmau");
+const resp = await axios.get("https://anikoto.vercel.app/api/episodes/one-piece-odmau");
 console.log(resp.data);
 ```
 
@@ -783,12 +783,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/watch?slug=one-piece-odmau&ep=1165"
+curl "https://anikoto.vercel.app/api/watch?slug=one-piece-odmau&ep=1165"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/watch", {
+const resp = await axios.get("https://anikoto.vercel.app/api/watch", {
   params: { slug: "one-piece-odmau", ep: 1165 }
 });
 console.log(resp.data);
@@ -853,12 +853,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/servers?ids={episodeIds}"
+curl "https://anikoto.vercel.app/api/servers?ids={episodeIds}"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/servers", {
+const resp = await axios.get("https://anikoto.vercel.app/api/servers", {
   params: { ids: "yourEpisodeIds" }
 });
 console.log(resp.data);
@@ -902,12 +902,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
+curl "https://anikoto.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/mapper-servers", {
+const resp = await axios.get("https://anikoto.vercel.app/api/mapper-servers", {
   params: { malId: 21, slug: "one-piece", timestamp: 1717900000 }
 });
 console.log(resp.data);
@@ -946,12 +946,12 @@ Server list for an episode — returns available streaming servers with their na
 | `ids` | `string` | **required** | Episode IDs |
 
 ```bash
-curl "https://anikato.vercel.app/api/servers?ids={episodeIds}"
+curl "https://anikoto.vercel.app/api/servers?ids={episodeIds}"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/servers", {
+const resp = await axios.get("https://anikoto.vercel.app/api/servers", {
   params: { ids: "yourEpisodeIds" }
 });
 console.log(resp.data);
@@ -989,12 +989,12 @@ Mapper API — fetches additional streaming servers from gogoanime/anivibe via t
 | `timestamp` | `number` | **required** | Current timestamp |
 
 ```bash
-curl "https://anikato.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
+curl "https://anikoto.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/mapper-servers", {
+const resp = await axios.get("https://anikoto.vercel.app/api/mapper-servers", {
   params: { malId: 21, slug: "one-piece", timestamp: 1717900000 }
 });
 console.log(resp.data);
@@ -1031,12 +1031,12 @@ console.log(resp.data);
 Top 10 anime rankings for day, week, and month.
 
 ```bash
-curl "https://anikato.vercel.app/api/top-ten"
+curl "https://anikoto.vercel.app/api/top-ten"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/top-ten");
+const resp = await axios.get("https://anikoto.vercel.app/api/top-ten");
 console.log(resp.data);
 ```
 
@@ -1084,12 +1084,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/spotlight"
+curl "https://anikoto.vercel.app/api/spotlight"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/spotlight");
+const resp = await axios.get("https://anikoto.vercel.app/api/spotlight");
 console.log(resp.data);
 ```
 
@@ -1150,12 +1150,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/trending"
+curl "https://anikoto.vercel.app/api/trending"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/trending");
+const resp = await axios.get("https://anikoto.vercel.app/api/trending");
 console.log(resp.data);
 ```
 
@@ -1218,12 +1218,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/most-popular?page=1"
+curl "https://anikoto.vercel.app/api/most-popular?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/most-popular", {
+const resp = await axios.get("https://anikoto.vercel.app/api/most-popular", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1297,12 +1297,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/new-release?page=1"
+curl "https://anikoto.vercel.app/api/new-release?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/new-release", {
+const resp = await axios.get("https://anikoto.vercel.app/api/new-release", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1343,12 +1343,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/newly-added?page=1"
+curl "https://anikoto.vercel.app/api/newly-added?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/newly-added", {
+const resp = await axios.get("https://anikoto.vercel.app/api/newly-added", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1387,12 +1387,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/trending-sidebar"
+curl "https://anikoto.vercel.app/api/trending-sidebar"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/trending-sidebar");
+const resp = await axios.get("https://anikoto.vercel.app/api/trending-sidebar");
 console.log(resp.data);
 ```
 
@@ -1446,12 +1446,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/genre/action?page=1"
+curl "https://anikoto.vercel.app/api/genre/action?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/genre/action", {
+const resp = await axios.get("https://anikoto.vercel.app/api/genre/action", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1491,12 +1491,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/type/movie?page=1"
+curl "https://anikoto.vercel.app/api/type/movie?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/type/movie", {
+const resp = await axios.get("https://anikoto.vercel.app/api/type/movie", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1549,12 +1549,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/status/currently-airing?page=1"
+curl "https://anikoto.vercel.app/api/status/currently-airing?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/status/currently-airing", {
+const resp = await axios.get("https://anikoto.vercel.app/api/status/currently-airing", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1606,12 +1606,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/az-list/a?page=1"
+curl "https://anikoto.vercel.app/api/az-list/a?page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/az-list/a", {
+const resp = await axios.get("https://anikoto.vercel.app/api/az-list/a", {
   params: { page: 1 }
 });
 console.log(resp.data);
@@ -1668,12 +1668,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/filter?genre=action&type=tv&page=1"
+curl "https://anikoto.vercel.app/api/filter?genre=action&type=tv&page=1"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/filter", {
+const resp = await axios.get("https://anikoto.vercel.app/api/filter", {
   params: { genre: "action", type: "tv", page: 1 }
 });
 console.log(resp.data);
@@ -1714,12 +1714,12 @@ console.log(resp.data);
 #### Example of request
 
 ```bash
-curl "https://anikato.vercel.app/api/suggestions?keyword=naruto"
+curl "https://anikoto.vercel.app/api/suggestions?keyword=naruto"
 ```
 
 ```javascript
 import axios from "axios";
-const resp = await axios.get("https://anikato.vercel.app/api/suggestions", {
+const resp = await axios.get("https://anikoto.vercel.app/api/suggestions", {
   params: { keyword: "naruto" }
 });
 console.log(resp.data);
@@ -1806,7 +1806,7 @@ console.log(resp.data);
 
 ### ▲ Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Shineii86/AniKatoAPI)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Shineii86/AniKotoAPI)
 
 1. Click the button above (or import manually on vercel.com)
 2. Vercel auto-detects the project — **no config needed**
@@ -1819,16 +1819,16 @@ npx vercel --prod
 
 ### 🖥️ Render
 
-Host your own instance of AniKatoAPI on Render.
+Host your own instance of AniKotoAPI on Render.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Shineii86/AniKatoAPI)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Shineii86/AniKotoAPI)
 
 ### 🖥️ Standalone Server
 
 ```bash
 # Clone and install
-git clone https://github.com/Shineii86/AniKatoAPI.git
-cd AniKatoAPI && npm install
+git clone https://github.com/Shineii86/AniKotoAPI.git
+cd AniKotoAPI && npm install
 
 # Start production server
 npm start
@@ -1946,7 +1946,7 @@ Use <code>/api/filter</code> with query params. The <code>keyword</code> param i
 <details>
 <summary><b>📡 Can I use this in my frontend app?</b></summary>
 <br/>
-Yes! CORS is enabled for all origins (<code>*</code>). Just make fetch requests to the API endpoints. No API key needed. Example: <code>fetch('https://anikato.vercel.app/api/search?keyword=naruto')</code>
+Yes! CORS is enabled for all origins (<code>*</code>). Just make fetch requests to the API endpoints. No API key needed. Example: <code>fetch('https://anikoto.vercel.app/api/search?keyword=naruto')</code>
 </details>
 
 <details>
@@ -2018,7 +2018,7 @@ The API can access 10,000+ anime titles from anikototv.to. The most-popular endp
 ### 🐛 Report Bugs
 Found something broken?
 
-[Open an Issue](https://github.com/Shineii86/AniKatoAPI/issues)
+[Open an Issue](https://github.com/Shineii86/AniKotoAPI/issues)
 
 </td>
 <td width="25%" align="center">
@@ -2026,7 +2026,7 @@ Found something broken?
 ### 💡 Suggest Features
 Have an idea?
 
-[Start a Discussion](https://github.com/Shineii86/AniKatoAPI/issues)
+[Start a Discussion](https://github.com/Shineii86/AniKotoAPI/issues)
 
 </td>
 <td width="25%" align="center">
@@ -2034,7 +2034,7 @@ Have an idea?
 ### 🔀 Submit PRs
 Ready to contribute code?
 
-[Fork & Submit](https://github.com/Shineii86/AniKatoAPI/fork)
+[Fork & Submit](https://github.com/Shineii86/AniKotoAPI/fork)
 
 </td>
 </tr>
@@ -2047,8 +2047,8 @@ Ready to contribute code?
 # Click the "Fork" button on GitHub
 
 # 2️⃣ Clone your fork
-git clone https://github.com/YOUR_USERNAME/AniKatoAPI.git
-cd AniKatoAPI
+git clone https://github.com/YOUR_USERNAME/AniKotoAPI.git
+cd AniKotoAPI
 
 # 3️⃣ Create a feature branch
 git checkout -b feature/amazing-feature
@@ -2084,11 +2084,11 @@ git push origin feature/amazing-feature
 
 | Source | About |
 |:---|:---|
-| [AniKato](https://anikototv.to) | Anime streaming site — primary data source |
-| [AniKato CZ](https://anikoto.cz) | Mirror domain |
-| [AniKato ME](https://anikoto.me) | Mirror domain |
-| [AniKato NET](https://anikoto.net) | Mirror domain |
-| [AniKato SE](https://anikoto.se) | Mirror domain |
+| [AniKoto](https://anikototv.to) | Anime streaming site — primary data source |
+| [AniKoto CZ](https://anikoto.cz) | Mirror domain |
+| [AniKoto ME](https://anikoto.me) | Mirror domain |
+| [AniKoto NET](https://anikoto.net) | Mirror domain |
+| [AniKoto SE](https://anikoto.se) | Mirror domain |
 
 ### 🛠️ Technologies
 
@@ -2123,7 +2123,7 @@ Free to use, modify, and distribute — see the [LICENSE](LICENSE) file for deta
 
 <div align="center">
 
-  <a href="https://github.com/Shineii86/AniKatoAPI">
+  <a href="https://github.com/Shineii86/AniKotoAPI">
   <img src="https://github.com/AniWaifuBot/Waifus/blob/main/Source/Banner.png" alt="Banner" width="100%" />
   </a>
   
@@ -2145,8 +2145,8 @@ Free to use, modify, and distribute — see the [LICENSE](LICENSE) file for deta
 ## ⭐ Star History
 
 <p align="center">
-  <a href="https://star-history.com/#Shineii86/AniKatoAPI&Date">
-    <img src="https://api.star-history.com/svg?repos=Shineii86/AniKatoAPI&type=Date" alt="Star History Chart" width="100%"/>
+  <a href="https://star-history.com/#Shineii86/AniKotoAPI&Date">
+    <img src="https://api.star-history.com/svg?repos=Shineii86/AniKotoAPI&type=Date" alt="Star History Chart" width="100%"/>
   </a>
 </p>
 

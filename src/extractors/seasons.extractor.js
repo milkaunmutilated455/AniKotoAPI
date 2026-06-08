@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — seasons.extractor.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — seasons.extractor.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Extracts season information for a specific anime via API.

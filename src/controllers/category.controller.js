@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — category.controller.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — category.controller.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Controller for category-based anime filtering. Handles genre,

@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — homeInfo.extractor.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — homeInfo.extractor.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Extracts homepage data from anikototv.to including spotlight carousel,

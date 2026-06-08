@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — countPages.helper.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — countPages.helper.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Utility function to extract total page count from paginated

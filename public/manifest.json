@@ -1,6 +1,6 @@
 {
-  "name": "AniKatoAPI",
-  "short_name": "AniKatoAPI",
+  "name": "AniKotoAPI",
+  "short_name": "AniKotoAPI",
   "description": "Free REST API for anime data. Browse, search, stream episodes. No API key required.",
   "start_url": "/",
   "display": "standalone",

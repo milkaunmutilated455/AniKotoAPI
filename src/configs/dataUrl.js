@@ -1,10 +1,10 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — dataUrl.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — dataUrl.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
- *   Central configuration file defining all URL patterns for the AniKato
+ *   Central configuration file defining all URL patterns for the AniKoto
  *   anime streaming site. Provides both base domain and alternative
  *   mirror domains for resilience and fallback purposes.
  *
@@ -20,9 +20,9 @@
 // BASE DOMAIN CONFIGURATION
 // ══════════════════════════════════════════════════════════════
 
-// ---- FEATURE: Primary base URL for the AniKato streaming service ----
+// ---- FEATURE: Primary base URL for the AniKoto streaming service ----
 /**
- * The primary base URL used for all API requests to AniKato.
+ * The primary base URL used for all API requests to AniKoto.
  * This serves as the canonical domain for the site.
  *
  * @type {string}
@@ -32,7 +32,7 @@ const BASE_URL = "https://anikototv.to";
 
 // ---- FEATURE: Alternative mirror domains for fallback and redundancy ----
 /**
- * Array of alternative domain mirrors for the AniKato site.
+ * Array of alternative domain mirrors for the AniKoto site.
  * Used when the primary domain is unavailable or blocked.
  * Each domain points to the same content but may have different
  * availability depending on region or network conditions.
@@ -56,7 +56,7 @@ const ALT_DOMAINS = [
 
 // ---- FEATURE: Complete URL routing map for all site endpoints ----
 /**
- * Object containing all URL patterns for the AniKato site.
+ * Object containing all URL patterns for the AniKoto site.
  * Functions return dynamically constructed URLs based on parameters.
  * Static URLs are provided as string properties.
  *

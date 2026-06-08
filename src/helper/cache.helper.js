@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — cache.helper.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — cache.helper.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   In-memory caching utility for storing and retrieving API responses.

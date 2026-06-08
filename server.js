@@ -1,10 +1,10 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — server.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — server.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
- *   Main entry point for the AniKatoAPI Express server.
+ *   Main entry point for the AniKotoAPI Express server.
  *   Configures CORS, middleware, static files, API routes,
  *   and 404 handling. Starts the server on the configured port.
  *
@@ -125,7 +125,7 @@ app.use((req, res) => {
 // ══════════════════════════════════════════════════════════════
 
 app.listen(PORT, () => {
-  console.info(`AniKatoAPI listening at ${PORT}`);
+  console.info(`AniKotoAPI listening at ${PORT}`);
 });
 
 // ══════════════════════════════════════════════════════════════ END: server.js

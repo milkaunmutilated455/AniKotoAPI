@@ -1,7 +1,7 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — category.route.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — category.route.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
  *   Defines category-based API routes for genre, type, and status

@@ -1,10 +1,10 @@
 /*
  * ======= • ======= • ======= • ======= • =======• =======
- * AniKatoAPI — ids.config.js
- * Repository: https://github.com/Shineii86/AniKatoAPI
+ * AniKotoAPI — ids.config.js
+ * Repository: https://github.com/Shineii86/AniKotoAPI
  *
  * @description
- *   Mapping configuration for anime metadata IDs used by the AniKato
+ *   Mapping configuration for anime metadata IDs used by the AniKoto
  *   site's filtering system. Contains human-readable slugs mapped
  *   to numeric IDs for genres, types, statuses, ratings, and sort options.
  *
@@ -23,7 +23,7 @@
 // ---- FEATURE: Genre slug to numeric ID mapping ----
 /**
  * Maps human-readable genre slugs to their corresponding numeric IDs
- * used in AniKato's filtering system. Contains 43 different anime genres
+ * used in AniKoto's filtering system. Contains 43 different anime genres
  * from action to vampire.
  *
  * @type {Object}
