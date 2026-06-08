@@ -9,7 +9,11 @@ const extractFilter = async (params) => {
   try {
     const queryParams = new URLSearchParams();
 
-    if (params.keyword) queryParams.set("keyword", params.keyword);
+    if (params.keyword) {
+      queryParams.set("keyword", params.keyword);
+    } else {
+      queryParams.set("keyword", "");
+    }
 
     if (params.genre) {
       const genres = params.genre.split(",").map(g => GENRE_IDS[g.trim().toLowerCase()] || g.trim());
