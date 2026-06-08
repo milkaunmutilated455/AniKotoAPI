@@ -698,7 +698,7 @@ curl "https://anikato.vercel.app/api/episodes/one-piece-odmau"
 
 ### `GET /api/episodes-ajax/:id`
 
-Raw AJAX episode list response from the source site.
+Raw AJAX episode list response from the source site. Returns HTML that contains episode buttons with `data-ep-id`, `data-num`, and `data-slug` attributes.
 
 | Param | Type | Default | Description |
 |:---|:---|:---|:---|
@@ -708,25 +708,58 @@ Raw AJAX episode list response from the source site.
 curl "https://anikato.vercel.app/api/episodes-ajax/1642"
 ```
 
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": "<a data-ep-id=\"12345\" data-num=\"1\" data-slug=\"ep-1\" href=\"/watch/one-piece-odmau/ep-1\" class=\"active\">...</a>..."
+}
+```
+
+> 💡 This endpoint returns raw HTML from the AJAX call. Use `/api/episodes/:slug` for parsed episode data instead.
+</details>
+
 ---
 
 ### `GET /api/stream`
 
-Streaming server info — extracts video embed URL via AJAX.
+Streaming server info — extracts video embed URL and skip data via AJAX. Requires a `linkId` from the server buttons on the watch page.
 
 | Param | Type | Default | Description |
 |:---|:---|:---|:---|
-| `id` | `string` | **required** | Link ID from server buttons |
+| `id` | `string` | **required** | Link ID from server buttons (`data-link-id`) |
 
 ```bash
 curl "https://anikato.vercel.app/api/stream?id={linkId}"
 ```
 
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "linkId": "abc123",
+    "url": "https://embed.s3t.stream/embed/xyz",
+    "skipData": {
+      "intro": { "start": 0, "end": 90 },
+      "outro": { "start": 1320, "end": 1410 }
+    }
+  }
+}
+```
+
+> 💡 The `skipData` object contains intro/outro timestamps for the video player to auto-skip.
+</details>
+
 ---
 
 ### `GET /api/servers`
 
-Server list for an episode.
+Server list for an episode — returns available streaming servers with their names and types.
 
 | Param | Type | Default | Description |
 |:---|:---|:---|:---|
@@ -736,11 +769,30 @@ Server list for an episode.
 curl "https://anikato.vercel.app/api/servers?ids={episodeIds}"
 ```
 
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "sub": [
+      { "server_id": 1, "server_name": "Vidstreaming", "type": "sub" },
+      { "server_id": 2, "server_name": "Gogocdn", "type": "sub" }
+    ],
+    "dub": [
+      { "server_id": 3, "server_name": "Vidstreaming", "type": "dub" }
+    ]
+  }
+}
+```
+</details>
+
 ---
 
 ### `GET /api/mapper-servers`
 
-Mapper API — fetches additional streaming servers from gogoanime/anivibe via nekostream.
+Mapper API — fetches additional streaming servers from gogoanime/anivibe via the nekostream mapper service. Returns sub/dub server URLs for each provider.
 
 | Param | Type | Default | Description |
 |:---|:---|:---|:---|
@@ -751,6 +803,30 @@ Mapper API — fetches additional streaming servers from gogoanime/anivibe via n
 ```bash
 curl "https://anikato.vercel.app/api/mapper-servers?malId=21&slug=one-piece&timestamp=1717900000"
 ```
+
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": [
+    {
+      "provider": "gogoanime",
+      "type": "sub",
+      "url": "https://embtaku.pro/embed?id=...",
+      "download": "https://gogodl.net/download?id=..."
+    },
+    {
+      "provider": "gogoanime",
+      "type": "dub",
+      "url": "https://embtaku.pro/embed?id=...",
+      "download": "https://gogodl.net/download?id=..."
+    }
+  ]
+}
+```
+</details>
 
 ---
 
@@ -969,19 +1045,36 @@ Newly released anime with pagination.
 curl "https://anikato.vercel.app/api/new-release?page=1"
 ```
 
----
+<details>
+<summary>📄 Example Response</summary>
 
-### `GET /api/newly-added`
-
-Recently added anime with pagination.
-
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `page` | `number` | `1` | Page number |
-
-```bash
-curl "https://anikato.vercel.app/api/newly-added?page=1"
+```json
+{
+  "success": true,
+  "results": {
+    "totalPages": 50,
+    "data": [
+      {
+        "slug": "given-movie-2024-xt2kv/ep-1",
+        "animeId": "7386",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/b4067f8aa165e643477e6c2eaf8e978c.jpg",
+        "title": "Given Movie (2024)",
+        "japaneseTitle": "Given Movie (2024)",
+        "sub": 1, "dub": 1, "total": 1,
+        "type": "Movie", "rating": "8"
+      },
+      {
+        "slug": "jujutsu-kaisen-hidden-inventory-premature-death-wjoxj/ep-1",
+        "animeId": "8584",
+        "title": "Jujutsu Kaisen: Hidden Inventory/Premature Death",
+        "sub": 1, "dub": 1, "total": 1,
+        "type": "Movie", "rating": "8.1"
+      }
+    ]
+  }
+}
 ```
+</details>
 
 ---
 
@@ -1021,9 +1114,53 @@ curl "https://anikato.vercel.app/api/trending-sidebar"
 
 ---
 
+### `GET /api/newly-added`
+
+Recently added anime with pagination.
+
+| Param | Type | Default | Description |
+|:---|:---|:---|:---|
+| `page` | `number` | `1` | Page number |
+
+```bash
+curl "https://anikato.vercel.app/api/newly-added?page=1"
+```
+
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "totalPages": 150,
+    "data": [
+      {
+        "slug": "one-piece-odmau/ep-1",
+        "animeId": "1642",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
+        "title": "One Piece",
+        "sub": 1165, "dub": 1133, "total": 0,
+        "type": "TV", "rating": "8.73"
+      },
+      {
+        "slug": "wistoria-wand-and-sword-season-2-dua04/ep-1",
+        "animeId": "8737",
+        "title": "Wistoria: Wand and Sword Season 2",
+        "sub": 9, "dub": 7, "total": 12,
+        "type": "TV", "rating": "8.12"
+      }
+    ]
+  }
+}
+```
+</details>
+
+---
+
 ### `GET /api/schedule`
 
-Anime schedule for a specific date.
+Anime schedule for a specific date. Returns an array of anime airing on that date with episode info, or an empty array if no schedule data is available.
 
 | Param | Type | Default | Description |
 |:---|:---|:---|:---|
@@ -1033,11 +1170,34 @@ Anime schedule for a specific date.
 curl "https://anikato.vercel.app/api/schedule?date=2026-06-08"
 ```
 
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": [
+    {
+      "slug": "anime-slug-xyz/ep-1",
+      "title": "Anime Title",
+      "episode": "Ep 1",
+      "japaneseTitle": "Japanese Title",
+      "type": "TV",
+      "subs": 1,
+      "dubs": 0
+    }
+  ]
+}
+```
+
+> 💡 If no anime are scheduled for the given date, the response will be `{"success": true, "results": []}`.
+</details>
+
 ---
 
 ### `GET /api/filter`
 
-Advanced filtering with multiple criteria.
+Advanced filtering with multiple criteria. Requires `keyword` parameter (use empty string for unfiltered).
 
 | Param | Type | Default | Description |
 |:---|:---|:---|:---|
@@ -1064,6 +1224,29 @@ Advanced filtering with multiple criteria.
 curl "https://anikato.vercel.app/api/filter?genre=action&type=tv&page=1"
 ```
 
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "totalPages": 89,
+    "data": [
+      {
+        "slug": "one-piece-odmau/ep-1",
+        "animeId": "1642",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
+        "title": "One Piece",
+        "sub": 1165, "dub": 1133, "total": 0,
+        "type": "TV", "rating": "8.73"
+      }
+    ]
+  }
+}
+```
+</details>
+
 ---
 
 ### `GET /api/genre/:name`
@@ -1078,6 +1261,36 @@ Browse anime by genre.
 ```bash
 curl "https://anikato.vercel.app/api/genre/action?page=1"
 ```
+
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "totalPages": 89,
+    "data": [
+      {
+        "slug": "one-piece-odmau/ep-1",
+        "animeId": "1642",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
+        "title": "One Piece",
+        "sub": 1165, "dub": 1133, "total": 0,
+        "type": "TV", "rating": "8.73"
+      },
+      {
+        "slug": "solo-leveling-season-2-arise-from-the-shadow-3eukp/ep-1",
+        "animeId": "7457",
+        "title": "Solo Leveling Season 2: Arise from the Shadow",
+        "sub": 13, "dub": 13, "total": 13,
+        "type": "TV", "rating": "8.87"
+      }
+    ]
+  }
+}
+```
+</details>
 
 ---
 
@@ -1094,6 +1307,37 @@ Browse anime by type.
 curl "https://anikato.vercel.app/api/type/movie?page=1"
 ```
 
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "totalPages": 44,
+    "data": [
+      {
+        "slug": "given-movie-2024-xt2kv/ep-1",
+        "animeId": "7386",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/b4067f8aa165e643477e6c2eaf8e978c.jpg",
+        "title": "Given Movie (2024)",
+        "japaneseTitle": "Given Movie (2024)",
+        "sub": 1, "dub": 1, "total": 1,
+        "type": "Movie", "rating": "8"
+      },
+      {
+        "slug": "jujutsu-kaisen-hidden-inventory-premature-death-wjoxj/ep-1",
+        "animeId": "8584",
+        "title": "Jujutsu Kaisen: Hidden Inventory/Premature Death",
+        "sub": 1, "dub": 1, "total": 1,
+        "type": "Movie", "rating": "8.1"
+      }
+    ]
+  }
+}
+```
+</details>
+
 ---
 
 ### `GET /api/status/:name`
@@ -1108,6 +1352,36 @@ Browse anime by airing status.
 ```bash
 curl "https://anikato.vercel.app/api/status/currently-airing?page=1"
 ```
+
+<details>
+<summary>📄 Example Response</summary>
+
+```json
+{
+  "success": true,
+  "results": {
+    "totalPages": 15,
+    "data": [
+      {
+        "slug": "one-piece-odmau/ep-1",
+        "animeId": "1642",
+        "poster": "https://cdn.anipixcdn.co/thumbnail/f899139df5e1059396431415e770c6dd.jpg",
+        "title": "One Piece",
+        "sub": 1165, "dub": 1133, "total": 0,
+        "type": "TV", "rating": "8.73"
+      },
+      {
+        "slug": "daemons-of-the-shadow-realm-hxj32/ep-1",
+        "animeId": "8712",
+        "title": "Daemons of the Shadow Realm",
+        "sub": 10, "dub": 8, "total": 24,
+        "type": "TV", "rating": "9.58"
+      }
+    ]
+  }
+}
+```
+</details>
 
 ---
 
