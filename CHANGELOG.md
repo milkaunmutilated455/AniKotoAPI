@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.2] - 2026-06-08
+
+### Added
+- `docs/` folder with complete API documentation
+  - `docs/index.md` — Overview, quick start, features
+  - `docs/endpoints.md` — Full API reference (27 endpoints documented)
+  - `docs/streaming.md` — Streaming flow guide (3-step process)
+  - `docs/examples.md` — Code examples in cURL, JavaScript, Python, Node.js
+  - `docs/architecture.md` — Project structure, tech stack, design decisions
+
+### Fixed
+- `episodeList.extractor.js` — Parse AJAX JSON response, extract `server_ids`, `timestamp`, `mal_id`
+- `streamInfo.extractor.js` — Parse server list HTML into structured objects
+- `streamInfo.extractor.js` — Parse stream URL from JSON response properly
+- Added cheerio import to streamInfo extractor for HTML parsing
+
 ## [1.7.1] - 2026-06-08
 
 ### Changed
