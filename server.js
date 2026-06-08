@@ -34,7 +34,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4444;
 const __filename = fileURLToPath(import.meta.url);
-const publicDir = path.join(dirname(__filename), "public");
+const publicDir = path.join(process.cwd(), "public");
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
 
 // ══════════════════════════════════════════════════════════════
