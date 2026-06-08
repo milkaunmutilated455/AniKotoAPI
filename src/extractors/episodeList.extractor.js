@@ -39,18 +39,24 @@ import { URLS, BASE_URL } from "../configs/dataUrl.js";
  *   console.log(episodeData.totalEpisodes); // e.g. 1100+
  *   console.log(episodeData.episodes[0].episode_no); // 1
  */
-const extractEpisodeList = async (slug) => {
+const extractEpisodeList = async (slugOrId) => {
   try {
-    // NOTE: First fetch the watch page to extract the internal anime ID
-    const infoUrl = URLS.watch(slug);
-    const { data: infoData } = await axios.get(infoUrl, { headers });
-    const $ = cheerio.load(infoData);
+    let animeId = 0;
+    let resolvedSlug = slugOrId;
 
-    // NOTE: data-id on #watch-main is the anime ID used for the AJAX episode list call
-    const animeId = parseInt($("#watch-main").attr("data-id")) || 0;
+    // NOTE: Accept either numeric anime ID or slug — if numeric, skip watch page fetch
+    if (/^\d+$/.test(slugOrId)) {
+      animeId = parseInt(slugOrId);
+    } else {
+      // NOTE: Fetch the watch page to extract the internal anime ID from the slug
+      const infoUrl = URLS.watch(slugOrId);
+      const { data: infoData } = await axios.get(infoUrl, { headers });
+      const $ = cheerio.load(infoData);
+      animeId = parseInt($("#watch-main").attr("data-id")) || 0;
+    }
 
     if (!animeId) {
-      return { animeId: 0, slug, totalEpisodes: 0, episodes: [] };
+      return { animeId: 0, slug: resolvedSlug, totalEpisodes: 0, episodes: [] };
     }
 
     try {
@@ -98,7 +104,7 @@ const extractEpisodeList = async (slug) => {
 
       return {
         animeId,
-        slug,
+        slug: resolvedSlug,
         totalEpisodes: episodes.length,
         episodes
       };
@@ -106,7 +112,7 @@ const extractEpisodeList = async (slug) => {
       // NOTE: Gracefully return empty list if AJAX call fails (e.g. network issue)
       return {
         animeId,
-        slug,
+        slug: resolvedSlug,
         totalEpisodes: 0,
         episodes: []
       };
