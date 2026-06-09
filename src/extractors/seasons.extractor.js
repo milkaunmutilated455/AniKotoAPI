@@ -36,21 +36,7 @@ import { BASE_URL } from "../configs/dataUrl.js";
  *   console.log(seasons.length); // Number of seasons
  */
 const extractSeasons = async (animeId) => {
-  try {
-    // NOTE: This is an internal API endpoint requiring X-Requested-With header
-    const url = `${BASE_URL}/api/seasons/${animeId}`;
-    const { data } = await axios.get(url, {
-      headers: {
-        ...headers,
-        "X-Requested-With": "XMLHttpRequest"
-      }
-    });
-
-    return data || [];
-  } catch (error) {
-    // NOTE: Return empty array on error to maintain consistent API
-    throw error;
-  }
+  throw new Error("Seasons endpoint not available - source site does not provide this data");
 };
 
 export { extractSeasons };

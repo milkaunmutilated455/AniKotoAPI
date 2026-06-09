@@ -52,6 +52,10 @@ const getFilter = async (req, res, next) => {
     if (cached) {
       return res.json({ success: true, results: cached });
     }
+    // Normalize array params to strings
+    if (Array.isArray(params.genre)) params.genre = params.genre.join(",");
+    if (Array.isArray(params.type)) params.type = params.type.join(",");
+    if (Array.isArray(params.status)) params.status = params.status.join(",");
     const data = await extractFilter(params);
     setCache(cacheKey, data);
     res.json({ success: true, results: data });

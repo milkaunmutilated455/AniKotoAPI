@@ -36,21 +36,7 @@ import { BASE_URL } from "../configs/dataUrl.js";
  *   console.log(watchOrder[0].title); // First anime in watch order
  */
 const extractWatchOrder = async (animeId) => {
-  try {
-    // NOTE: This is an internal API endpoint requiring X-Requested-With header
-    const url = `${BASE_URL}/api/watch-order/${animeId}`;
-    const { data } = await axios.get(url, {
-      headers: {
-        ...headers,
-        "X-Requested-With": "XMLHttpRequest"
-      }
-    });
-
-    return data || [];
-  } catch (error) {
-    // NOTE: Return empty array on error to maintain consistent API
-    throw error;
-  }
+  throw new Error("Watch order endpoint not available - source site does not provide this data");
 };
 
 export { extractWatchOrder };

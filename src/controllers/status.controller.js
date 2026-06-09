@@ -54,7 +54,14 @@ const getStatus = async (req, res, next) => {
     if (cached) {
       return res.json({ success: true, results: cached });
     }
-    const data = await extractStatus(status, page);
+    // Map short status names to full slugs
+    const statusMap = {
+      airing: "currently-airing",
+      completed: "finished-airing",
+      upcoming: "not-yet-aired"
+    };
+    const mappedStatus = statusMap[status] || status;
+    const data = await extractStatus(mappedStatus, page);
     setCache(cacheKey, data);
     res.json({ success: true, results: data });
   } catch (error) {
