@@ -17,7 +17,7 @@
  */
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const { version } = require("../package.json");
+const { version } = require("../../package.json");
 
 
 import { getHomeInfo } from "../controllers/homeInfo.controller.js";
